@@ -50,12 +50,12 @@
 }
 
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f8f8;
-    --bg-elevated: #f0f0f0;
-    --bg-card: #ffffff;
-    --bg-card-hover: #fafafa;
-    --bg-glass: rgba(255,255,255,0.8);
+    --bg-primary: #FAF6F1;
+    --bg-secondary: #F3EDE6;
+    --bg-elevated: #EBE5DC;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FBF8F4;
+    --bg-glass: rgba(250,246,241,0.85);
     --surface-subtle: rgba(0,0,0,0.02);
     --border-subtle: rgba(0,0,0,0.06);
     --border-medium: rgba(0,0,0,0.1);
@@ -70,7 +70,7 @@
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
     --shadow-md: 0 8px 32px rgba(0,0,0,0.08);
     --shadow-lg: 0 24px 80px rgba(0,0,0,0.1);
-    --nav-bg: rgba(255,255,255,0.85);
+    --nav-bg: rgba(250,246,241,0.85);
     --particle-color: 0,0,0;
     --particle-opacity: 0.55;
     --particle-line-opacity: 0.12;
@@ -359,6 +359,8 @@ img { max-width: 100%; display: block; }
     transition: border-color 0.3s ease;
 }
 .service-card:hover .service-tag { border-color: var(--border-medium); }
+.service-card-arrow { opacity:0.4; transition: all 0.3s ease !important; }
+.service-card:hover .service-card-arrow { opacity:1; color:var(--text-primary) !important; transform:translate(2px,-2px); }
 
 /* ═══ GROW WITH US ═══ */
 .grow-section { position: relative; z-index: 1; padding: 60px 0 140px; }
@@ -681,12 +683,13 @@ img { max-width: 100%; display: block; }
             <p>Stop getting ghosted. Get warm intros to 50+ top-tier VCs and angels actively funding in 2026.</p>
             <span class="service-tag">Learn more</span>
         </div>
-        <div class="service-card reveal reveal-d2" style="grid-column:2;grid-row:3/5;">
+        <a href="positioning.html" class="service-card reveal reveal-d2" style="grid-column:2;grid-row:3/5;text-decoration:none;">
+            <svg class="service-card-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:20px;right:20px;color:var(--text-tertiary);transition:all 0.3s ease;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             <div class="service-card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
             <h3>Positioning &amp; Narrative Advisory</h3>
             <p>Stop competing against generic competitors and create your own unique category and blue ocean.</p>
             <span class="service-tag">Learn more</span>
-        </div>
+        </a>
         <div class="service-card reveal reveal-d3" style="grid-column:2;grid-row:5/7;">
             <div class="service-card-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
             <h3>Web3 Founders Library</h3>
@@ -694,13 +697,14 @@ img { max-width: 100%; display: block; }
             <span class="service-tag">Coming Soon</span>
         </div>
         <!-- LEFT: GTM Advisory (rows 4-6) -->
-        <div class="service-card reveal" style="grid-column:1;grid-row:4/7;">
+        <a href="gtm.html" class="service-card reveal" style="grid-column:1;grid-row:4/7;text-decoration:none;">
+            <svg class="service-card-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:20px;right:20px;color:var(--text-tertiary);transition:all 0.3s ease;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             <div class="service-card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <h3>GTM Advisory</h3>
             <p>Turn Your Launch From an Exit Event Into an Adoption Engine. We Design Your GTM Strategy in 28 Days So You Don't Waste $1M+ on farmers Who Dump and Leave.</p>
             <p style="margin-top:12px;">From stakeholder maps (who to target), incentive design (how to reward builders over farmers), conversion funnels, positioning that owns your category, channel strategy with budget allocation, KPI dashboard, and your 90-day execution roadmap.</p>
-            <a href="gtm.html" class="service-tag">Learn more</a>
-        </div>
+            <span class="service-tag">Learn more</span>
+        </a>
         </div>
     </div>
 </section>
@@ -747,7 +751,7 @@ img { max-width: 100%; display: block; }
                 <h2 class="section-title reveal">Frequently asked questions.</h2>
             </div>
             <div class="faq-list reveal">
-                <div class="faq-item open">
+                <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)"><h4>Why do you call yourselves a growth partner and not a typical agency?</h4><div class="faq-toggle">+</div></div>
                     <div class="faq-a"><p>Like our long-term investment thesis from our fund Hansa — we work on long-term horizons and become high-conviction growth partners with a small handful to give you the custom resources you need when you need them. We try and align incentives and act as a founding partner alongside your founding team. We are highly selective about who we work with, which is how we can guarantee success.</p></div>
                 </div>
@@ -855,7 +859,24 @@ img { max-width: 100%; display: block; }
 /* ═══ THEME ═══ */
 const themeToggle=document.getElementById('themeToggle'),html=document.documentElement;
 const saved=localStorage.getItem('nozomi-theme');if(saved)html.setAttribute('data-theme',saved);
-themeToggle.addEventListener('click',()=>{const next=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('nozomi-theme',next);});
+themeToggle.addEventListener('click',function(e){
+  const rect=themeToggle.getBoundingClientRect();
+  const cx=rect.left+rect.width/2;
+  const cy=rect.top+rect.height/2;
+  const maxX=Math.max(cx,window.innerWidth-cx);
+  const maxY=Math.max(cy,window.innerHeight-cy);
+  const maxR=Math.ceil(Math.sqrt(maxX*maxX+maxY*maxY));
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  if(document.startViewTransition){
+    document.startViewTransition(()=>{html.setAttribute('data-theme',next);localStorage.setItem('nozomi-theme',next);});
+    const s=document.createElement('style');
+    s.textContent='::view-transition-new(root){animation:morphReveal 0.8s cubic-bezier(0.4,0,0,1) forwards}::view-transition-old(root){animation:none;z-index:-1}@keyframes morphReveal{from{clip-path:circle(0px at '+cx+'px '+cy+'px)}to{clip-path:circle('+maxR+'px at '+cx+'px '+cy+'px)}}';
+    document.head.appendChild(s);
+    setTimeout(()=>s.remove(),900);
+  } else {
+    html.setAttribute('data-theme',next);localStorage.setItem('nozomi-theme',next);
+  }
+});
 
 addEventListener('scroll',()=>{
     document.getElementById('nav').classList.toggle('scrolled',scrollY>40);
