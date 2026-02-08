@@ -119,5 +119,6 @@ const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)
 document.querySelectorAll('.deliverable-card-v2,.example-block,.cost-item,.pricing-box,.for-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--glow-x',(e.clientX-r.left)+'px');card.style.setProperty('--glow-y',(e.clientY-r.top)+'px');});});
 document.querySelectorAll('.deliverable-card-v2,.example-block,.cost-item,.pricing-box').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width;const y=(e.clientY-r.top)/r.height;card.style.transform=`perspective(800px) rotateX(${(y-0.5)*-8}deg) rotateY(${(x-0.5)*8}deg) translateY(-4px)`;});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(800px) rotateX(0) rotateY(0) translateY(0)';});});
 </script>
+<script src="/site.js"></script>
 </body>
 </html>
