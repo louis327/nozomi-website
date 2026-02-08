@@ -1,0 +1,173 @@
+/* Nozomi Sales Page Visual Enhancements
+   Shared across GTM and Positioning pages
+   ========================================= */
+
+/* 1. CONTENT FRAME — subtle left/right borders on container */
+.container, .container-wide {
+  border-left: 1px dashed var(--border-subtle);
+  border-right: 1px dashed var(--border-subtle);
+}
+/* Remove borders on hero and full-bleed sections */
+.gtm-hero .container,
+.hero-carousel,
+.final-cta .container,
+.footer-mini .container,
+.nav .nav-inner {
+  border-left: none;
+  border-right: none;
+}
+
+/* 2. MORE GENEROUS SECTION SPACING */
+.lf-section {
+  padding: 72px 0 !important;
+}
+.lf-section + .lf-section {
+  border-top: none;
+}
+
+/* 3. ALTERNATING SECTION BACKGROUNDS */
+.lf-section:nth-child(even of .lf-section) {
+  background: var(--bg-secondary);
+}
+/* Fallback for browsers without :nth-child(of) */
+.section-alt {
+  background: var(--bg-secondary);
+}
+
+/* 4. ENHANCED DOT DIVIDERS */
+.dot-divider {
+  padding: 24px 0 !important;
+  font-size: 24px !important;
+  letter-spacing: 24px !important;
+}
+
+/* 5. HIGHLIGHT TEXT — bigger punch */
+.prose p.highlight {
+  font-size: 20px !important;
+  line-height: 1.5 !important;
+  margin-top: 8px;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+/* 6. PULL QUOTES — more dramatic */
+.pull-quote {
+  font-size: clamp(26px, 3.8vw, 40px) !important;
+  margin: 56px auto !important;
+  padding: 48px 0 !important;
+}
+.pull-quote::before,
+.pull-quote::after {
+  width: 80px !important;
+  height: 2px;
+}
+
+/* 7. CARDS — more pronounced borders and hover */
+.deliverable-card-v2,
+.example-block,
+.cost-item,
+.pricing-box,
+.for-card {
+  border-width: 1px;
+  border-color: var(--border-medium) !important;
+}
+.deliverable-card-v2:hover,
+.example-block:hover,
+.cost-item:hover {
+  border-color: var(--text-tertiary) !important;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.3) !important;
+  transform: translateY(-4px);
+}
+[data-theme="light"] .deliverable-card-v2:hover,
+[data-theme="light"] .example-block:hover,
+[data-theme="light"] .cost-item:hover {
+  box-shadow: 0 12px 48px rgba(0,0,0,0.1) !important;
+}
+
+/* 8. PROSE — slightly more generous line height */
+.prose p {
+  line-height: 1.95 !important;
+}
+
+/* 9. SECTION LABELS — more visible */
+.section-label {
+  font-size: 12px !important;
+  letter-spacing: 4px !important;
+  margin-bottom: 16px !important;
+  opacity: 0.8;
+}
+
+/* 10. HORIZONTAL RULES between major prose blocks */
+.prose .spacer {
+  height: 1px !important;
+  margin: 40px 0 !important;
+  background: var(--border-subtle);
+}
+
+/* 11. MID-CTA — more breathing room */
+.mid-cta {
+  padding: 48px 0 !important;
+  margin: 16px 0 !important;
+}
+
+/* 12. PRICING BOX — more premium feel */
+.pricing-box {
+  border-width: 2px !important;
+  padding: 72px 56px !important;
+}
+.pricing-box h3 {
+  font-size: 32px !important;
+}
+
+/* 13. TEAM PHOTOS — slightly larger */
+.team-photos {
+  margin: 56px 0 48px !important;
+}
+.team-photo {
+  width: 220px !important;
+  height: 220px !important;
+}
+
+/* 14. FAQ — more spacing */
+.faq-q {
+  padding: 24px 0 !important;
+}
+.faq-q h4 {
+  font-size: 16px !important;
+}
+
+/* 15. IMAGE PLACEHOLDERS — more prominent */
+.img-placeholder {
+  margin: 48px auto !important;
+  border-radius: 16px;
+}
+
+/* 16. FINAL CTA — more dramatic */
+.final-cta {
+  padding: 120px 0 !important;
+}
+.final-cta h2 {
+  font-size: clamp(32px, 4.5vw, 48px) !important;
+  margin-bottom: 28px !important;
+}
+
+/* 17. MOBILE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .container, .container-wide {
+    border-left: none;
+    border-right: none;
+  }
+  .lf-section {
+    padding: 56px 0 !important;
+  }
+  .prose p.highlight {
+    font-size: 18px !important;
+  }
+  .team-photo {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  .pricing-box {
+    padding: 48px 28px !important;
+  }
+}
