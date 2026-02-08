@@ -2,6 +2,38 @@
    Shared across GTM and Positioning pages
    ========================================= */
 
+/* 0. LIGHT MODE TEXT FIX — make all text darker/black on light backgrounds */
+[data-theme="light"] {
+  --text-secondary: rgba(0,0,0,0.8) !important;
+  --text-tertiary: rgba(0,0,0,0.5) !important;
+}
+[data-theme="light"] .prose p {
+  color: rgba(0,0,0,0.85) !important;
+}
+[data-theme="light"] .prose p.dim {
+  color: rgba(0,0,0,0.5) !important;
+}
+[data-theme="light"] .prose p.highlight {
+  color: #000 !important;
+}
+[data-theme="light"] .deliverable-card-v2 p,
+[data-theme="light"] .deliverable-card p,
+[data-theme="light"] .example-block p,
+[data-theme="light"] .timeline-card p,
+[data-theme="light"] .cost-timeline .month p,
+[data-theme="light"] .faq-a p,
+[data-theme="light"] .for-card li,
+[data-theme="light"] .pricing-box li {
+  color: rgba(0,0,0,0.8) !important;
+}
+[data-theme="light"] .section-label {
+  color: rgba(0,0,0,0.5) !important;
+}
+[data-theme="light"] .gtm-hero .subtitle,
+[data-theme="light"] .final-cta p {
+  color: rgba(0,0,0,0.75) !important;
+}
+
 /* 1. CONTENT FRAME — subtle left/right borders on container */
 .container, .container-wide {
   border-left: 1px dashed var(--border-subtle);
