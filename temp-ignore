@@ -1,0 +1,7 @@
+        <div class="service-card reveal" style="grid-column:1;grid-row:1/4;">
+            <div class="service-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <h3>LaunchOS (Incubation + ICO)</h3>
+            <p>We work 1:1 with you to scale your network, run your ICO, and support you pre-TGE and post-launch.</p>
+            <p style="margin-top:12px;">We design your GTM strategy, position you to own your category, help run your ICO (raised $87M+ in 2025), sit in the room negotiating your TGE terms with exchanges and MMs.</p>
+            <span class="service-tag">Next Batch — Q2 2026</span>
+        </div>
