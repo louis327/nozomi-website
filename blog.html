@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nozomi Letters — Ideas and Playbooks for Decentralization</title>
+    <link rel="icon" type="image/png" href="/favicon_nozomi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --serif: 'Lora', 'Georgia', serif;
+            --sans: 'Inter', -apple-system, sans-serif;
+            --bg: #FFFFFF;
+            --bg-off: #FAFAFA;
+            --text: #1A1A1A;
+            --text-secondary: #6B6B6B;
+            --text-tertiary: #999999;
+            --border: #E8E8E8;
+            --accent: #000000;
+            --accent-soft: #F5F5F5;
+            --newsletter-bg: #F9F9F9;
+            --tag-bg: #F0F0F0;
+            --tag-hover: #E5E5E5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* HEADER */
+        .header {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--serif);
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* HERO WITH EMAIL CAPTURE */
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 32px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(38px, 6vw, 64px);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        /* NEWSLETTER HERO */
+        .newsletter-hero {
+            background: var(--newsletter-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 48px 40px;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .newsletter-hero h3 {
+            font-family: var(--serif);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .newsletter-hero p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
+            font-family: var(--sans);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .newsletter-submit {
+            padding: 16px 36px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: var(--sans);
+            white-space: nowrap;
+        }
+
+        .newsletter-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .newsletter-note {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        /* FILTERS */
+        .filters {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 8px;
+        }
+
+        .tag-filter {
+            padding: 8px 18px;
+            background: var(--tag-bg);
+            border-radius: 100px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .tag-filter:hover {
+            background: var(--tag-hover);
+        }
+
+        .tag-filter.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* BLOG GRID */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 32px 80px;
+        }
+
+        .featured-post {
+            margin-bottom: 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .featured-post a {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .featured-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--accent-soft);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .featured-post a:hover .featured-image img {
+            transform: scale(1.05);
+        }
+
+        .featured-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-tag {
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .post-title {
+            font-family: var(--serif);
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            transition: opacity 0.2s;
+        }
+
+        .featured-post a:hover .post-title {
+            opacity: 0.7;
+        }
+
+        .post-excerpt {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        /* ARTICLES GRID */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px 40px;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .article-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--accent-soft);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-card .post-title {
+            font-size: 24px;
+            line-height: 1.3;
+        }
+
+        .article-card:hover .post-title {
+            opacity: 0.7;
+        }
+
+        .article-card .post-excerpt {
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 32px;
+            text-align: center;
+        }
+
+        .footer-tagline {
+            font-family: var(--serif);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--text);
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .featured-post a {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-inner {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 20px 40px;
+            }
+
+            .newsletter-hero {
+                padding: 32px 24px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .filters, .blog-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* HIDDEN BY DEFAULT */
+        .article-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="/" class="logo">Nozomi</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/blog.html">Letters</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO WITH EMAIL CAPTURE -->
+    <section class="hero">
+        <h1>The Next Decade Decides Humanity's Future</h1>
+        <p class="hero-subtitle">Centralized AI, robotics, and brain-computer interfaces are accelerating and Crypto is falling behind.</p>
+        <p class="hero-description">We share deep dives and playbooks to help decentralization catch up and win.</p>
+        
+        <!-- NEWSLETTER SIGNUP -->
+        <div class="newsletter-hero">
+            <h3>Get Weekly Insights</h3>
+            <p>Non-technical deep dives, startup ideas we're backing, and playbooks to scale decentralized networks. 100% free.</p>
+            <form class="newsletter-form" action="https://embeds.beehiiv.com/d0f28dd1-0f1b-4586-9750-255fab35b518" method="post" target="_blank">
+                <input type="email" name="EMAIL" class="newsletter-input" placeholder="your@email.com" required>
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+            <p class="newsletter-note">Unsubscribe anytime. No spam, just signal.</p>
+        </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="filters">
+        <div class="filter-row">
+            <span class="filter-label">Topics:</span>
+            <button class="tag-filter active" data-tag="all">All</button>
+            <button class="tag-filter" data-tag="Use-Cases">Use-Cases</button>
+            <button class="tag-filter" data-tag="Ideas">Startup Ideas</button>
+            <button class="tag-filter" data-tag="Playbooks">Playbooks</button>
+            <button class="tag-filter" data-tag="Decentralization">Decentralization</button>
+            <button class="tag-filter" data-tag="Network States">Network States</button>
+        </div>
+    </section>
+
+    <!-- BLOG CONTENT -->
+    <div class="blog-container">
+        
+        <!-- FEATURED POST -->
+        <article class="featured-post" data-tags="Decentralization,Use-Cases">
+            <a href="/blog/why-crypto-needs-dapps-not-more-l1s.html">
+                <div class="featured-image">
+                    <img src="/images/blog/dapps-not-l1s.jpg" alt="Why Crypto Needs Dapps, Not More L1s">
+                </div>
+                <div class="featured-content">
+                    <span class="post-tag">Use-Cases • Decentralization</span>
+                    <h2 class="post-title">Why Crypto Needs Dapps People Actually Use (Not More L1s)</h2>
+                    <p class="post-excerpt">There are dozens of billion-dollar "unicorn" Layer 1s with zero dapps and zero real users. Here's what we need to build instead.</p>
+                    <div class="post-meta">
+                        <span>Louis Chen</span>
+                        <span>•</span>
+                        <span>9 min read</span>
+                        <span>•</span>
+                        <span>Jan 15, 2026</span>
+                    </div>
+                </div>
+            </a>
+        </article>
+
+        <!-- ARTICLES GRID -->
+        <div class="articles-grid">
+            
+            <article class="article-card" data-tags="Decentralization">
+                <a href="/blog/decentralization-vs-centralized-ai.html">
+                    <div class="article-image">
+                        <img src="/images/blog/centralized-ai.jpg" alt="Decentralization vs AI">
+                    </div>
+                    <div>
+                        <span class="post-tag">Decentralization</span>
+                        <h3 class="post-title">Decentralization is How We Fight Back</h3>
+                        <p class="post-excerpt">Big tech and governments are racing to control AI, robotics, and brain-computer interfaces. First they control your wealth, then what you can see and say.</p>
+                        <div class="post-meta">
+                            <span>7 min read</span>
+                            <span>•</span>
+                            <span>Jan 12, 2026</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card" data-tags="Ideas">
+                <a href="/blog/startup-ideas-were-backing.html">
+                    <div class="article-image">
+                        <img src="/images/blog/startup-ideas.jpg" alt="Startup Ideas">
+                    </div>
+                    <div>
+                        <span class="post-tag">Startup Ideas</span>
+                        <h3 class="post-title">Startup Ideas We're Backing Right Now</h3>
+                        <p class="post-excerpt">Dapps real people can actually use instead of just airdrop farmers. If you're building one of these, we want to hear from you.</p>
+                        <div class="post-meta">
+                            <span>5 min read</span>
+                            <span>•</span>
+                            <span>Jan 10, 2026</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card" data-tags="Playbooks">
+                <a href="/blog/scale-without-ponzinomics.html">
+                    <div class="article-image">
+                        <img src="/images/blog/scale-playbook.jpg" alt="Scaling Playbook">
+                    </div>
+                    <div>
+                        <span class="post-tag">Playbooks</span>
+                        <h3 class="post-title">How to Scale Without Defaulting to Ponzinomics</h3>
+                        <p class="post-excerpt">Easy-to-implement playbooks to scale decentralized networks without Web2 extraction tactics or unsustainable tokenomics.</p>
+                        <div class="post-meta">
+                            <span>8 min read</span>
+                            <span>•</span>
+                            <span>Jan 8, 2026</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card" data-tags="Network States">
+                <a href="/blog/future-of-network-states.html">
+                    <div class="article-image">
+                        <img src="/images/blog/network-states.jpg" alt="Network States">
+                    </div>
+                    <div>
+                        <span class="post-tag">Network States</span>
+                        <h3 class="post-title">The Future of Network States (And Why They Matter)</h3>
+                        <p class="post-excerpt">Non-technical deep dive on how decentralized societies actually work and why they're the future of governance.</p>
+                        <div class="post-meta">
+                            <span>10 min read</span>
+                            <span>•</span>
+                            <span>Jan 5, 2026</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card" data-tags="Use-Cases">
+                <a href="/blog/explain-crypto-without-sounding-high.html">
+                    <div class="article-image">
+                        <img src="/images/blog/explain-crypto.jpg" alt="Explain Crypto">
+                    </div>
+                    <div>
+                        <span class="post-tag">Use-Cases</span>
+                        <h3 class="post-title">How to Explain Crypto to Your Friends Without Sounding High</h3>
+                        <p class="post-excerpt">Most people think crypto is just memes and yield farming. Here's how to explain why it actually matters.</p>
+                        <div class="post-meta">
+                            <span>6 min read</span>
+                            <span>•</span>
+                            <span>Jan 3, 2026</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card" data-tags="Playbooks,Ideas">
+                <a href="/blog/from-zero-to-real-users.html">
+                    <div class="article-image">
+                        <img src="/images/blog/real-users.jpg" alt="Real Users">
+                    </div>
+                    <div>
+                        <span class="post-tag">Playbooks</span>
+                        <h3 class="post-title">From Zero to Real Users: The Anti-Airdrop Playbook</h3>
+                        <p class="post-excerpt">Stop rewarding airdrop farmers. Here's how to attract people who actually use your product.</p>
+                        <div class="post-meta">
+                            <span>7 min read</span>
+                            <span>•</span>
+                            <span>Dec 28, 2025</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p class="footer-tagline">For builders and citizens who refuse to let centralized overlords win.</p>
+        <nav class="footer-nav">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/launchos/">LaunchOS</a>
+            <a href="/gtm/">GTM Advisory</a>
+            <a href="/blog.html">Letters</a>
+        </nav>
+        <p>© 2026 The Nozomi Letters. All rights reserved.</p>
+    </footer>
+
+    <!-- FILTERING SCRIPT -->
+    <script>
+        // Tag filtering
+        const filterBtns = document.querySelectorAll('.tag-filter');
+        const articles = document.querySelectorAll('.article-card, .featured-post');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag;
+                
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter articles
+                articles.forEach(article => {
+                    if (tag === 'all') {
+                        article.classList.remove('hidden');
+                    } else {
+                        const articleTags = article.dataset.tags.split(',');
+                        if (articleTags.includes(tag)) {
+                            article.classList.remove('hidden');
+                        } else {
+                            article.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for newsletter link
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
