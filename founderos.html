@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FounderOS – The YC Library for Web3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #1a1a1a;
+            --gray: #888;
+            --gray-light: #e5e5e5;
+            --red: #FF0000;
+            --green: #00FF00;
+            
+            --font-mono: 'Space Mono', monospace;
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* BRUTAL GRID BACKGROUND */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--gray-light) 1px, transparent 1px),
+                linear-gradient(90deg, var(--gray-light) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .hero-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 2px solid var(--black);
+            padding: 8px 20px;
+            display: inline-block;
+            margin-bottom: 40px;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 400;
+            line-height: 0.95;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: clamp(16px, 2vw, 24px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .hero-description {
+            font-size: clamp(18px, 2.5vw, 28px);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* CTA BUTTON */
+        .cta {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 20px 50px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--red);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta:hover::before {
+            left: 0;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* SECTION */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        /* PROBLEM SECTION */
+        .problem {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .problem .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .problem-item h3 {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .problem-item p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--gray-light);
+            font-weight: 300;
+        }
+
+        /* WHAT IS THIS */
+        .what-is-this {
+            text-align: center;
+        }
+
+        .what-is-this .big-text {
+            font-size: clamp(24px, 4vw, 48px);
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--black);
+            border: 2px solid var(--black);
+            margin-top: 80px;
+        }
+
+        .feature-box {
+            background: var(--white);
+            padding: 60px 40px;
+            text-align: left;
+        }
+
+        .feature-box h3 {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .feature-box p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        /* PHASES */
+        .phases {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .phase {
+            margin-bottom: 100px;
+        }
+
+        .phase:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase-title {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-left: 8px solid var(--green);
+            padding-left: 30px;
+        }
+
+        .phase-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .phase-item h4 {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--gray-light);
+        }
+
+        .phase-item ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .phase-item li {
+            font-size: 13px;
+            color: var(--gray);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .phase-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step {
+            text-align: left;
+        }
+
+        .step-number {
+            font-family: var(--font-serif);
+            font-size: 120px;
+            line-height: 1;
+            margin-bottom: 20px;
+            font-style: italic;
+            opacity: 0.3;
+        }
+
+        .step h3 {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .step p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* WHO THIS IS FOR */
+        .who-for {
+            background: var(--white);
+        }
+
+        .who-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--black);
+            border: 2px solid var(--black);
+            margin-top: 60px;
+        }
+
+        .who-item {
+            background: var(--white);
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .who-item h3 {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .who-item p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* DIFFERENT */
+        .different {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .different-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .different-item h3 {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .different-item p {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 150px 40px;
+        }
+
+        .final-cta h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 100px);
+            line-height: 1.1;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .final-cta p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .final-cta .cta {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .final-cta .cta:hover {
+            background: var(--green);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .features-grid,
+            .who-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .different-grid,
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .phase-items {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--red);
+        }
+
+        /* SAKURA PETALS */
+        #sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="sakura-canvas"></canvas>
+<div class="grid-bg"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Launching Q2 2026</div>
+        <h1>FounderOS</h1>
+        <div class="hero-subtitle">The YC Library for Web3</div>
+        <p class="hero-description">Plug-and-play playbooks that help you plan, raise, and launch with Power Citizens-not airdrop farmers who dump Day 1.</p>
+        <a href="#waitlist" class="cta">Join the Waitlist →</a>
+    </div>
+</section>
+
+<!-- PROBLEM: WEB3 IS BROKEN -->
+<section class="problem">
+    <div class="container">
+        <h2 class="section-title">Web3 Is Broken</h2>
+        <p style="font-size: 28px; max-width: 800px; line-height: 1.5; font-weight: 300;">Right now, it's a casino dressed up like a revolution.</p>
+        
+        <div class="problem-grid">
+            <div class="problem-item">
+                <h3>Billions Raised</h3>
+                <p>VCs throwing money at anything with a whitepaper. Millions of tokens minted.</p>
+            </div>
+            <div class="problem-item">
+                <h3>Less than 0.1% Survive</h3>
+                <p>Dead chains. VC playgrounds. Discord cemeteries where "community" was just exit liquidity.</p>
+            </div>
+            <div class="problem-item">
+                <h3>It Looks Like a Scam</h3>
+                <p>Endless pump-and-dumps, meme coins, and billion-dollar chains with barely a single dApp anyone can name.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- IT'S NOT ALWAYS YOUR FAULT -->
+<section>
+    <div class="container">
+        <div class="section-subtitle">The Problem</div>
+        <h2 class="section-title">It's Not Always<br>Your Fault</h2>
+        <p class="big-text" style="font-size: 28px; max-width: 900px; line-height: 1.5; font-weight: 300;">
+            What takes a Web2 company ten years-ideation, fundraising, PMF, IPO-you're expected to do in <em>months</em>.<br><br>
+            Tokens trade before products work. Communities demand results before you're ready. VCs, exchanges, and market makers trap you in toxic deals.<br><br>
+            You're running a public company faster than any industry in history. Most founders panic and paste Web2 playbooks into this chaos.<br><br>
+            <strong>It breaks.</strong>
+        </p>
+    </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="what-is-this">
+    <div class="container">
+        <div class="section-subtitle">The Solution</div>
+        <h2 class="section-title">The Missing Operating System<br>for Web3 Founders</h2>
+        <p class="big-text">
+            FounderOS is 100+ plug-and-play frameworks covering what matters <em>after</em> you build:
+        </p>
+        
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Raise Capital</h3>
+                <p>Structure your round so you don't get screwed by VCs, exchanges, or market makers.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Launch Your Token</h3>
+                <p>Design tokenomics and incentives that reward staying, not dumping.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Growth</h3>
+                <p>Grow your network and create sustainable systems that survive cycles.</p>
+            </div>
+        </div>
+
+        <p style="font-size: 20px; margin-top: 60px; font-weight: 300;">Not a course. Not theory. Not 1,000 pages of buzzwords.</p>
+        <p style="font-size: 28px; margin-top: 20px; font-weight: 500;">Everything YC gave their batch. But for Web3.</p>
+    </div>
+</section>
+
+<!-- PHASES -->
+<section class="phases">
+    <div class="container">
+        <h2 class="section-title">Here's What You Get</h2>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-title">Phase 1: Planning</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Idea Validation</h4>
+                    <p>Craft problem statements that make investors lean in and users say "I need this now."</p>
+                    <ul>
+                        <li>Problem statements investors believe</li>
+                        <li>"Hell vs Heaven" frameworks</li>
+                        <li>Market timing (Why now?)</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Customer Research</h4>
+                    <p>Know exactly who to build for so you're not guessing or chasing noise.</p>
+                    <ul>
+                        <li>Jobs-to-be-done templates</li>
+                        <li>ICP worksheets</li>
+                        <li>Value proposition canvas</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Competitor Analysis</h4>
+                    <p>Find white space where you can win instead of fighting for scraps.</p>
+                    <ul>
+                        <li>SWOT frameworks</li>
+                        <li>Blue Ocean positioning</li>
+                        <li>On-chain data reverse engineering</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Tokenomics Foundations</h4>
+                    <p>Design tokens that reward staying and building, not farming and dumping.</p>
+                    <ul>
+                        <li>Token design 101</li>
+                        <li>Incentive structures</li>
+                        <li>Airdrop strategy that filters farmers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-title">Phase 2: Marketing & Messaging</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Messaging That Converts</h4>
+                    <p>Explain what you do so VCs get it in 60 seconds and users know why they should care.</p>
+                    <ul>
+                        <li>Features → benefits translation</li>
+                        <li>Elevator pitches that work</li>
+                        <li>FAQ frameworks</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Brand Building</h4>
+                    <p>Create a brand people want to be part of, not just another logo they scroll past.</p>
+                    <ul>
+                        <li>Brand personality definition</li>
+                        <li>Blair Warren "cult following" framework</li>
+                        <li>Visual identity guidelines</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Company Assets</h4>
+                    <p>Copy-paste-ready materials so you're not rewriting your pitch every time.</p>
+                    <ul>
+                        <li>Website copy templates</li>
+                        <li>One-pager/memo</li>
+                        <li>Sales deck structure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-title">Phase 3: GTM & Growth</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>GTM Strategy</h4>
+                    <p>Build a go-to-market plan that attracts Power Citizens who stay.</p>
+                    <ul>
+                        <li>Web3 vs Web2 GTM differences</li>
+                        <li>Power Citizens framework</li>
+                        <li>Ecosystem-led growth models</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Funnels & Retention</h4>
+                    <p>Turn casual users into committed contributors.</p>
+                    <ul>
+                        <li>Aha moment design</li>
+                        <li>Habit formation systems</li>
+                        <li>Flywheels that compound</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Incentive Programs</h4>
+                    <p>Design rewards that make building more profitable than gaming.</p>
+                    <ul>
+                        <li>Behavioral design</li>
+                        <li>Anti-gaming mechanisms</li>
+                        <li>Program structure</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Acquisition Playbooks</h4>
+                    <p>Execute campaigns that drive real growth.</p>
+                    <ul>
+                        <li>Airdrop strategy</li>
+                        <li>ICO execution</li>
+                        <li>KOL campaigns</li>
+                        <li>Founder-led growth</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-title">Phase 4: Fundraising</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Raise Strategy</h4>
+                    <p>Structure your round with aligned investors who help you scale.</p>
+                    <ul>
+                        <li>Cap table design</li>
+                        <li>Fundraising models (SAFE, SAFT)</li>
+                        <li>Pre-raise prep checklist</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Materials</h4>
+                    <p>Walk into every meeting with a deck that makes investors say yes.</p>
+                    <ul>
+                        <li>Pitch deck templates</li>
+                        <li>Investor memo</li>
+                        <li>Data room setup</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Execution</h4>
+                    <p>Close your round faster.</p>
+                    <ul>
+                        <li>Investor outreach playbooks</li>
+                        <li>Elevator pitch frameworks</li>
+                        <li>Objection handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-title">Phase 5: TGE & Launch</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>TGE Strategy</h4>
+                    <p>Launch your token without a Day 1 dump.</p>
+                    <ul>
+                        <li>DEX vs CEX strategy</li>
+                        <li>Supply management</li>
+                        <li>Liquidity design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+    <div class="container">
+        <h2 class="section-title">How It Actually Works</h2>
+        <p style="font-size: 20px; max-width: 700px; margin: 0 auto 60px;">Each framework is plug-and-play. No theory for theory's sake.</p>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>The Framework</h3>
+                <p>What to do + why it matters</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Real Case Studies</h3>
+                <p>What worked (BTC, Solana, Uniswap) and what failed (dead L1s)</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>The Worksheet</h3>
+                <p>Apply it to your project today</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="who-for">
+    <div class="container">
+        <h2 class="section-title">Who This Is For</h2>
+        
+        <div class="who-grid">
+            <div class="who-item">
+                <h3>Pre-Fundraise Teams</h3>
+                <p>You need to structure your raise so you don't get screwed</p>
+            </div>
+            <div class="who-item">
+                <h3>Pre-TGE Projects</h3>
+                <p>You're 3-12 months from launch and don't want to be another 70% Day 1 dump</p>
+            </div>
+            <div class="who-item">
+                <h3>Post-TGE Teams</h3>
+                <p>Your token launched, dumped, and now you're fixing retention and governance</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section style="background: var(--white);">
+    <div class="container">
+        <div class="section-subtitle">The Team</div>
+        <h2 class="section-title">Who We Are</h2>
+        
+        <div style="max-width: 900px; margin: 0 0 60px;">
+            <p style="font-size: 24px; line-height: 1.6; font-weight: 300; margin-bottom: 40px;">
+                We've Been in the Room When It All Goes to Shit
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; margin-bottom: 60px;">
+                <div>
+                    <div style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--black); margin-bottom: 20px; overflow: hidden; background: var(--gray-light);">
+                        <img src="/images/Loui.jpg" alt="Louis Dharma" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-family: var(--font-mono); font-size: 20px; margin-bottom: 15px; text-transform: uppercase;">Louis Dharma</h3>
+                    <p style="font-size: 16px; line-height: 1.7; color: var(--gray);">Ex-Head of Growth at Immutable. Built founder programs and playbooks for Aptos Accelerators. Worked with hundreds of projects from early-stage to top 50 ecosystems.</p>
+                </div>
+                <div>
+                    <div style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--black); margin-bottom: 20px; overflow: hidden; background: var(--gray-light);">
+                        <img src="/images/Jinelle.png" alt="Jinelle D'Lima" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-family: var(--font-mono); font-size: 20px; margin-bottom: 15px; text-transform: uppercase;">Jinelle D'Lima</h3>
+                    <p style="font-size: 16px; line-height: 1.7; color: var(--gray);">Led marketing across Immutable + Animoca portfolios. Helped teams achieve 70% average growth increase and navigate launches that 10x'd in month one.</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 18px; line-height: 1.7; font-weight: 300; margin-bottom: 40px;">
+                Together, we've helped teams raise $87M+ in 2025 alone. We've been inside launches that 10x'd in month one. And launches that crashed 80% on Day 1. And everything in between.
+            </p>
+            
+            <p style="font-size: 18px; line-height: 1.7; font-weight: 300;">
+                You get all that scar tissue in FounderOS. Without wasting years and millions figuring it out yourself.
+            </p>
+        </div>
+        
+        <div style="border: 2px solid var(--black); padding: 60px 50px; background: #fafafa; margin-top: 60px;">
+            <h3 style="font-family: var(--font-mono); font-size: 20px; margin-bottom: 30px; text-transform: uppercase; text-align: center;">With Help from Our Network</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-bottom: 60px;">
+                <div>
+                    <p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px;"><strong>Operators from leading ecosystems:</strong><br>Aptos, Virtuals, Ethereum Foundation, and more</p>
+                    <p style="font-size: 16px; line-height: 1.8;"><strong>Top VCs actively funding in 2026</strong></p>
+                </div>
+                <div>
+                    <p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px;"><strong>Exchanges and market makers</strong><br>who've launched 100+ tokens</p>
+                    <p style="font-size: 16px; line-height: 1.8;"><strong>Agencies that execute, not just talk</strong></p>
+                </div>
+            </div>
+            
+            <!-- NETWORK LOGOS -->
+            <div style="background: var(--white); border: 2px solid var(--black); padding: 40px; margin-bottom: 40px;">
+                <p style="text-align: center; color: var(--gray); font-size: 14px; font-style: italic; margin-bottom: 40px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 2px;">Over 500 investors and projects</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 30px; align-items: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Immutable</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Aptos</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Arbitrum</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Avalanche</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">BNB Chain</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Sui</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Berachain</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Optimism</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Polkadot</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Movement</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Skale</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Story</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Cardano</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Abstract</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Virtual</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+                        <span style="color: var(--black); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Legion</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="padding-top: 40px; border-top: 2px solid var(--black);">
+                <p style="font-size: 18px; line-height: 1.7; font-weight: 300; margin-bottom: 20px;">
+                    These playbooks come from people who actually built what lasted.
+                </p>
+                <p style="font-size: 18px; line-height: 1.7; font-weight: 500;">
+                    No armchair advisors. No generic consultants. No "experts" who've never launched anything. Just battle-tested frameworks from operators who scaled the networks that survived.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT MAKES THIS DIFFERENT -->
+<section class="different">
+    <div class="container">
+        <h2 class="section-title">What Makes This Different</h2>
+        
+        <div class="different-grid">
+            <div class="different-item">
+                <h3>It's Not a Course</h3>
+                <p>Courses give you knowledge. This gives you systems you execute today.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Modular</h3>
+                <p>Take what you need when you need it. Fundraising? Jump to Phase 4. GTM broken? Phase 3.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Battle-Tested</h3>
+                <p>Built from working with projects that raised $87M+, scaled ecosystems like Immutable and Animoca portfolios.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Free Forever</h3>
+                <p>No paywalls. No upsells. Just the playbooks you need to survive and scale.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="waitlist">
+    <div class="container">
+        <h2>Join the Waitlist</h2>
+        <p>Launching Q2 2026. Get early access. Start fixing your biggest bottleneck today.</p>
+        <a href="https://forms.fillout.com/t/fiYYkaHNbeus" target="_blank" class="cta">Get Early Access →</a>
+        
+        <p style="margin-top: 80px; font-size: 16px; max-width: 900px; margin-left: auto; margin-right: auto; color: #888;">
+            P.S. — This isn't theory from people who've never launched anything. It's the exact playbooks we use with projects raising millions, launching successfully, and surviving cycles. Everything YC gives their batch. But for Web3. And free forever.
+        </p>
+    </div>
+</section>
+
+<script>
+// Sakura Petal Animation
+(function() {
+    const canvas = document.getElementById('sakura-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    class Petal {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height - canvas.height;
+            this.size = Math.random() * 8 + 4;
+            this.speedY = Math.random() * 1 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.3;
+            this.rotation = Math.random() * 360;
+            this.rotationSpeed = Math.random() * 2 - 1;
+        }
+        
+        update() {
+            this.y += this.speedY;
+            this.x += this.speedX;
+            this.rotation += this.rotationSpeed;
+            
+            if (this.y > canvas.height) {
+                this.y = -20;
+                this.x = Math.random() * canvas.width;
+            }
+            
+            if (this.x > canvas.width) {
+                this.x = 0;
+            } else if (this.x < 0) {
+                this.x = canvas.width;
+            }
+        }
+        
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation * Math.PI / 180);
+            ctx.globalAlpha = this.opacity;
+            ctx.fillStyle = '#FFB7CE';
+            
+            // Draw petal shape
+            ctx.beginPath();
+            ctx.ellipse(0, 0, this.size, this.size * 1.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+    }
+    
+    const petals = [];
+    for (let i = 0; i < 30; i++) {
+        petals.push(new Petal());
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        petals.forEach(petal => {
+            petal.update();
+            petal.draw();
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+})();
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Fade in on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.problem-item, .feature-box, .phase, .step, .who-item, .different-item').forEach(el => {
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
