@@ -768,7 +768,7 @@
         <p>Get early access to FounderOS. 100+ frameworks to help you plan, raise, and launch.</p>
         
         <!-- MAILCHIMP FORM -->
-        <form action="https://network.us8.list-manage.com/subscribe/post?u=af0c9b564920f5939a4d980f7&id=be614940cf&f_id=001dc7e1f0" method="POST" class="email-form" id="emailForm" onsubmit="return handleFormSubmit(event)">
+        <form action="https://network.us8.list-manage.com/subscribe/post?u=af0c9b564920f5939a4d980f7&id=be614940cf&f_id=001dc7e1f0" method="POST" class="email-form" id="emailForm" target="hidden_iframe" onsubmit="return handleFormSubmit(event)">
             <input type="email" name="EMAIL" class="email-input" placeholder="Enter your email" required>
             <!-- Anti-bot field (hidden) -->
             <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -777,6 +777,9 @@
             <button type="submit" class="email-submit">Join Waitlist</button>
             <p class="form-message" id="formMessage" style="margin-top: 15px; font-size: 14px; display: none;"></p>
         </form>
+        
+        <!-- Hidden iframe for form submission -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         
         <p class="email-privacy">We respect your privacy. Unsubscribe anytime.</p>
     </div>
@@ -1384,10 +1387,7 @@ document.querySelectorAll('a[href="#waitlist"]').forEach(link => {
 
 // Handle form submission
 function handleFormSubmit(event) {
-    event.preventDefault();
-    
     const form = document.getElementById('emailForm');
-    const formData = new FormData(form);
     const message = document.getElementById('formMessage');
     const submitBtn = form.querySelector('.email-submit');
     
@@ -1395,38 +1395,25 @@ function handleFormSubmit(event) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
     
-    // Submit to Mailchimp using fetch
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors' // Mailchimp doesn't support CORS, so we use no-cors
-    })
-    .then(() => {
-        // Since we're using no-cors, we can't read the response
-        // But we can assume success if no error was thrown
+    // Form will submit to hidden iframe
+    // Show success message immediately since we can't detect the response
+    setTimeout(() => {
         message.style.display = 'block';
         message.style.color = 'var(--text-primary)';
         message.textContent = '✅ Success! Check your email to confirm your subscription.';
         form.reset();
         submitBtn.textContent = 'Joined!';
         
-        // Close popup after 2 seconds
+        // Close popup after 3 seconds
         setTimeout(() => {
             closeEmailPopup();
             submitBtn.disabled = false;
             submitBtn.textContent = 'Join Waitlist';
             message.style.display = 'none';
         }, 3000);
-    })
-    .catch((error) => {
-        message.style.display = 'block';
-        message.style.color = '#ff4444';
-        message.textContent = '❌ Something went wrong. Please try again.';
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Join Waitlist';
-    });
+    }, 500);
     
-    return false;
+    return true; // Allow form to submit normally
 }
 
 </script>
