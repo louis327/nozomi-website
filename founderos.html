@@ -1,1 +1,1435 @@
-FILE_TOO_LARGE_WILL_USE_ALTERNATE_METHOD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FounderOS – The YC Library for Web3</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="shortcut icon" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #1a1a1a;
+            --gray: #888;
+            --gray-light: #e5e5e5;
+            --red: #FF0000;
+            --green: #00FF00;
+            
+            --font-mono: 'Space Mono', monospace;
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* BRUTAL GRID BACKGROUND */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--gray-light) 1px, transparent 1px),
+                linear-gradient(90deg, var(--gray-light) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 2px solid var(--black);
+            z-index: 1000;
+            padding: 20px 40px;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-logo img {
+            height: 32px;
+            display: block;
+        }
+
+        .navbar-back {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--black);
+            text-decoration: none;
+            border: 2px solid var(--black);
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .navbar-back:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .navbar-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .navbar-btn {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--black);
+            text-decoration: none;
+            border: 2px solid var(--black);
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .navbar-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .navbar-btn.primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .navbar-btn.primary:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 40px 100px;
+            position: relative;
+        }
+
+        .hero-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 2px solid var(--black);
+            padding: 8px 20px;
+            display: inline-block;
+            margin-bottom: 40px;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 400;
+            line-height: 0.95;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: clamp(16px, 2vw, 24px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .hero-description {
+            font-size: clamp(18px, 2.5vw, 28px);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* CTA BUTTON */
+        .cta {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 20px 50px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--red);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta:hover::before {
+            left: 0;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* SECTION */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        /* PROBLEM SECTION */
+        .problem {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .problem .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .problem-item h3 {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .problem-item p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--gray-light);
+            font-weight: 300;
+        }
+
+        /* WHAT IS THIS */
+        .what-is-this {
+            text-align: center;
+        }
+
+        .what-is-this .big-text {
+            font-size: clamp(24px, 4vw, 48px);
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--black);
+            border: 2px solid var(--black);
+            margin-top: 80px;
+        }
+
+        .feature-box {
+            background: var(--white);
+            padding: 60px 40px;
+            text-align: left;
+        }
+
+        .feature-box h3 {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .feature-box p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        /* PHASES */
+        .phases {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .phase {
+            margin-bottom: 100px;
+        }
+
+        .phase:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase-title {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-left: 8px solid var(--green);
+            padding-left: 30px;
+        }
+
+        .phase-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .phase-item h4 {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--gray-light);
+        }
+
+        .phase-item ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .phase-item li {
+            font-size: 13px;
+            color: var(--gray);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .phase-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step {
+            text-align: left;
+        }
+
+        .step-number {
+            font-family: var(--font-serif);
+            font-size: 120px;
+            line-height: 1;
+            margin-bottom: 20px;
+            font-style: italic;
+            opacity: 0.3;
+        }
+
+        .step h3 {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .step p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* WHO THIS IS FOR */
+        .who-for {
+            background: var(--white);
+        }
+
+        .who-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--black);
+            border: 2px solid var(--black);
+            margin-top: 60px;
+        }
+
+        .who-item {
+            background: var(--white);
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .who-item h3 {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .who-item p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* DIFFERENT */
+        .different {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .different-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .different-item h3 {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .different-item p {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 150px 40px;
+        }
+
+        .final-cta h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 100px);
+            line-height: 1.1;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .final-cta p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .final-cta .cta {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .final-cta .cta:hover {
+            background: var(--green);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar-logo img {
+                height: 24px;
+            }
+
+            .navbar-buttons {
+                gap: 8px;
+            }
+
+            .navbar-btn {
+                font-size: 10px;
+                padding: 8px 14px;
+                letter-spacing: 1px;
+            }
+
+            .features-grid,
+            .who-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .different-grid,
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .phase-items {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero {
+                padding: 120px 20px 80px;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--red);
+        }
+
+        /* SAKURA PETALS */
+        #sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.6;
+        }
+
+        /* EMAIL POPUP MODAL */
+        .email-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .email-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .email-popup-content {
+            background: var(--white);
+            border: 3px solid var(--black);
+            max-width: 500px;
+            width: 90%;
+            padding: 50px 40px;
+            position: relative;
+            text-align: center;
+        }
+
+        .email-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            transition: color 0.2s ease;
+        }
+
+        .email-popup-close:hover {
+            color: var(--red);
+        }
+
+        .email-popup h3 {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .email-popup p {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .email-input {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            padding: 16px 20px;
+            border: 2px solid var(--black);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+
+        .email-submit {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 18px 40px;
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--black);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .email-submit:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .email-privacy {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .email-popup-content {
+                padding: 40px 25px;
+            }
+
+            .email-popup h3 {
+                font-size: 28px;
+            }
+
+            .email-popup p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="/" class="navbar-logo">
+            <img src="/images/Nozomi_Logo_Black (2).png" alt="Nozomi">
+        </a>
+        <div class="navbar-buttons">
+            <a href="/" class="navbar-btn">Home</a>
+            <a href="#waitlist" class="navbar-btn primary">Join Waitlist</a>
+        </div>
+    </div>
+</nav>
+
+<!-- EMAIL POPUP -->
+<div class="email-popup" id="emailPopup">
+    <div class="email-popup-content">
+        <button class="email-popup-close" onclick="closeEmailPopup()">&times;</button>
+        <h3>Join the Waitlist</h3>
+        <p>Get early access to FounderOS. 100+ frameworks to help you plan, raise, and launch.</p>
+        
+        <!-- MAILCHIMP FORM -->
+        <form action="https://network.us8.list-manage.com/subscribe/post?u=af0c9b564920f5939a4d980f7&id=be614940cf&f_id=001dc7e1f0" method="POST" class="email-form" id="emailForm" onsubmit="return handleFormSubmit(event)">
+            <input type="email" name="EMAIL" class="email-input" placeholder="Enter your email" required>
+            <!-- Anti-bot field (hidden) -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_af0c9b564920f5939a4d980f7_be614940cf" tabindex="-1" value="">
+            </div>
+            <button type="submit" class="email-submit">Join Waitlist</button>
+            <p class="form-message" id="formMessage" style="margin-top: 15px; font-size: 14px; display: none;"></p>
+        </form>
+        
+        <p class="email-privacy">We respect your privacy. Unsubscribe anytime.</p>
+    </div>
+</div>
+
+<canvas id="sakura-canvas"></canvas>
+<div class="grid-bg"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Launching Q2 2026</div>
+        <h1>FounderOS</h1>
+        <div class="hero-subtitle">The YC Library for Web3</div>
+        <p class="hero-description">Plug-and-play playbooks that help you plan, raise, and launch with Power Citizens instead of wasting $1M+ on airdrop farmers who dump Day 1.</p>
+        <a href="#waitlist" class="cta">Join the Waitlist →</a>
+    </div>
+</section>
+
+<!-- PROBLEM: WEB3 IS BROKEN -->
+<section class="problem">
+    <div class="container">
+        <h2 class="section-title">Web3 Is Broken</h2>
+        <p style="font-size: 28px; max-width: 800px; line-height: 1.5; font-weight: 300;">Right now, it's a casino dressed up like a revolution.</p>
+        
+        <div class="problem-grid">
+            <div class="problem-item">a
+                <h3>Billions Raised</h3>
+                <p>VCs throwing money at anything with a whitepaper. Millions of tokens minted.</p>
+            </div>
+            <div class="problem-item">
+                <h3>Less than 0.1% Survive</h3>
+                <p>Dead chains. VC playgrounds. Discord cemeteries where "community" was just exit liquidity.</p>
+            </div>
+            <div class="problem-item">
+                <h3>It Looks Like a Scam</h3>
+                <p>Endless pump-and-dumps, meme coins, and billion-dollar chains with barely a single dApp anyone can name.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- IT'S NOT ALWAYS YOUR FAULT -->
+<section>
+    <div class="container">
+        <div class="section-subtitle">The Problem</div>
+        <h2 class="section-title">It's Not Always<br>Your Fault</h2>
+        <p class="big-text" style="font-size: 28px; max-width: 900px; line-height: 1.5; font-weight: 300;">
+            What takes a Web2 company ten years-ideation, fundraising, PMF, IPO-you're expected to do in <em>months</em>.<br><br>
+            Tokens trade before products work. Communities demand results before you're ready. VCs, exchanges, and market makers trap you in toxic deals.<br><br>
+            You're running a public company faster than any industry in history. Most founders panic and paste Web2 playbooks into this chaos.<br><br>
+            <strong>It breaks.</strong>
+        </p>
+    </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="what-is-this">
+    <div class="container">
+        <div class="section-subtitle">The Solution</div>
+        <h2 class="section-title">The Missing Operating System<br>for Web3 Founders</h2>
+        <p class="big-text">
+            FounderOS is 100+ plug-and-play frameworks covering what matters <em>after</em> you build:
+        </p>
+        
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Raise Capital</h3>
+                <p>Structure your round so you don't get screwed by VCs, exchanges, or market makers.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Launch Your Token</h3>
+                <p>Design tokenomics and incentives that reward staying, not dumping.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Growth</h3>
+                <p>Grow your network and create sustainable systems that survive cycles.</p>
+            </div>
+        </div>
+
+        <p style="font-size: 20px; margin-top: 60px; font-weight: 300;">Not a course. Not theory. Not 1,000 pages of buzzwords.</p>
+        <p style="font-size: 28px; margin-top: 20px; font-weight: 500;">Everything YC gave their batch. But for Web3.</p>
+    </div>
+</section>
+
+<!-- PHASES -->
+<section class="phases">
+    <div class="container">
+        <h2 class="section-title">Here's What You Get</h2>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-title">Phase 1: Planning</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Idea Validation</h4>
+                    <p>Craft problem statements that make investors lean in and users say "I need this now."</p>
+                    <ul>
+                        <li>Problem statements investors believe</li>
+                        <li>"Hell vs Heaven" frameworks</li>
+                        <li>Market timing (Why now?)</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Customer Research</h4>
+                    <p>Know exactly who to build for so you're not guessing or chasing noise.</p>
+                    <ul>
+                        <li>Jobs-to-be-done templates</li>
+                        <li>ICP worksheets</li>
+                        <li>Value proposition canvas</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Competitor Analysis</h4>
+                    <p>Find white space where you can win instead of fighting for scraps.</p>
+                    <ul>
+                        <li>SWOT frameworks</li>
+                        <li>Blue Ocean positioning</li>
+                        <li>On-chain data reverse engineering</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Tokenomics Foundations</h4>
+                    <p>Design tokens that reward staying and building, not farming and dumping.</p>
+                    <ul>
+                        <li>Token design 101</li>
+                        <li>Incentive structures</li>
+                        <li>Airdrop strategy that filters farmers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-title">Phase 2: Marketing & Messaging</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Messaging That Converts</h4>
+                    <p>Explain what you do so VCs get it in 60 seconds and users know why they should care.</p>
+                    <ul>
+                        <li>Features → benefits translation</li>
+                        <li>Elevator pitches that work</li>
+                        <li>FAQ frameworks</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Brand Building</h4>
+                    <p>Create a brand people want to be part of, not just another logo they scroll past.</p>
+                    <ul>
+                        <li>Brand personality definition</li>
+                        <li>Blair Warren "cult following" framework</li>
+                        <li>Visual identity guidelines</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Company Assets</h4>
+                    <p>Copy-paste-ready materials so you're not rewriting your pitch every time.</p>
+                    <ul>
+                        <li>Website copy templates</li>
+                        <li>One-pager/memo</li>
+                        <li>Sales deck structure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-title">Phase 3: GTM & Growth</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>GTM Strategy</h4>
+                    <p>Build a go-to-market plan that attracts Power Citizens who stay.</p>
+                    <ul>
+                        <li>Web3 vs Web2 GTM differences</li>
+                        <li>Power Citizens framework</li>
+                        <li>Ecosystem-led growth models</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Funnels & Retention</h4>
+                    <p>Turn casual users into committed contributors.</p>
+                    <ul>
+                        <li>Aha moment design</li>
+                        <li>Habit formation systems</li>
+                        <li>Flywheels that compound</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Incentive Programs</h4>
+                    <p>Design rewards that make building more profitable than gaming.</p>
+                    <ul>
+                        <li>Behavioral design</li>
+                        <li>Anti-gaming mechanisms</li>
+                        <li>Program structure</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Acquisition Playbooks</h4>
+                    <p>Execute campaigns that drive real growth.</p>
+                    <ul>
+                        <li>Airdrop strategy</li>
+                        <li>ICO execution</li>
+                        <li>KOL campaigns</li>
+                        <li>Founder-led growth</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-title">Phase 4: Fundraising</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>Raise Strategy</h4>
+                    <p>Structure your round with aligned investors who help you scale.</p>
+                    <ul>
+                        <li>Cap table design</li>
+                        <li>Fundraising models (SAFE, SAFT)</li>
+                        <li>Pre-raise prep checklist</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Materials</h4>
+                    <p>Walk into every meeting with a deck that makes investors say yes.</p>
+                    <ul>
+                        <li>Pitch deck templates</li>
+                        <li>Investor memo</li>
+                        <li>Data room setup</li>
+                    </ul>
+                </div>
+                <div class="phase-item">
+                    <h4>Execution</h4>
+                    <p>Close your round faster.</p>
+                    <ul>
+                        <li>Investor outreach playbooks</li>
+                        <li>Elevator pitch frameworks</li>
+                        <li>Objection handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-title">Phase 5: TGE & Launch</div>
+            <div class="phase-items">
+                <div class="phase-item">
+                    <h4>TGE Strategy</h4>
+                    <p>Launch your token without a Day 1 dump.</p>
+                    <ul>
+                        <li>DEX vs CEX strategy</li>
+                        <li>Supply management</li>
+                        <li>Liquidity design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+    <div class="container">
+        <h2 class="section-title">How It Actually Works</h2>
+        <p style="font-size: 20px; max-width: 700px; margin: 0 auto 60px;">Each framework is plug-and-play. No theory for theory's sake.</p>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>The Framework</h3>
+                <p>What to do + why it matters</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Real Case Studies</h3>
+                <p>What worked (BTC, Solana, Uniswap) and what failed (dead L1s)</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>The Worksheet</h3>
+                <p>Apply it to your project today</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="who-for">
+    <div class="container">
+        <h2 class="section-title">Who This Is For</h2>
+        
+        <div class="who-grid">
+            <div class="who-item">
+                <h3>Pre-Fundraise Teams</h3>
+                <p>You need to structure your raise so you don't get screwed</p>
+            </div>
+            <div class="who-item">
+                <h3>Pre-TGE Projects</h3>
+                <p>You're 3-12 months from launch and don't want to be another 70% Day 1 dump</p>
+            </div>
+            <div class="who-item">
+                <h3>Post-TGE Teams</h3>
+                <p>Your token launched, dumped, and now you're fixing retention and governance</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO WE ARE SECTION - DRAFT -->
+<section style="background: var(--white); padding: 120px 0;">
+    <div class="container">
+        <!-- Main Heading -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <div class="section-subtitle">The Team</div>
+            <h2 class="section-title">Who We Are</h2>
+            <p style="font-family: var(--font-mono); font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
+                We've Been in the Room When It All Goes to Shit
+            </p>
+        </div>
+        
+        <!-- Team Photos -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; max-width: 800px; margin: 0 auto 80px;">
+            <div style="text-align: center;">
+                <div style="width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--black); margin: 0 auto 20px; overflow: hidden; background: var(--gray-light);">
+                    <img src="/images/Loui.jpg" alt="Louis Dharma" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 style="font-family: var(--font-mono); font-size: 18px; margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Louis Dharma</h3>
+                <p style="font-size: 14px; line-height: 1.6; color: var(--gray);">Ex-Head of Growth at Immutable.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--black); margin: 0 auto 20px; overflow: hidden; background: var(--gray-light);">
+                    <img src="/images/Jinelle.png" alt="Jinelle D'Lima" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 style="font-family: var(--font-mono); font-size: 18px; margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Jinelle D'Lima</h3>
+                <p style="font-size: 14px; line-height: 1.6; color: var(--gray);">Led marketing across Immutable + Animoca portfolios.</p>
+            </div>
+        </div>
+        
+        <!-- Main Copy -->
+        <div style="max-width: 900px; margin: 0 auto 80px;">
+            <div style="font-size: 20px; line-height: 1.8; color: var(--black); font-weight: 300;">
+                <p style="margin-bottom: 20px;">Together, we've <strong>worked with hundreds of projects.</strong></p>
+                <p style="margin-bottom: 20px;">Small teams with big ideas.</p>
+                <p style="margin-bottom: 20px;">Mid-sized protocols finding PMF.</p>
+                <p style="margin-bottom: 20px;">Most of the top 50 ecosystems like Aptos and Virtuals.</p>
+                <p style="margin-bottom: 20px;">Helped teams raise <strong>$87M in 2025</strong> alone.</p>
+                <p style="margin-bottom: 40px;">We've been inside launches that 10X'd in month one.</p>
+                
+                <p style="margin-bottom: 20px;">And launches that crashed 80% on day one.</p>
+                <p style="margin-bottom: 20px;">And everything in-between.</p>
+                
+                <p style="margin-bottom: 40px; margin-top: 40px;">We've watched founders burn millions on KOL campaigns that spiked for a week then died.</p>
+                <p style="margin-bottom: 20px;">We've seen projects with "perfect metrics"—100K Discord, trending Twitter, millions in treasury—crater on Day 1.</p>
+                
+                <p style="margin-bottom: 40px; margin-top: 40px;"><strong>We know what separated them.</strong></p>
+                
+                <p style="font-size: 22px; font-weight: 500; margin-top: 40px;">You get all that scar tissue in FounderOS. Without wasting years and millions figuring it out yourself.</p>
+            </div>
+        </div>
+        
+        <!-- Network Section -->
+        <div style="margin-top: 100px;">
+            <h3 style="font-family: var(--font-mono); font-size: 24px; text-align: center; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">With Help from Our Network</h3>
+            
+            <!-- Logo Wall -->
+            <div style="background: #fafafa; border: 2px solid var(--black); padding: 60px 40px; margin-bottom: 60px;">
+                <p style="text-align: center; color: var(--gray); font-size: 14px; font-style: italic; margin-bottom: 50px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 2px;">Over 200 investors and projects</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 50px 30px; align-items: center; max-width: 900px; margin: 0 auto;">
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Immutable (1).png" alt="Immutable" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Aptos_logo_(2025).png" alt="Aptos" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Arbitrum.png" alt="Arbitrum" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/AVAX (1).png" alt="Avalanche" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/BNB Chain (1).png" alt="BNB Chain" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/SUI (1).png" alt="Sui" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Berachain (1).png" alt="Berachain" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/OPTIMISM (1).png" alt="Optimism" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Polkadot (1).png" alt="Polkadot" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Movement.png" alt="Movement" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Skale (1).png" alt="Skale" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/STORY (1).png" alt="Story" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Cardano.png" alt="Cardano" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Abstract.png" alt="Abstract" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Virtual.png" alt="Virtual" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                        <img src="/images/Legion.png" alt="Legion" style="max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Closing Statement -->
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 22px; line-height: 1.7; font-weight: 300; margin-bottom: 20px; color: var(--black);">
+                    These playbooks come from people who actually built what lasted.
+                </p>
+                <p style="font-size: 22px; line-height: 1.7; font-weight: 500; color: var(--black);">
+                    No armchair advisors. No generic consultants. No "experts" who've never launched anything. Just battle-tested frameworks from operators who scaled the networks that survived.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT MAKES THIS DIFFERENT -->
+<section class="different">
+    <div class="container">
+        <h2 class="section-title">What Makes This Different</h2>
+        
+        <div class="different-grid">
+            <div class="different-item">
+                <h3>It's Not a Course</h3>
+                <p>Courses give you knowledge. This gives you systems you execute today.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Modular</h3>
+                <p>Take what you need when you need it. Fundraising? Jump to Phase 4. GTM broken? Phase 3.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Battle-Tested</h3>
+                <p>Built from working with projects that raised $87M+, scaled ecosystems like Immutable and Animoca portfolios.</p>
+            </div>
+            <div class="different-item">
+                <h3>It's Free Forever</h3>
+                <p>No paywalls. No upsells. Just the playbooks you need to survive and scale.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="waitlist">
+    <div class="container">
+        <h2>Join the Waitlist</h2>
+        <p>Launching Q2 2026. Get early access. Start fixing your biggest bottleneck today.</p>
+        <a href="#waitlist" class="cta">Get Early Access →</a>
+        
+        <p style="margin-top: 80px; font-size: 16px; max-width: 900px; margin-left: auto; margin-right: auto; color: #888;">
+            P.S. - This isn't theory from people who've never launched anything. It's the exact playbooks we use with projects raising millions, launching successfully, and surviving cycles. Everything YC gives their batch. But for Web3. And free forever.
+        </p>
+    </div>
+</section>
+
+<script>
+// Sakura Petal Animation (from Nozomi homepage)
+(function(){
+const canvas=document.getElementById('sakura-canvas');
+const ctx=canvas.getContext('2d');
+let petals=[];
+const PETAL_COUNT=30;
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();
+addEventListener('resize',resize);
+class Petal{
+constructor(){this.reset(true);}
+reset(init){
+this.x=Math.random()*canvas.width;
+this.y=init?Math.random()*canvas.height:-20-Math.random()*100;
+this.size=Math.random()*8+5;
+this.speedY=Math.random()*0.8+0.3;
+this.speedX=Math.random()*0.6-0.3;
+this.rotation=Math.random()*Math.PI*2;
+this.rotSpeed=(Math.random()-0.5)*0.02;
+this.wobble=Math.random()*Math.PI*2;
+this.wobbleSpeed=Math.random()*0.02+0.01;
+this.wobbleAmp=Math.random()*1.5+0.5;
+this.color={r:255,g:183,b:206};
+this.opacity=Math.random()*0.4+0.15;
+this.scale=Math.random()*0.5+0.5;
+}
+update(){
+this.y+=this.speedY;
+this.wobble+=this.wobbleSpeed;
+this.x+=this.speedX+Math.sin(this.wobble)*this.wobbleAmp*0.3;
+this.rotation+=this.rotSpeed;
+if(this.y>canvas.height+20)this.reset(false);
+if(this.x>canvas.width+20)this.x=-20;
+if(this.x<-20)this.x=canvas.width+20;
+}
+draw(){
+ctx.save();
+ctx.translate(this.x,this.y);
+ctx.rotate(this.rotation);
+ctx.scale(this.scale,this.scale);
+ctx.globalAlpha=this.opacity;
+// Draw petal shape (more realistic)
+ctx.beginPath();
+ctx.moveTo(0,-this.size);
+ctx.bezierCurveTo(this.size*0.8,-this.size*0.5,this.size*0.6,this.size*0.3,0,this.size);
+ctx.bezierCurveTo(-this.size*0.6,this.size*0.3,-this.size*0.8,-this.size*0.5,0,-this.size);
+ctx.fillStyle=`rgb(${this.color.r},${this.color.g},${this.color.b})`;
+ctx.fill();
+// Add subtle vein
+ctx.beginPath();
+ctx.moveTo(0,-this.size*0.7);
+ctx.quadraticCurveTo(this.size*0.1,0,0,this.size*0.7);
+ctx.strokeStyle=`rgba(${this.color.r-20},${this.color.g-20},${this.color.b-20},0.3)`;
+ctx.lineWidth=0.5;
+ctx.stroke();
+ctx.restore();
+}
+}
+for(let i=0;i<PETAL_COUNT;i++)petals.push(new Petal());
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+petals.forEach(p=>{p.update();p.draw();});
+requestAnimationFrame(animate);
+}
+animate();
+})();
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Fade in on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.problem-item, .feature-box, .phase, .step, .who-item, .different-item').forEach(el => {
+    observer.observe(el);
+});
+
+// EMAIL POPUP FUNCTIONALITY
+function openEmailPopup() {
+    document.getElementById('emailPopup').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeEmailPopup() {
+    document.getElementById('emailPopup').classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Close popup when clicking outside
+document.getElementById('emailPopup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeEmailPopup();
+    }
+});
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeEmailPopup();
+    }
+});
+
+// Open popup when "Join Waitlist" buttons are clicked
+document.querySelectorAll('a[href="#waitlist"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        openEmailPopup();
+    });
+});
+
+// Handle form submission
+function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('emailForm');
+    const formData = new FormData(form);
+    const message = document.getElementById('formMessage');
+    const submitBtn = form.querySelector('.email-submit');
+    
+    // Disable button and show loading
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    
+    // Submit to Mailchimp using fetch
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Mailchimp doesn't support CORS, so we use no-cors
+    })
+    .then(() => {
+        // Since we're using no-cors, we can't read the response
+        // But we can assume success if no error was thrown
+        message.style.display = 'block';
+        message.style.color = 'var(--text-primary)';
+        message.textContent = '✅ Success! Check your email to confirm your subscription.';
+        form.reset();
+        submitBtn.textContent = 'Joined!';
+        
+        // Close popup after 2 seconds
+        setTimeout(() => {
+            closeEmailPopup();
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Join Waitlist';
+            message.style.display = 'none';
+        }, 3000);
+    })
+    .catch((error) => {
+        message.style.display = 'block';
+        message.style.color = '#ff4444';
+        message.textContent = '❌ Something went wrong. Please try again.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join Waitlist';
+    });
+    
+    return false;
+}
+
+</script>
+
+</body>
+</html>
