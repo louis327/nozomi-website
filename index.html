@@ -155,7 +155,21 @@ img { max-width: 100%; display: block; }
 .slide-title { font-family: var(--font-display); font-size: 13px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; display: block; }
 /* ABOUT */
 .about-section { position: relative; z-index: 1; padding: 140px 0; }
-.about-intro { max-width: 800px; margin-bottom: 100px; }
+.about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 80px; }
+.about-text { max-width: 520px; }
+.about-intro .intro-text { font-size: 18px; line-height: 1.8; color: var(--text-primary); margin-bottom: 32px; font-weight: 300; }
+.intro-highlight { font-size: 20px; line-height: 1.6; color: var(--text-primary); font-weight: 400; border-left: 3px solid var(--accent); padding-left: 24px; margin-top: 32px; }
+.journey-wrapper { position: sticky; top: 100px; }
+.journey-title { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 32px; opacity: 0.7; }
+.journey-stages { display: flex; flex-direction: column; gap: 40px; position: relative; }
+.journey-stages::before { content: ''; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); opacity: 0.2; }
+.stage { position: relative; padding-left: 60px; }
+.stage-number { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-medium); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--accent); z-index: 1; }
+.stage-label { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
+.stage-description { font-size: 14px; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+.results-section { margin-top: 140px; }
+.results-header { margin-bottom: 60px; }
+.results-subtitle { font-size: 16px; color: var(--text-tertiary); line-height: 1.7; max-width: 600px; font-weight: 300; font-style: italic; }
 .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .value-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 44px 36px; position: relative; overflow: hidden; transition: all 0.4s var(--ease-out-expo); }
 .value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.4s ease; }
@@ -242,6 +256,8 @@ img { max-width: 100%; display: block; }
 .mobile-menu a { font-family: var(--font-display); font-size: 28px; font-weight: 600; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
 .mobile-close { position: absolute; top: 20px; right: 24px; width: 42px; height: 42px; border: 1px solid var(--border-medium); border-radius: 10px; background: none; cursor: pointer; font-size: 18px; color: var(--text-primary); display: flex; align-items: center; justify-content: center; }
 @media (max-width: 1024px) {
+.about-content { grid-template-columns: 1fr; gap: 60px; }
+.journey-wrapper { position: static; }
 .value-grid { grid-template-columns: 1fr 1fr; }
 .services-grid { grid-template-columns: 1fr; }
 .services-grid .service-card { grid-column: 1 !important; grid-row: auto !important; }
@@ -253,6 +269,9 @@ img { max-width: 100%; display: block; }
 .container { padding: 0 20px; }
 .nav-links { display: none; }
 .mobile-toggle { display: flex; }
+.about-content { grid-template-columns: 1fr; gap: 60px; }
+.journey-wrapper { position: static; }
+.journey-stages::before { display: none; }
 .value-grid { grid-template-columns: 1fr; }
 .services-grid { grid-template-columns: 1fr; }
 .services-grid .service-card { grid-column: 1 !important; grid-row: auto !important; }
@@ -323,10 +342,55 @@ img { max-width: 100%; display: block; }
 </section>
 <section class="about-section" id="about">
 <div class="container">
-<div class="about-intro reveal">
-<div class="section-label">About Us</div>
-<p style="font-size:20px;line-height:1.6;color:var(--text-primary);">We help you plan, raise, and launch without wasting millions on airdrop farmers. Our frameworks are designed to replace "mercenary noise" with "Power Citizens", the users who contribute, recruit, invest and hold. From growth focused advisory and hands-on incubation. Access to our VC network and ICO support. Direct intros to top ecosystems, exchanges, and market makers. Free playbooks and growth templates.</p>
+<div class="section-label reveal">About Us</div>
+<h2 class="section-title reveal">About Us</h2>
+
+<div class="about-content">
+<div class="about-text reveal">
+<p class="intro-text">
+We help you plan, raise, and launch without wasting millions on airdrop farmers. Our frameworks are designed to replace "mercenary noise" with "Power Citizens" - the users who contribute, recruit, invest and hold.
+</p>
+
+<div class="intro-highlight">
+From battle-tested playbooks for early-stage teams to hands-on execution at launch, we partner with founders to build networks that last.
 </div>
+</div>
+
+<div class="journey-wrapper reveal reveal-d1">
+<div class="journey-title">How We Support You</div>
+<div class="journey-stages">
+<div class="stage">
+<div class="stage-number">01</div>
+<div class="stage-label">Early-Stage Teams</div>
+<p class="stage-description">
+Free library of battle-tested playbooks and growth templates to lay a strong foundation from Day 1.
+</p>
+</div>
+<div class="stage">
+<div class="stage-number">02</div>
+<div class="stage-label">3–12 Months from TGE</div>
+<p class="stage-description">
+Growth-focused advisory, hands-on incubation, institutional VC access, direct intros to top ecosystems, and full ICO execution.
+</p>
+</div>
+<div class="stage">
+<div class="stage-number">03</div>
+<div class="stage-label">At Launch</div>
+<p class="stage-description">
+Navigate liquidity complexities. We sit in the room negotiating terms with exchanges and market makers for a successful TGE.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="results-section">
+<div class="results-header reveal">
+<div class="section-label">Track Record</div>
+<h2 class="section-title">Proven results from operators,<br>not CT "thought leaders"</h2>
+<p class="results-subtitle">We've been there at every stage, helping founders compound growth.</p>
+</div>
+
 <div class="value-grid">
 <div class="value-card reveal">
 <div class="stat">$2 billion</div>
@@ -343,6 +407,9 @@ img { max-width: 100%; display: block; }
 <h3>Raised by founders we've supported in 2025</h3>
 <p>We've helped teams close rounds with top-tier VCs. We run our own ICOs, connect founders to leading L1s/L2s, have direct relationships with exchanges, market makers, and launch partners.</p>
 </div>
+</div>
+</div>
+
 </div>
 </div>
 </section>
@@ -548,13 +615,4 @@ if(sc){const heroH=window.innerHeight;const fade=Math.max(0.15,1-(0.85*scrollY/h
 document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
 document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
 function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
-function toggleFaq(el){const item=el.closest('.faq-item'),was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');}
-(function(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));})();
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
-(function(){const btn=document.getElementById('backToTop');addEventListener('scroll',()=>{btn.classList.toggle('visible',scrollY>500);});btn.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});})();
-(function(){document.querySelectorAll('.value-card, .service-card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();card.style.setProperty('--glow-x',(e.clientX-rect.left)+'px');card.style.setProperty('--glow-y',(e.clientY-rect.top)+'px');const x=(e.clientX-rect.left)/rect.width;const y=(e.clientY-rect.top)/rect.height;card.style.transform=`perspective(800px) rotateX(${(y-0.5)*-8}deg) rotateY(${(x-0.5)*8}deg) translateY(-4px)`;});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(800px) rotateX(0) rotateY(0) translateY(0)';});});})();
-(function(){document.querySelectorAll('.slide-video-wrap video').forEach(vid=>{vid.addEventListener('playing',function(){vid.closest('.slide-video-wrap').classList.add('playing');});});})();
-</script>
-<script src="/site.js"></script>
-</body>
-</html>
+function toggleFaq(el){const item=el.closest('.faq-item'),was=item.classList.contains('open');document.
