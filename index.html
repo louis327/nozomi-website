@@ -158,25 +158,23 @@ img { max-width: 100%; display: block; }
 .slide-title { font-family: var(--font-display); font-size: 13px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; display: block; }
 /* ABOUT */
 .about-section { position: relative; z-index: 1; padding: 140px 0; }
-.about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 80px; }
-.about-text { max-width: 520px; }
-.about-intro .intro-text { font-size: 18px; line-height: 1.8; color: var(--text-primary); margin-bottom: 32px; font-weight: 300; }
-.intro-highlight { font-size: 20px; line-height: 1.6; color: var(--text-primary); font-weight: 400; border-left: 3px solid var(--accent); padding-left: 24px; margin-top: 32px; }
-.journey-wrapper { position: sticky; top: 100px; }
-.journey-title { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 32px; opacity: 0.7; }
-.journey-stages { display: flex; flex-direction: column; gap: 40px; position: relative; }
-.journey-stages::before { content: ''; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); opacity: 0; animation: lineGrow 1.2s ease-out 0.5s forwards; }
-@keyframes lineGrow { from { opacity: 0; transform: scaleY(0); transform-origin: top; } to { opacity: 0.2; transform: scaleY(1); } }
-.stage { position: relative; padding-left: 60px; opacity: 0; transform: translateX(-30px); animation: slideInStage 0.6s ease-out forwards; }
-.stage:nth-child(1) { animation-delay: 0.3s; }
-.stage:nth-child(2) { animation-delay: 0.5s; }
-.stage:nth-child(3) { animation-delay: 0.7s; }
-@keyframes slideInStage { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-.stage-number { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-medium); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--accent); z-index: 1; transition: all 0.4s var(--ease-spring); }
-.stage:hover .stage-number { transform: scale(1.15) rotate(360deg); border-color: var(--accent); box-shadow: 0 0 20px rgba(var(--particle-color), 0.3); }
-.stage-label { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; transition: color 0.3s ease; }
+.about-content { display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: start; margin-bottom: 80px; }
+.about-text { max-width: 100%; padding-top: 40px; }
+.about-intro .intro-text { font-size: 22px; line-height: 1.65; color: var(--text-primary); margin-bottom: 0; font-weight: 300; }
+.journey-wrapper { position: relative; }
+.journey-title { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 28px; opacity: 0.6; }
+.journey-stages { display: flex; flex-direction: column; gap: 32px; position: relative; }
+.journey-stages::before { content: ''; position: absolute; left: 19px; top: 16px; bottom: 16px; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); opacity: 0.3; }
+.stage { position: relative; padding-left: 52px; opacity: 0; transform: translateX(-20px); animation: slideInStage 0.5s ease-out forwards; }
+.stage:nth-child(1) { animation-delay: 0.2s; }
+.stage:nth-child(2) { animation-delay: 0.3s; }
+.stage:nth-child(3) { animation-delay: 0.4s; }
+@keyframes slideInStage { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+.stage-number { position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-medium); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--accent); z-index: 1; transition: all 0.4s var(--ease-spring); }
+.stage:hover .stage-number { border-color: var(--accent); transform: scale(1.15); box-shadow: 0 0 16px rgba(var(--particle-color), 0.3); }
+.stage-label { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; transition: color 0.3s ease; }
 .stage:hover .stage-label { color: var(--accent); }
-.stage-description { font-size: 14px; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+.stage-description { font-size: 13px; line-height: 1.7; color: var(--text-secondary); font-weight: 300; opacity: 0.9; }
 .results-section { margin-top: 140px; }
 .results-header { margin-bottom: 60px; }
 .results-subtitle { font-size: 16px; color: var(--text-tertiary); line-height: 1.7; max-width: 600px; font-weight: 300; font-style: italic; }
@@ -366,10 +364,9 @@ img { max-width: 100%; display: block; }
 <p class="intro-text">
 We help you plan, raise, and launch without wasting millions on airdrop farmers. Our frameworks are designed to replace "mercenary noise" with "Power Citizens" - the users who contribute, recruit, invest and hold.
 </p>
-
-<div class="intro-highlight">
+<p class="intro-text" style="margin-top: 24px;">
 From battle-tested playbooks for early-stage teams to hands-on execution at launch, we partner with founders to build networks that last.
-</div>
+</p>
 </div>
 
 <div class="journey-wrapper reveal reveal-d1">
