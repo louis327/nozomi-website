@@ -615,4 +615,13 @@ if(sc){const heroH=window.innerHeight;const fade=Math.max(0.15,1-(0.85*scrollY/h
 document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
 document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
 function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
-function toggleFaq(el){const item=el.closest('.faq-item'),was=item.classList.contains('open');document.
+function toggleFaq(el){const item=el.closest('.faq-item'),was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');}
+(function(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));})();
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+(function(){const btn=document.getElementById('backToTop');addEventListener('scroll',()=>{btn.classList.toggle('visible',scrollY>500);});btn.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});})();
+(function(){document.querySelectorAll('.value-card, .service-card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();card.style.setProperty('--glow-x',(e.clientX-rect.left)+'px');card.style.setProperty('--glow-y',(e.clientY-rect.top)+'px');const x=(e.clientX-rect.left)/rect.width;const y=(e.clientY-rect.top)/rect.height;card.style.transform=`perspective(800px) rotateX(${(y-0.5)*-8}deg) rotateY(${(x-0.5)*8}deg) translateY(-4px)`;});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(800px) rotateX(0) rotateY(0) translateY(0)';});});})();
+(function(){document.querySelectorAll('.slide-video-wrap video').forEach(vid=>{vid.addEventListener('playing',function(){vid.closest('.slide-video-wrap').classList.add('playing');});});})();
+</script>
+<script src="/site.js"></script>
+</body>
+</html>
