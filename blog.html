@@ -89,12 +89,22 @@
 
         /* HEADER */
         .header {
-            background: rgba(10,10,12,0.88);
+            background: var(--bg-primary);
             backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-medium);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] .header {
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] .header {
+            background: rgba(10,10,12,0.88);
         }
 
         .header-inner {
@@ -205,8 +215,66 @@
             font-size: 20px;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 16px;
             font-weight: 300;
+        }
+
+        .hero-subtitle:last-of-type {
+            margin-bottom: 40px;
+        }
+
+        /* EMAIL CAPTURE */
+        .email-capture {
+            max-width: 500px;
+            margin: 0 auto 60px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid var(--border-medium);
+            border-radius: 8px;
+            font-size: 15px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            transition: border-color 0.2s;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .email-submit {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-body);
+            white-space: nowrap;
+        }
+
+        .email-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(var(--particle-color), 0.3);
+        }
+
+        .email-note {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            text-align: center;
         }
 
         /* FILTERS */
@@ -418,8 +486,20 @@
 
     <!-- HERO -->
     <section class="hero">
-        <h1>The Nozomi Letters</h1>
-        <p class="hero-subtitle">Deep dives, startup ideas, and playbooks to help decentralization catch up and win.</p>
+        <h1>The Next Decade Decides Humanity's Future</h1>
+        <p class="hero-subtitle">Centralized AI, robotics, and brain-computer interfaces are accelerating and Crypto is falling behind.</p>
+        <p class="hero-subtitle">We share deep dives and playbooks to help decentralization catch up and win.</p>
+        
+        <!-- EMAIL CAPTURE -->
+        <div class="email-capture">
+            <form class="email-form" id="mc-form-hero">
+                <input type="email" name="EMAIL" class="email-input" placeholder="your@email.com" required id="mc-email-hero">
+                <button type="submit" class="email-submit">Subscribe</button>
+            </form>
+            <p class="email-note">Weekly insights. No spam. Unsubscribe anytime.</p>
+            <p id="mc-success-hero" style="display:none; color: #22c55e; font-size: 14px; margin-top: 12px;">✓ Thanks! Check your email to confirm.</p>
+            <p id="mc-error-hero" style="display:none; color: #ef4444; font-size: 14px; margin-top: 12px;">Something went wrong. Please try again.</p>
+        </div>
     </section>
 
     <!-- FILTERS -->
@@ -481,6 +561,39 @@ const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
 html.setAttribute('data-theme',next);
 localStorage.setItem('nozomi-blog-theme',next);
 });
+
+// === MAILCHIMP HANDLER ===
+const form = document.getElementById('mc-form-hero');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('mc-email-hero').value;
+        const successMsg = document.getElementById('mc-success-hero');
+        const errorMsg = document.getElementById('mc-error-hero');
+        
+        successMsg.style.display = 'none';
+        errorMsg.style.display = 'none';
+        
+        const url = 'https://network.us8.list-manage.com/subscribe/post-json?u=af0c9b564920f5939a4d980f7&id=be614940cf&c=?';
+        const script = document.createElement('script');
+        const callbackName = 'mcCallback' + Date.now();
+        
+        window[callbackName] = function(data) {
+            if (data.result === 'success') {
+                form.style.display = 'none';
+                successMsg.style.display = 'block';
+            } else {
+                errorMsg.textContent = data.msg || 'Something went wrong. Please try again.';
+                errorMsg.style.display = 'block';
+            }
+            delete window[callbackName];
+            document.body.removeChild(script);
+        };
+        
+        script.src = url + '&EMAIL=' + encodeURIComponent(email) + '&c=' + callbackName;
+        document.body.appendChild(script);
+    });
+}
 
 // === SAKURA PETALS ===
 (function(){
