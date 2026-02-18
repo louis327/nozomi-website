@@ -87,6 +87,60 @@
             color: var(--text);
         }
 
+        /* TABLE OF CONTENTS */
+        .article-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 60px;
+            padding: 0 32px 80px;
+        }
+        .toc-wrapper {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            padding-top: 60px;
+        }
+        .toc {
+            background: var(--bg-off);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .toc-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .toc-list {
+            list-style: none;
+        }
+        .toc-list li {
+            margin-bottom: 12px;
+        }
+        .toc-list a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: block;
+            padding: 4px 0;
+            border-left: 2px solid transparent;
+            padding-left: 12px;
+            margin-left: -12px;
+        }
+        .toc-list a:hover, .toc-list a.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        @media (max-width: 1024px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .toc-wrapper { display: none; }
+        }
+
         .article-header {
             max-width: 740px;
             margin: 0 auto;
@@ -366,8 +420,16 @@
         </div>
     </header>
 
-    <article class="article-content">
+<div class="article-layout">
         
+        <aside class="toc-wrapper">
+            <nav class="toc">
+                <h3 class="toc-title">Contents</h3>
+                <ul class="toc-list" id="tocList"></ul>
+            </nav>
+        </aside>
+
+        <article class="article-content">        
         <p>What’s one of the biggest lies in crypto?</p>
         <p>That launching a decentralized network gives power back to the people.</p>
         <p>Most 2025 launches did the exact opposite.</p>
@@ -852,7 +914,7 @@
         </div>
 
     </article>
-
+</div>
     <footer class="footer">
         <nav class="footer-nav">
             <a href="/">Home</a>
@@ -889,6 +951,29 @@ document.body.appendChild(script);
 setupMailchimp('mc-form-1');
 setupMailchimp('mc-form-2');
 setupMailchimp('mc-form-final');
+
+        const tocList=document.getElementById('tocList');
+const headings=document.querySelectorAll('.article-content h2');
+headings.forEach((h,i)=>{
+if(!h.id)h.id='section-'+i;
+const li=document.createElement('li');
+const a=document.createElement('a');
+a.href='#'+h.id;
+a.textContent=h.textContent;
+li.appendChild(a);
+tocList.appendChild(li);
+});
+const tocLinks=document.querySelectorAll('.toc-list a');
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+tocLinks.forEach(link=>link.classList.remove('active'));
+const activeLink=document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+if(activeLink)activeLink.classList.add('active');
+}
+});
+},{rootMargin:'-100px 0px -80% 0px'});
+headings.forEach(h=>observer.observe(h));
     </script>
 
 </body>
