@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: louis327/nozomi-website
+  name: git-gateway
   branch: main
 
 media_folder: "images/blog"
