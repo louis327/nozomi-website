@@ -219,7 +219,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 20px 0 16px;
+            padding: 20px 0 12px;
             border-top: 1px solid var(--border);
         }
 
@@ -262,7 +262,7 @@
         }
 
         .featured-image {
-            margin: 24px 0 48px;
+            margin: 16px 0 48px;
             border-radius: 8px;
             overflow: hidden;
         }
@@ -320,13 +320,13 @@
 
         /* BEAUTIFUL NEWSLETTER CTA */
         .newsletter-cta {
-            background: linear-gradient(135deg, var(--newsletter-bg) 0%, #FAFAFA 100%);
+            background: linear-gradient(135deg, #F9F9F9 0%, #FAFAFA 100%);
             border: 2px solid var(--newsletter-border);
-            border-radius: 12px;
-            padding: 56px 48px;
-            margin: 64px 0;
+            border-radius: 16px;
+            padding: 52px 44px;
+            margin: 72px 0;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
         }
@@ -337,22 +337,26 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, #22c55e 100%);
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent) 0%, #22c55e 50%, var(--accent) 100%);
         }
 
         .newsletter-cta h3 {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             color: var(--text);
+            letter-spacing: -0.02em;
         }
 
         .newsletter-cta p {
-            font-size: 17px !important;
+            font-size: 18px !important;
             color: var(--text-light);
-            margin-bottom: 32px !important;
+            margin-bottom: 36px !important;
             line-height: 1.5 !important;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .newsletter-form {
@@ -645,7 +649,7 @@
         <p>Actual businesse built around spinning up hundreds of wallets, faking activity, and extracting tokens at TGE.</p>
         <p>The people showing up weren't users. They were operators running extraction playbooks.</p>
 
-        <div class="newsletter-inline">
+        <div class="newsletter-cta">
             <h3>Want More Insights Like This?</h3>
             <p>Join founders building real decentralized networks. Weekly playbooks, no spam.</p>
             <form class="newsletter-form" id="mc-form-1">
@@ -808,7 +812,7 @@
         <p>The whole point of Web3 is that you don't need a 1,000-person company doing everything in-house.</p>
         <p>You push work outward. Content, tutorials, translations, bug testing, design, community support.</p>
 
-        <div class="newsletter-inline">
+        <div class="newsletter-cta">
             <h3>Want More Insights Like This?</h3>
             <p>Join founders building real decentralized networks. Weekly playbooks, no spam.</p>
             <form class="newsletter-form" id="mc-form-2">
@@ -1017,7 +1021,7 @@
         <p>It'll be built by the most aligned ones.</p>
         <p>Let's build it, together.</p>
         <p>- Louis</p>
-        <div class="newsletter-inline">
+        <div class="newsletter-cta">
             <h3>Get More Insights Like This</h3>
             <p>Join founders building the future of decentralization. Weekly playbooks, no spam.</p>
             <form class="newsletter-form" id="mc-form-final">
