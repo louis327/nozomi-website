@@ -31,6 +31,8 @@
             --accent-hover: #156D13;
             --highlight: #FFC017;
             --toc-bg: #F9F9F9;
+            --newsletter-bg: #F7F7F7;
+            --newsletter-border: #E0E0E0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -165,7 +167,7 @@
 
         .article-header {
             grid-column: 2;
-            padding: 56px 0 32px;
+            padding: 56px 0 24px;
         }
 
         .breadcrumb {
@@ -217,7 +219,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 24px 0 32px;
+            padding: 20px 0 16px;
             border-top: 1px solid var(--border);
         }
 
@@ -259,6 +261,17 @@
             padding-bottom: 80px;
         }
 
+        .featured-image {
+            margin: 24px 0 48px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            display: block;
+        }
+
         .article-body p {
             font-size: 21px;
             line-height: 1.58;
@@ -277,7 +290,7 @@
             scroll-margin-top: 100px;
         }
 
-        .article-body h2:first-child {
+        .article-body h2:first-of-type {
             margin-top: 0;
         }
 
@@ -302,69 +315,92 @@
         .article-body img {
             width: 100%;
             margin: 48px 0;
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
+        /* BEAUTIFUL NEWSLETTER CTA */
         .newsletter-cta {
-            background: var(--toc-bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 48px;
+            background: linear-gradient(135deg, var(--newsletter-bg) 0%, #FAFAFA 100%);
+            border: 2px solid var(--newsletter-border);
+            border-radius: 12px;
+            padding: 56px 48px;
             margin: 64px 0;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, #22c55e 100%);
         }
 
         .newsletter-cta h3 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            color: var(--text);
         }
 
         .newsletter-cta p {
-            font-size: 16px !important;
+            font-size: 17px !important;
             color: var(--text-light);
-            margin-bottom: 24px !important;
-            line-height: 1.4 !important;
+            margin-bottom: 32px !important;
+            line-height: 1.5 !important;
         }
 
         .newsletter-form {
             display: flex;
             gap: 12px;
-            max-width: 420px;
+            max-width: 480px;
             margin: 0 auto;
         }
 
         .newsletter-input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 15px;
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
             font-family: var(--sans);
             background: white;
+            transition: all 0.2s;
         }
 
         .newsletter-input:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26, 137, 23, 0.1);
         }
 
         .newsletter-submit {
-            padding: 12px 24px;
+            padding: 16px 32px;
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 15px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
             font-family: var(--sans);
             cursor: pointer;
-            transition: background 0.15s;
+            transition: all 0.2s;
             white-space: nowrap;
         }
 
         .newsletter-submit:hover {
             background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 137, 23, 0.3);
+        }
+
+        .newsletter-submit:active {
+            transform: translateY(0);
         }
 
         .right-sidebar {
@@ -445,6 +481,9 @@
             }
             .newsletter-form {
                 flex-direction: column;
+            }
+            .newsletter-cta {
+                padding: 40px 24px;
             }
         }
 
@@ -987,7 +1026,6 @@
             </form>
         </div>
 
-    </article>
         </article>
 
         <aside class="right-sidebar"></aside>
@@ -1056,9 +1094,9 @@ function setupMailchimp(formId) {
         const callbackName = 'mcCallback' + Date.now();
         window[callbackName] = function(data) {
             if (data.result === 'success') {
-                form.innerHTML = '<p style="color:#1A8917;font-size:15px;margin:0;">✓ Thanks! Check your email to confirm.</p>';
+                form.innerHTML = '<p style="color:#1A8917;font-size:16px;margin:0;">✓ Thanks! Check your email to confirm.</p>';
             } else {
-                form.innerHTML = '<p style="color:#C94A38;font-size:15px;margin:0;">' + data.msg + '</p>';
+                form.innerHTML = '<p style="color:#C94A38;font-size:16px;margin:0;">' + data.msg + '</p>';
             }
             delete window[callbackName];
             document.body.removeChild(script);
