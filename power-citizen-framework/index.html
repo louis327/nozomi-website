@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/favicon_nozomi.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charter:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX6C0Q0P1P"></script>
     <script>
@@ -20,54 +20,61 @@
     
     <style>
         :root {
-            --serif: 'Lora', 'Georgia', serif;
-            --sans: 'Inter', -apple-system, sans-serif;
+            --serif: Charter, 'Georgia', 'Times New Roman', serif;
+            --sans: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
             --bg: #FFFFFF;
-            --bg-off: #FAFAFA;
-            --text: #1A1A1A;
-            --text-secondary: #6B6B6B;
-            --text-tertiary: #999999;
-            --border: #E8E8E8;
-            --accent: #000000;
-            --accent-soft: #F5F5F5;
-            --newsletter-bg: #F9F9F9;
+            --text: #242424;
+            --text-light: #6B6B6B;
+            --text-lighter: #8B8B8B;
+            --border: #E6E6E6;
+            --accent: #1A8917;
+            --accent-hover: #156D13;
+            --highlight: #FFC017;
+            --toc-bg: #F9F9F9;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        ::selection {
+            background: var(--highlight);
+            color: var(--text);
+        }
+
         body {
-            font-family: var(--sans);
+            font-family: var(--serif);
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.58;
+            letter-spacing: -0.003em;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         a { text-decoration: none; color: inherit; }
 
         .header {
-            background: var(--bg);
+            background: rgba(255, 255, 255, 0.95);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
         }
 
         .header-inner {
-            max-width: 1200px;
+            max-width: 1336px;
             margin: 0 auto;
-            padding: 20px 32px;
+            padding: 20px 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .logo {
-            font-family: var(--serif);
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-family: var(--sans);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -75,230 +82,265 @@
             gap: 32px;
             list-style: none;
             align-items: center;
+            font-family: var(--sans);
         }
 
         .nav-links a {
             font-size: 14px;
-            color: var(--text-secondary);
-            transition: color 0.2s;
+            color: var(--text-light);
+            transition: color 0.15s;
+            font-weight: 400;
         }
 
         .nav-links a:hover {
             color: var(--text);
         }
 
-        /* TABLE OF CONTENTS */
-        .article-layout {
-            max-width: 1400px;
+        .article-container {
+            max-width: 1336px;
             margin: 0 auto;
+            padding: 0 64px;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 60px;
-            padding: 0 32px 80px;
+            grid-template-columns: 1fr 680px 1fr;
+            gap: 64px;
+            position: relative;
         }
-        .toc-wrapper {
+
+        .toc-sidebar {
             position: sticky;
             top: 100px;
             height: fit-content;
-            padding-top: 60px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding-right: 24px;
         }
-        .toc {
-            background: var(--bg-off);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+
+        .toc-sidebar::-webkit-scrollbar {
+            width: 3px;
         }
+
+        .toc-sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
         .toc-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-tertiary);
-            margin-bottom: 20px;
+            font-family: var(--sans);
+            font-size: 13px;
             font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
         .toc-list {
             list-style: none;
         }
+
         .toc-list li {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
+
         .toc-list a {
+            font-family: var(--sans);
             font-size: 14px;
-            color: var(--text-secondary);
-            transition: all 0.2s;
+            color: var(--text-lighter);
+            transition: all 0.15s;
             display: block;
-            padding: 4px 0;
+            padding: 6px 0 6px 16px;
             border-left: 2px solid transparent;
-            padding-left: 12px;
-            margin-left: -12px;
         }
-        .toc-list a:hover, .toc-list a.active {
-            color: var(--accent);
+
+        .toc-list a:hover {
+            color: var(--text);
+            border-left-color: var(--border);
+        }
+
+        .toc-list a.active {
+            color: var(--text);
             border-left-color: var(--accent);
-        }
-        @media (max-width: 1024px) {
-            .article-layout { grid-template-columns: 1fr; }
-            .toc-wrapper { display: none; }
+            font-weight: 500;
         }
 
         .article-header {
-            max-width: 740px;
-            margin: 0 auto;
-            padding: 80px 32px 40px;
+            grid-column: 2;
+            padding: 56px 0 32px;
         }
 
-        .article-tags {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+        .breadcrumb {
+            font-family: var(--sans);
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 32px;
         }
 
-        .tag {
+        .breadcrumb a {
+            color: var(--text-light);
+            transition: color 0.15s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text);
+        }
+
+        .article-tag {
+            display: inline-block;
+            font-family: var(--sans);
             font-size: 13px;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            padding: 6px 14px;
-            background: var(--accent-soft);
-            border-radius: 100px;
-        }
-
-        .article-title {
-            font-family: var(--serif);
-            font-size: clamp(36px, 5vw, 52px);
-            font-weight: 600;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+            color: var(--text-light);
+            background: var(--toc-bg);
+            padding: 6px 12px;
+            border-radius: 4px;
             margin-bottom: 24px;
         }
 
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border);
+        .article-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            color: var(--text);
         }
 
-        .author-info {
+        .article-subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+
+        .author-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
         }
 
         .author-avatar {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: var(--accent-soft);
+            overflow: hidden;
         }
 
-        .author-details {
-            display: flex;
-            flex-direction: column;
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info {
+            flex: 1;
         }
 
         .author-name {
-            font-weight: 500;
-            font-size: 15px;
-        }
-
-        .publish-info {
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        .article-content {
-            max-width: 740px;
-            margin: 0 auto;
-            padding: 60px 32px;
-        }
-
-        .article-content > * + * {
-            margin-top: 28px;
-        }
-
-        .article-content p {
-            font-family: var(--serif);
-            font-size: 21px;
-            line-height: 1.8;
-            color: var(--text);
-            letter-spacing: -0.003em;
-        }
-
-        .article-content h2 {
-            font-family: var(--serif);
-            font-size: 32px;
+            font-family: var(--sans);
+            font-size: 16px;
             font-weight: 600;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            margin-top: 48px;
-            margin-bottom: 16px;
+            color: var(--text);
+            margin-bottom: 4px;
         }
 
-        .article-content h3 {
-            font-family: var(--serif);
+        .article-meta {
+            font-family: var(--sans);
+            font-size: 14px;
+            color: var(--text-lighter);
+            display: flex;
+            gap: 8px;
+        }
+
+        .article-body {
+            grid-column: 2;
+            padding-bottom: 80px;
+        }
+
+        .article-body p {
+            font-size: 21px;
+            line-height: 1.58;
+            letter-spacing: -0.003em;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+
+        .article-body h2 {
+            font-size: 34px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 56px 0 16px;
+            color: var(--text);
+            scroll-margin-top: 100px;
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body h3 {
             font-size: 26px;
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.22;
             letter-spacing: -0.01em;
-            margin-top: 40px;
-            margin-bottom: 12px;
-        }
-
-        .article-content strong {
-            font-weight: 600;
+            margin: 48px 0 8px;
             color: var(--text);
         }
 
-        .article-content em {
+        .article-body strong {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .article-body em {
             font-style: italic;
         }
 
-        .article-content img {
+        .article-body img {
             width: 100%;
-            border-radius: 8px;
             margin: 48px 0;
+            border-radius: 4px;
         }
 
-        .newsletter-inline {
-            background: var(--newsletter-bg);
-            padding: 48px 40px;
-            border-radius: 12px;
+        .newsletter-cta {
+            background: var(--toc-bg);
+            border-radius: 4px;
+            padding: 48px;
+            margin: 64px 0;
             text-align: center;
-            margin: 60px 0;
         }
 
-        .newsletter-inline h3 {
-            font-family: var(--serif);
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
+        .newsletter-cta h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
 
-        .newsletter-inline p {
+        .newsletter-cta p {
             font-size: 16px !important;
-            color: var(--text-secondary);
-            margin-bottom: 28px !important;
+            color: var(--text-light);
+            margin-bottom: 24px !important;
+            line-height: 1.4 !important;
         }
 
         .newsletter-form {
             display: flex;
             gap: 12px;
-            max-width: 480px;
+            max-width: 420px;
             margin: 0 auto;
         }
 
         .newsletter-input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 12px 16px;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 15px;
-            background: white;
             font-family: var(--sans);
+            background: white;
         }
 
         .newsletter-input:focus {
@@ -307,42 +349,49 @@
         }
 
         .newsletter-submit {
-            padding: 14px 32px;
+            padding: 12px 24px;
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
             font-family: var(--sans);
+            cursor: pointer;
+            transition: background 0.15s;
             white-space: nowrap;
         }
 
         .newsletter-submit:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: var(--accent-hover);
+        }
+
+        .right-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
         }
 
         .footer {
             border-top: 1px solid var(--border);
-            padding: 60px 32px;
+            padding: 48px 64px;
             text-align: center;
+            background: var(--bg);
         }
 
         .footer-nav {
             display: flex;
             gap: 32px;
             justify-content: center;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
+            font-family: var(--sans);
         }
 
         .footer-nav a {
             font-size: 14px;
-            color: var(--text-secondary);
-            transition: color 0.2s;
+            color: var(--text-light);
+            transition: color 0.15s;
         }
 
         .footer-nav a:hover {
@@ -350,39 +399,57 @@
         }
 
         .footer p {
+            font-family: var(--sans);
             font-size: 13px;
-            color: var(--text-tertiary);
+            color: var(--text-lighter);
         }
 
-        @media (max-width: 640px) {
-            .header-inner {
-                padding: 16px 20px;
+        @media (max-width: 1200px) {
+            .article-container {
+                grid-template-columns: 200px 1fr;
+                gap: 48px;
+                padding: 0 32px;
             }
-
-            .nav-links {
+            .article-header, .article-body {
+                grid-column: 2;
+            }
+            .right-sidebar {
                 display: none;
             }
+        }
 
-            .article-header,
-            .article-content {
-                padding-left: 20px;
-                padding-right: 20px;
+        @media (max-width: 900px) {
+            .article-container {
+                grid-template-columns: 1fr;
+                padding: 0 24px;
             }
-
-            .article-content p {
+            .toc-sidebar {
+                display: none;
+            }
+            .article-header, .article-body {
+                grid-column: 1;
+            }
+            .header-inner, .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .article-title {
+                font-size: 36px;
+            }
+            .article-body p {
                 font-size: 19px;
             }
-
-            .article-content h2 {
+            .article-body h2 {
                 font-size: 28px;
             }
-
             .newsletter-form {
                 flex-direction: column;
             }
+        }
 
-            .newsletter-inline {
-                padding: 32px 24px;
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
             }
         }
     </style>
@@ -402,34 +469,37 @@
         </div>
     </header>
 
-    <header class="article-header">
-        <div class="article-tags">
-            <span class="tag">Web3 Growth</span>
-        </div>
-        <h1 class="article-title">A New Growth Model for Web3 & Decentralization Maxis: The Power Citizen Framework</h1>
-        <div class="article-meta">
-            <div class="author-info">
+    <div class="article-container">
+        
+        <aside class="toc-sidebar">
+            <h3 class="toc-title">In this article</h3>
+            <ul class="toc-list" id="tocList"></ul>
+        </aside>
+
+        <header class="article-header">
+            <div class="breadcrumb">
+                <a href="/blog.html">← Letters</a>
+            </div>
+            <span class="article-tag">Web3 Growth</span>
+            <h1 class="article-title">A New Growth Model for Web3 & Decentralization Maxis</h1>
+            <p class="article-subtitle">The Power Citizen Framework</p>
+            <div class="author-section">
                 <div class="author-avatar">
                     <img src="/images/Loui.jpg" alt="Louis Dharma">
                 </div>
-                <div class="author-details">
+                <div class="author-info">
                     <div class="author-name">Louis Dharma</div>
-                    <div class="publish-info">Feb 18, 2026 · 18 min read</div>
+                    <div class="article-meta">
+                        <span>Feb 18, 2026</span>
+                        <span>·</span>
+                        <span>18 min read</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-<div class="article-layout">
+        <article class="article-body">
         
-        <aside class="toc-wrapper">
-            <nav class="toc">
-                <h3 class="toc-title">Contents</h3>
-                <ul class="toc-list" id="tocList"></ul>
-            </nav>
-        </aside>
-
-        <article class="article-content">        
         <p>What’s one of the biggest lies in crypto?</p>
         <p>That launching a decentralized network gives power back to the people.</p>
         <p>Most 2025 launches did the exact opposite.</p>
@@ -914,7 +984,12 @@
         </div>
 
     </article>
-</div>
+        </article>
+
+        <aside class="right-sidebar"></aside>
+
+    </div>
+
     <footer class="footer">
         <nav class="footer-nav">
             <a href="/">Home</a>
@@ -925,55 +1000,73 @@
     </footer>
 
     <script>
-function setupMailchimp(formId){
-const form=document.getElementById(formId);
-if(!form)return;
-form.addEventListener('submit',function(e){
-e.preventDefault();
-const email=form.querySelector('input[type="email"]').value;
-const url='https://network.us8.list-manage.com/subscribe/post-json?u=af0c9b564920f5939a4d980f7&id=be614940cf&c=?';
-const script=document.createElement('script');
-const callbackName='mcCallback'+Date.now();
-window[callbackName]=function(data){
-if(data.result==='success'){
-form.innerHTML='<p style="color:#22c55e;font-size:15px;margin:0;">✓ Thanks! Check your email to confirm.</p>';
-}else{
-form.innerHTML='<p style="color:#ef4444;font-size:15px;margin:0;">'+data.msg+'</p>';
-}
-delete window[callbackName];
-document.body.removeChild(script);
-};
-script.src=url+'&EMAIL='+encodeURIComponent(email)+'&c='+callbackName;
-document.body.appendChild(script);
+const tocList = document.getElementById('tocList');
+const headings = document.querySelectorAll('.article-body h2');
+
+headings.forEach((heading, i) => {
+    if (!heading.id) {
+        heading.id = 'section-' + i;
+    }
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + heading.id;
+    a.textContent = heading.textContent;
+    li.appendChild(a);
+    tocList.appendChild(li);
 });
+
+const tocLinks = document.querySelectorAll('.toc-list a');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    });
+}, { rootMargin: '-100px 0px -80% 0px' });
+
+headings.forEach(h => observer.observe(h));
+
+tocLinks.forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            window.scrollTo({
+                top: target.offsetTop - 120,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+function setupMailchimp(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]').value;
+        const url = 'https://network.us8.list-manage.com/subscribe/post-json?u=af0c9b564920f5939a4d980f7&id=be614940cf&c=?';
+        const script = document.createElement('script');
+        const callbackName = 'mcCallback' + Date.now();
+        window[callbackName] = function(data) {
+            if (data.result === 'success') {
+                form.innerHTML = '<p style="color:#1A8917;font-size:15px;margin:0;">✓ Thanks! Check your email to confirm.</p>';
+            } else {
+                form.innerHTML = '<p style="color:#C94A38;font-size:15px;margin:0;">' + data.msg + '</p>';
+            }
+            delete window[callbackName];
+            document.body.removeChild(script);
+        };
+        script.src = url + '&EMAIL=' + encodeURIComponent(email) + '&c=' + callbackName;
+        document.body.appendChild(script);
+    });
 }
 
 setupMailchimp('mc-form-1');
 setupMailchimp('mc-form-2');
 setupMailchimp('mc-form-final');
-
-        const tocList=document.getElementById('tocList');
-const headings=document.querySelectorAll('.article-content h2');
-headings.forEach((h,i)=>{
-if(!h.id)h.id='section-'+i;
-const li=document.createElement('li');
-const a=document.createElement('a');
-a.href='#'+h.id;
-a.textContent=h.textContent;
-li.appendChild(a);
-tocList.appendChild(li);
-});
-const tocLinks=document.querySelectorAll('.toc-list a');
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-tocLinks.forEach(link=>link.classList.remove('active'));
-const activeLink=document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
-if(activeLink)activeLink.classList.add('active');
-}
-});
-},{rootMargin:'-100px 0px -80% 0px'});
-headings.forEach(h=>observer.observe(h));
     </script>
 
 </body>
