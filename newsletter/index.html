@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Decade of Freedom | Nozomi</title>
+<meta name="description" content="A content series on why decentralisation is the last stand of true freedom. Weekly deep dives, startup ideas, and the philosophical case for crypto beyond the scams and speculation.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_nozomi.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_nozomi.png">
+<link rel="shortcut icon" href="/favicon_nozomi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX6C0Q0P1P"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZX6C0Q0P1P');</script>
+<style>
+:root{--font-display:'Sora',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1);--radius-sm:8px;--radius-md:14px;--radius-lg:22px;--radius-xl:32px;--sakura:#F2B8C6;--sakura-deep:#D4869C;--sakura-pale:#FAD4DF;--sakura-glow:rgba(242,184,198,0.12)}
+[data-theme="dark"]{--bg-primary:#0A0A0C;--bg-secondary:#0E0E12;--bg-elevated:#141418;--bg-card:#12121A;--bg-card-hover:#1a1a24;--bg-glass:rgba(10,10,12,0.8);--border-subtle:rgba(242,184,198,0.06);--border-medium:rgba(242,184,198,0.1);--border-strong:rgba(242,184,198,0.2);--text-primary:#F5EDE8;--text-secondary:rgba(245,237,232,0.55);--text-tertiary:rgba(245,237,232,0.3);--text-muted:rgba(245,237,232,0.12);--accent:var(--sakura);--accent-dim:rgba(242,184,198,0.06);--accent-medium:rgba(242,184,198,0.12);--shadow-sm:0 2px 8px rgba(0,0,0,0.5);--shadow-md:0 8px 32px rgba(0,0,0,0.5);--shadow-lg:0 24px 80px rgba(0,0,0,0.6);--nav-bg:rgba(10,10,12,0.88);--glow-color:rgba(242,184,198,0.04);--particle-color:242,184,198}
+[data-theme="light"]{--bg-primary:#FBF5F0;--bg-secondary:#F5ECE5;--bg-elevated:#EDE3DA;--bg-card:#FFFFFF;--bg-card-hover:#FFF8F5;--bg-glass:rgba(251,245,240,0.88);--border-subtle:rgba(180,100,120,0.08);--border-medium:rgba(180,100,120,0.12);--border-strong:rgba(180,100,120,0.2);--text-primary:#1A1018;--text-secondary:rgba(26,16,24,0.55);--text-tertiary:rgba(26,16,24,0.3);--text-muted:rgba(26,16,24,0.1);--accent:#C4627A;--accent-dim:rgba(196,98,122,0.06);--accent-medium:rgba(196,98,122,0.1);--shadow-sm:0 2px 8px rgba(80,20,40,0.05);--shadow-md:0 8px 32px rgba(80,20,40,0.08);--shadow-lg:0 24px 80px rgba(80,20,40,0.08);--nav-bg:rgba(251,245,240,0.88);--glow-color:rgba(196,98,122,0.04);--particle-color:196,98,122}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--border-medium) transparent}body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background 0.5s ease,color 0.3s ease}::selection{background:var(--accent);color:var(--bg-primary)}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+#sakura-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;transition:all 0.4s var(--ease-out-expo)}.nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);border-bottom:1px solid var(--border-subtle)}.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}.nav-logo{display:flex;align-items:center;gap:10px}.nav-logo img{height:32px;transition:opacity 0.3s ease}[data-theme="dark"] .nav-logo .logo-dark{display:block}[data-theme="dark"] .nav-logo .logo-light{display:none}[data-theme="light"] .nav-logo .logo-dark{display:none}[data-theme="light"] .nav-logo .logo-light{display:block}.nav-actions{display:flex;align-items:center;gap:12px}
+.theme-toggle{width:42px;height:42px;border-radius:10px;border:1px solid var(--border-medium);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;position:relative;overflow:hidden}.theme-toggle:hover{border-color:var(--accent);background:var(--accent-dim)}.theme-toggle svg{width:18px;height:18px;fill:none;stroke:var(--text-primary);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;position:absolute;transition:all 0.4s var(--ease-spring)}.theme-toggle .icon-sun{opacity:0;transform:rotate(90deg) scale(0)}.theme-toggle .icon-moon{opacity:1;transform:rotate(0) scale(1)}[data-theme="light"] .theme-toggle .icon-sun{opacity:1;transform:rotate(0) scale(1)}[data-theme="light"] .theme-toggle .icon-moon{opacity:0;transform:rotate(-90deg) scale(0)}
+.btn-primary{font-family:var(--font-body);font-size:14px;font-weight:500;padding:12px 28px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--bg-primary);cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;position:relative;overflow:hidden}.btn-primary:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 12px 32px rgba(var(--particle-color),0.4)}.btn-nav{font-size:13px;padding:10px 22px}
+.container{max-width:1100px;margin:0 auto;padding:0 32px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.reveal{opacity:0;transform:translateY(50px);transition:opacity 0.8s var(--ease-out-expo),transform 0.8s var(--ease-out-expo)}.reveal.visible{opacity:1;transform:translateY(0)}.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}.reveal-d5{transition-delay:0.5s}
+.section-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;opacity:0.8}.section-title{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.035em;margin-bottom:20px}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 0 80px}.hero-center{max-width:680px;margin:0 auto;text-align:center}.hero-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);opacity:0.8;margin-bottom:20px;animation:fadeUp 0.7s var(--ease-out-expo) 0.1s both}.hero-title{font-family:var(--font-display);font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.08;letter-spacing:-0.035em;margin-bottom:24px;animation:fadeUp 0.8s var(--ease-out-expo) 0.15s both}.hero-title .accent-word{background:linear-gradient(135deg,var(--sakura-pale),var(--sakura-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}[data-theme="light"] .hero-title .accent-word{background:linear-gradient(135deg,#D4627A,#A04060);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hero-subtitle{font-size:17px;line-height:1.7;color:var(--text-secondary);max-width:560px;margin:0 auto 36px;font-weight:300;animation:fadeUp 0.8s var(--ease-out-expo) 0.25s both}.hero-subtitle strong{color:var(--text-primary);font-weight:500}
+.hero-form{display:flex;gap:10px;max-width:460px;margin:0 auto 16px;animation:fadeUp 0.8s var(--ease-out-expo) 0.35s both}.hero-form .form-input{flex:1;padding:16px 20px;font-size:15px}.hero-form .form-submit{width:auto;padding:16px 32px;white-space:nowrap;flex-shrink:0}
+.jp-ornament{display:flex;align-items:center;gap:16px;margin-bottom:36px;animation:fadeUp 0.8s var(--ease-out-expo) 0.3s both}.jp-ornament .line{width:40px;height:1px;background:var(--accent);opacity:0.3}.jp-ornament .symbol{font-size:14px;color:var(--accent);opacity:0.5;letter-spacing:8px}
+.form-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:48px 40px;position:relative;overflow:hidden;animation:fadeUp 0.9s var(--ease-out-expo) 0.35s both}.form-card::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.4}.form-card::after{content:'';position:absolute;top:-120px;right:-120px;width:300px;height:300px;background:radial-gradient(circle,rgba(var(--particle-color),0.06) 0%,transparent 70%);pointer-events:none}
+.form-label-top{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);opacity:0.7;margin-bottom:8px}.form-title{font-family:var(--font-display);font-size:22px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px}.form-desc{font-size:14px;color:var(--text-secondary);line-height:1.65;font-weight:300;margin-bottom:28px}
+.input-group{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}.form-input{font-family:var(--font-body);font-size:14px;padding:14px 18px;border-radius:var(--radius-md);border:1px solid var(--border-medium);background:var(--bg-elevated);color:var(--text-primary);outline:none;transition:all 0.3s ease;width:100%}.form-input::placeholder{color:var(--text-tertiary)}.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--particle-color),0.1);background:var(--bg-secondary)}
+.form-submit{font-family:var(--font-body);font-size:15px;font-weight:600;padding:16px 32px;border-radius:var(--radius-md);border:none;background:var(--accent);color:var(--bg-primary);cursor:pointer;transition:all 0.3s ease;width:100%;position:relative;overflow:hidden;letter-spacing:0.02em}.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(var(--particle-color),0.35)}.form-submit:active{transform:translateY(0)}
+.form-privacy{font-size:11px;color:var(--text-tertiary);text-align:center;margin-top:14px;line-height:1.5}
+.social-proof{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border-subtle)}.avatar-stack{display:flex}.avatar-stack .av{width:28px;height:28px;border-radius:50%;border:2px solid var(--bg-card);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}.avatar-stack .av:first-child{margin-left:0}.av-1{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff}.av-2{background:linear-gradient(135deg,var(--sakura),var(--sakura-deep));color:var(--bg-primary)}.av-3{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}.av-4{background:linear-gradient(135deg,#10b981,#059669);color:#fff}.social-proof-text{font-size:12px;color:var(--text-secondary);font-weight:400}.social-proof-text strong{color:var(--text-primary);font-weight:600}
+.prose-section{position:relative;z-index:1;padding:120px 0;border-top:1px solid var(--border-subtle)}.prose-block{max-width:680px;margin:0 auto;text-align:center}.prose-block p{font-size:17px;line-height:1.8;color:var(--text-secondary);font-weight:300;margin-bottom:24px}.prose-block p:last-child{margin-bottom:0}
+.get-section{position:relative;z-index:1;padding:120px 0;border-top:1px solid var(--border-subtle)}.get-header{text-align:center;margin-bottom:64px}.get-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.get-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:36px 28px;transition:all 0.4s var(--ease-out-expo);text-align:center}.get-card:hover{border-color:var(--border-strong);transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.3)}.get-card-icon{width:56px;height:56px;border-radius:14px;border:1px solid var(--border-medium);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:var(--bg-elevated);font-size:24px;transition:all 0.4s var(--ease-spring)}.get-card:hover .get-card-icon{border-color:var(--accent);background:var(--accent-dim);transform:translateY(-4px) scale(1.08);box-shadow:0 8px 20px rgba(var(--particle-color),0.25)}.get-card h3{font-family:var(--font-display);font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em}.get-card p{font-size:13px;color:var(--text-secondary);line-height:1.65;font-weight:300}
+.series-section{position:relative;z-index:1;padding:120px 0;border-top:1px solid var(--border-subtle)}.series-header{margin-bottom:60px}.series-tracks{display:grid;grid-template-columns:1fr 1fr;gap:32px}.track{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:40px 32px;position:relative;overflow:hidden}.track::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.3}.track-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;opacity:0.7}.track h3{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em}.track-desc{font-size:14px;color:var(--text-secondary);line-height:1.65;font-weight:300;margin-bottom:24px}.track-list{list-style:none;display:flex;flex-direction:column;gap:0}.track-list li{padding:12px 0;border-bottom:1px solid var(--border-subtle);font-size:13px;color:var(--text-secondary);font-weight:400;display:flex;align-items:center;gap:10px;transition:color 0.2s ease}.track-list li:last-child{border-bottom:none}.track-list li:hover{color:var(--text-primary)}.track-list .track-num{font-family:var(--font-mono);font-size:10px;color:var(--accent);opacity:0.5;min-width:24px}.track-count{font-family:var(--font-mono);font-size:11px;color:var(--accent);background:var(--accent-dim);border:1px solid var(--border-subtle);border-radius:100px;padding:4px 12px;display:inline-block;margin-top:16px}
+.about-section{position:relative;z-index:1;padding:120px 0;border-top:1px solid var(--border-subtle)}.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}.about-text h3{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:16px;letter-spacing:-0.02em}.about-text p{font-size:14px;color:var(--text-secondary);line-height:1.7;font-weight:300;margin-bottom:16px}.about-text p strong{color:var(--text-primary);font-weight:500}.stat-row{display:flex;flex-direction:column;gap:0}.stat-item{padding:20px 0;border-bottom:1px solid var(--border-subtle);display:flex;align-items:baseline;gap:20px}.stat-item:first-child{border-top:1px solid var(--border-subtle)}.stat-num{font-family:var(--font-display);font-size:28px;font-weight:800;letter-spacing:-0.02em;min-width:120px;flex-shrink:0;background:linear-gradient(135deg,var(--text-primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.stat-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;font-weight:300}
+.cta-section{position:relative;z-index:1;padding:80px 0 140px}.cta-box{border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:80px;text-align:center;position:relative;overflow:hidden;background:var(--bg-card)}.cta-box::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.3}.cta-title{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:16px}.cta-desc{font-size:16px;color:var(--text-secondary);max-width:480px;margin:0 auto 32px;line-height:1.7;font-weight:300}.cta-form{max-width:440px;margin:0 auto;display:flex;gap:10px}.cta-form .form-input{flex:1}.cta-form .form-submit{width:auto;padding:14px 28px;white-space:nowrap}
+.footer{position:relative;z-index:1;border-top:1px solid var(--border-subtle);padding:48px 0 32px}.footer-inner{display:flex;align-items:center;justify-content:space-between}.footer-copy{font-size:12px;color:var(--text-tertiary)}.footer-back a{font-size:13px;color:var(--text-secondary);transition:color 0.2s ease}.footer-back a:hover{color:var(--accent)}
+@media(max-width:1024px){.series-tracks{grid-template-columns:1fr}.about-layout{grid-template-columns:1fr}}
+@media(max-width:768px){.container{padding:0 20px}.hero{padding:120px 0 60px}.hero-form{flex-direction:column}.hero-form .form-submit{width:100%}.get-grid{grid-template-columns:1fr}.cta-box{padding:48px 24px}.cta-form{flex-direction:column}.cta-form .form-submit{width:100%}.footer-inner{flex-direction:column;gap:12px;text-align:center}.stat-item{flex-direction:column;gap:4px}.stat-num{min-width:auto}}
+</style>
+</head>
+<body>
+<canvas id="sakura-canvas"></canvas>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="https://nozomi.network" class="nav-logo"><img class="logo-dark" src="images/Nozomi_Logo_White (1).png" alt="Nozomi" style="height:32px;"><img class="logo-light" src="images/Nozomi_Logo_Black (2).png" alt="Nozomi" style="height:32px;"></a>
+<div class="nav-actions">
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a href="https://nozomi.network" class="btn-primary btn-nav">Back to Nozomi</a>
+</div>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero"><div class="container">
+<div class="hero-center">
+<div class="hero-eyebrow">A Nozomi Content Series</div>
+<h1 class="hero-title">The Last Decade of <span class="accent-word">Freedom</span></h1>
+<p class="hero-subtitle">Beyond the scams and speculation. <strong>Decentralisation is the last stand of true freedom</strong>, where self-sovereignty survives against centralisation and corruption. Weekly deep dives on the real case for crypto, startup ideas, and what builders should be building next.</p>
+<form class="hero-form" action="https://network.us8.list-manage.com/subscribe/post?u=af0c9b564920f5939a4d980f7&amp;id=be614940cf&amp;f_id=001ec7e1f0" method="post">
+<input type="email" name="EMAIL" class="form-input" placeholder="Your email address" required>
+<div hidden><input type="hidden" name="tags" value="429086"></div>
+<div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_af0c9b564920f5939a4d980f7_be614940cf" tabindex="-1" value=""></div>
+<button type="submit" class="form-submit">Get Access</button>
+</form>
+<p class="form-privacy">Free. No spam. Unsubscribe anytime.</p>
+<div class="jp-ornament" style="justify-content:center;"><div class="line"></div><span class="symbol">望</span><div class="line"></div></div>
+</div>
+</div></section>
+
+<!-- WHAT YOU GET -->
+<section class="get-section"><div class="container">
+<div class="get-header reveal">
+<div class="section-label">What You Get</div>
+<h2 class="section-title">Every week in your inbox</h2>
+</div>
+<div class="get-grid">
+<div class="get-card reveal">
+<div class="get-card-icon">📖</div>
+<h3>Deep-Dive Articles</h3>
+<p>Long-form explorations of the real problems crypto solves. No jargon, no shilling. Accessible to anyone, even if they've never bought a token.</p>
+</div>
+<div class="get-card reveal reveal-d1">
+<div class="get-card-icon">🚀</div>
+<h3>Startup Ideas</h3>
+<p>Every article includes a concrete "Request for Startups". What's not yet being built, and what Nozomi would incubate and support.</p>
+</div>
+<div class="get-card reveal reveal-d2">
+<div class="get-card-icon">🗺</div>
+<h3>Fundraising & Growth Playbooks</h3>
+<p>Step-by-step implementation guides to help founders plan, raise, and launch. From idea to TGE and beyond, with frameworks you can action immediately.</p>
+</div>
+</div>
+</div></section>
+
+<!-- WHY THIS SERIES EXISTS -->
+<section class="prose-section"><div class="container">
+<div class="prose-block reveal">
+<div class="section-label" style="text-align:center;">Why This Series Exists</div>
+<p>The next decade decides humanity's future. That's not hyperbole. It's the thesis behind everything we do at Nozomi.</p>
+<p>Centralised AI, robotics, and brain-computer interfaces are accelerating at a pace most people don't fully grasp. Whoever controls the models will control the future. First they control your wealth. Then what you see. Then what you think. We are rapidly approaching a world where Orwell's 1984 isn't fiction, it's the default trajectory.</p>
+<p>And yet, the one technology designed to fight back is still dismissed as a scam. Most people, including smart, successful people in tech, finance, and media, genuinely believe crypto is just speculation dressed up in ideology. They're not entirely wrong about the surface. But underneath the noise, decentralisation represents the most important technological movement of our lifetime.</p>
+<p>This series exists to make that case. Not with hype. Not with token shilling. With real philosophy, real verticals, and real startup ideas that show exactly why crypto matters and what founders should be building next.</p>
+</div>
+</div></section>
+
+<!-- SERIES STRUCTURE -->
+<section class="series-section"><div class="container">
+<div class="series-header reveal">
+<div class="section-label">The Series</div>
+<h2 class="section-title">One series. Two parallel tracks.</h2>
+<p style="font-size:16px;color:var(--text-secondary);font-weight:300;max-width:640px;line-height:1.7;">Part 1 answers "why should I care?" Part 2 answers "what can I actually build?" Together, they convert sceptics into believers and believers into builders.</p>
+</div>
+
+<div class="series-tracks">
+<div class="track reveal">
+<div class="track-label">Part 1</div>
+<h3>Verticals & First Principles</h3>
+<p class="track-desc">Too many Web3 founders are giving up on the mission for scale, removing the decentralisation first principles, which just creates Web2 with worse UI/UX. This track covers the actual verticals and the ideologies needed to build decentralisation that matters.</p>
+<ul class="track-list">
+<li><span class="track-num">→</span> Digital Currency & Sound Money</li>
+<li><span class="track-num">→</span> The Decentralised World Computer</li>
+<li><span class="track-num">→</span> Decentralised AI (De-AI)</li>
+<li><span class="track-num">→</span> Decentralised Storage & Data Sovereignty</li>
+<li><span class="track-num">→</span> Privacy-Preserving Algorithms</li>
+<li><span class="track-num">→</span> Self-Sovereign Identity</li>
+<li><span class="track-num">→</span> Decentralised Governance & Network States</li>
+<li><span class="track-num">→</span> The Cypherpunk Origin Story</li>
+</ul>
+<div class="track-count">Weekly deep dives</div>
+</div>
+
+<div class="track reveal reveal-d1">
+<div class="track-label">Part 2</div>
+<h3>Real Use Cases & Startup Ideas</h3>
+<p class="track-desc">Every article takes a real-world problem and proposes a concrete decentralised startup idea that a founder could build today. Not abstract theory. Tangible products people would actually use.</p>
+<ul class="track-list">
+<li><span class="track-num">→</span> AI-simulated dating: avatars run thousands of compatibility scenarios before you ever meet, replacing mindless swiping with high-conviction matches</li>
+<li><span class="track-num">→</span> Creator IP licensing on-chain: musicians, artists, and writers control and monetise their work without middlemen taking 80%</li>
+<li><span class="track-num">→</span> Decentralised credit scoring: your financial reputation is portable, private, and not owned by Equifax</li>
+<li><span class="track-num">→</span> Community-owned social networks: your feed, your algorithm, your data. No ads. No manipulation</li>
+<li><span class="track-num">→</span> Autonomous AI agent economies: agents that trade, negotiate, and transact on your behalf across open protocols</li>
+<li><span class="track-num">→</span> Decentralised energy markets, supply chain provenance, and more</li>
+</ul>
+<div class="track-count">Weekly deep dives</div>
+</div>
+</div>
+</div></section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section" id="cta"><div class="container">
+<div class="cta-box reveal">
+<div class="jp-ornament" style="justify-content:center;margin-bottom:24px;"><div class="line"></div><span class="symbol">望</span><div class="line"></div></div>
+<h2 class="cta-title">The next decade decides everything.</h2>
+<p class="cta-desc">Decentralisation is how we fight back. This series is the ammunition. Get it free, every week.</p>
+<form class="cta-form" action="https://network.us8.list-manage.com/subscribe/post?u=af0c9b564920f5939a4d980f7&amp;id=be614940cf&amp;f_id=001ec7e1f0" method="post">
+<input type="email" name="EMAIL" class="form-input" placeholder="Your email address" required>
+<div hidden><input type="hidden" name="tags" value="429086"></div>
+<div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_af0c9b564920f5939a4d980f7_be614940cf" tabindex="-1" value=""></div>
+<button type="submit" class="form-submit">Get Access</button>
+</form>
+</div>
+</div></section>
+
+<footer class="footer"><div class="container"><div class="footer-inner">
+<span class="footer-copy">© 2026 Nozomi Network. All rights reserved.</span>
+<div class="footer-back"><a href="https://nozomi.network">nozomi.network</a></div>
+</div></div></footer>
+
+<script>
+(function(){const canvas=document.getElementById('sakura-canvas');const ctx=canvas.getContext('2d');let petals=[];const PETAL_COUNT=30;function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}resize();addEventListener('resize',resize);function getThemeColors(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';return isDark?[{r:242,g:184,b:198},{r:250,g:212,b:223},{r:212,g:134,b:156},{r:255,g:200,b:210}]:[{r:196,g:98,b:122},{r:220,g:140,b:160},{r:180,g:80,b:110},{r:200,g:120,b:140}];}class Petal{constructor(){this.reset(true);}reset(init){this.x=Math.random()*canvas.width;this.y=init?Math.random()*canvas.height:-20-Math.random()*100;this.size=Math.random()*8+5;this.speedY=Math.random()*0.8+0.3;this.speedX=Math.random()*0.6-0.3;this.rotation=Math.random()*Math.PI*2;this.rotSpeed=(Math.random()-0.5)*0.02;this.wobble=Math.random()*Math.PI*2;this.wobbleSpeed=Math.random()*0.02+0.01;this.wobbleAmp=Math.random()*1.5+0.5;const colors=getThemeColors();const c=colors[Math.floor(Math.random()*colors.length)];this.color=c;this.opacity=Math.random()*0.4+0.15;this.scale=Math.random()*0.5+0.5;}update(){this.y+=this.speedY;this.wobble+=this.wobbleSpeed;this.x+=this.speedX+Math.sin(this.wobble)*this.wobbleAmp*0.3;this.rotation+=this.rotSpeed;if(this.y>canvas.height+20)this.reset(false);if(this.x>canvas.width+20)this.x=-20;if(this.x<-20)this.x=canvas.width+20;}draw(){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rotation);ctx.scale(this.scale,this.scale);ctx.globalAlpha=this.opacity;ctx.beginPath();ctx.moveTo(0,-this.size);ctx.bezierCurveTo(this.size*0.8,-this.size*0.5,this.size*0.6,this.size*0.3,0,this.size);ctx.bezierCurveTo(-this.size*0.6,this.size*0.3,-this.size*0.8,-this.size*0.5,0,-this.size);ctx.fillStyle=`rgb(${this.color.r},${this.color.g},${this.color.b})`;ctx.fill();ctx.beginPath();ctx.moveTo(0,-this.size*0.7);ctx.quadraticCurveTo(this.size*0.1,0,0,this.size*0.7);ctx.strokeStyle=`rgba(${this.color.r-20},${this.color.g-20},${this.color.b-20},0.3)`;ctx.lineWidth=0.5;ctx.stroke();ctx.restore();}}for(let i=0;i<PETAL_COUNT;i++)petals.push(new Petal());function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);petals.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}animate();})();
+const themeToggle=document.getElementById('themeToggle'),html=document.documentElement;const saved=localStorage.getItem('nozomi-theme');if(saved)html.setAttribute('data-theme',saved);themeToggle.addEventListener('click',function(){const next=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('nozomi-theme',next);});
+addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>40);const sc=document.getElementById('sakura-canvas');if(sc){const heroH=window.innerHeight;const fade=Math.max(0.15,1-(0.85*scrollY/heroH));sc.style.opacity=fade;}});
+(function(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));})();
+</script>
+</body>
+</html>
