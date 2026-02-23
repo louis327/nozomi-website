@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal Room — What They Couldn't Say | Nozomi Network</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_nozomi.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_nozomi.png">
+    <link rel="shortcut icon" href="/favicon_nozomi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX6C0Q0P1P"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZX6C0Q0P1P');</script>
+<style>
+:root{--font-display:'Sora',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono-nz:'JetBrains Mono',monospace;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1);--sakura:#F2B8C6;--sakura-deep:#D4869C;--sakura-pale:#FAD4DF;--radius-lg:22px;--black:#0a0a08;--off-white:#f2ede4;--pink:#C2185B;--pink-dim:#7B0D38;--mono:'IBM Plex Mono',monospace;--serif:'Playfair Display',serif}
+[data-theme="dark"]{--nz-nav-bg:rgba(10,10,12,0.88);--nz-border:rgba(242,184,198,0.06);--nz-border-med:rgba(242,184,198,0.1);--nz-text:#F5EDE8;--nz-text-sec:rgba(245,237,232,0.55);--particle-color:242,184,198}
+[data-theme="light"]{--nz-nav-bg:rgba(251,245,240,0.88);--nz-border:rgba(180,100,120,0.08);--nz-border-med:rgba(180,100,120,0.12);--nz-text:#1A1018;--nz-text-sec:rgba(26,16,24,0.55);--particle-color:196,98,122}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--black);color:var(--off-white);font-family:var(--mono);font-size:14px;line-height:1.7;overflow-x:hidden;cursor:default}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
+a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:var(--off-white)}
+
+/* NAV */
+.nz-nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 32px;background:var(--nz-nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--nz-border)}
+.nz-nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nz-nav-logo img{height:32px}[data-theme="dark"] .nz-nav-logo .logo-light{display:none}[data-theme="light"] .nz-nav-logo .logo-dark{display:none}
+.nz-nav-actions{display:flex;align-items:center;gap:12px}
+.nz-btn-back{font-family:var(--font-mono-nz);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--nz-text-sec);padding:10px 20px;border:1px solid var(--nz-border-med);border-radius:100px;transition:all .3s ease}.nz-btn-back:hover{color:var(--nz-text);border-color:var(--nz-text)}
+.nz-theme-toggle{width:40px;height:40px;border-radius:50%;border:1px solid var(--nz-border-med);background:0 0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease;color:var(--nz-text-sec)}.nz-theme-toggle:hover{border-color:var(--nz-text);color:var(--nz-text)}.nz-theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nz-btn-primary{font-family:var(--font-display);font-size:14px;font-weight:600;padding:14px 32px;border-radius:100px;transition:all .3s var(--ease-out-expo);cursor:pointer;border:none;display:inline-block}
+[data-theme="dark"] .nz-btn-primary{background:#fff;color:#000}[data-theme="light"] .nz-btn-primary{background:#000;color:#fff}.nz-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+
+/* NOZOMI ELEMENTS */
+.reading-progress{position:fixed;top:0;left:0;width:0%;height:2px;background:linear-gradient(90deg,var(--pink),var(--sakura));z-index:1001;transition:width .1s linear;opacity:.7}
+#sakura-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.3}
+.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:12px;border:1px solid rgba(242,237,228,.15);background:rgba(10,10,8,.85);backdrop-filter:blur(16px);color:var(--off-white);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;pointer-events:none;transform:translateY(12px);transition:all .3s var(--ease-out-expo)}.back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}.back-to-top:hover{border-color:var(--pink);transform:translateY(-2px)}.back-to-top svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 60px;padding-top:152px;position:relative;border-bottom:1px solid rgba(242,237,228,.1);z-index:1}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 80% 20%,rgba(194,24,91,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(194,24,91,.04) 0%,transparent 60%)}
+.hero-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:40px;opacity:0;animation:fadeUp .6s ease .2s forwards}
+.hero h1{font-family:var(--serif);font-size:clamp(52px,8vw,110px);font-weight:700;line-height:.95;letter-spacing:-.02em;margin-bottom:32px;opacity:0;animation:fadeUp .8s ease .4s forwards}
+.hero h1 em{font-style:italic;font-weight:400;color:rgba(242,237,228,.5)}
+.hero-sub{max-width:580px;font-size:13px;color:rgba(242,237,228,.55);line-height:1.9;margin-bottom:8px;opacity:0;animation:fadeUp .8s ease .6s forwards}.hero-sub strong{color:var(--off-white);font-weight:600}
+.hero-until{max-width:580px;font-size:14px;color:var(--off-white);font-weight:600;letter-spacing:.05em;margin-bottom:16px;opacity:0;animation:fadeUp .8s ease .65s forwards}
+.hero-tagline{max-width:580px;font-family:var(--serif);font-style:italic;font-size:17px;color:rgba(242,237,228,.65);margin-bottom:48px;opacity:0;animation:fadeUp .8s ease .7s forwards}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;opacity:0;animation:fadeUp .8s ease .8s forwards}
+.hero-trust{font-size:10px;letter-spacing:.25em;color:rgba(242,237,228,.25);opacity:0;animation:fadeUp .8s ease .9s forwards}
+.jp-ornament{display:flex;align-items:center;gap:16px;margin-top:20px;opacity:0;animation:fadeUp .8s ease 1s forwards}.jp-ornament .line{width:40px;height:1px;background:var(--pink);opacity:.3}.jp-ornament .symbol{font-size:14px;color:var(--pink);opacity:.4;letter-spacing:8px}
+
+/* BUTTONS */
+.btn-primary{background:var(--pink);color:var(--off-white);border:none;padding:14px 32px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:inline-block;transition:all .3s ease}.btn-primary:hover{background:#d81b60;transform:translateY(-1px);box-shadow:0 8px 24px rgba(194,24,91,.25)}
+.btn-ghost{background:0 0;color:rgba(242,237,228,.6);border:1px solid rgba(242,237,228,.2);padding:14px 32px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:inline-block;transition:all .3s ease}.btn-ghost:hover{border-color:rgba(242,237,228,.5);color:var(--off-white);transform:translateY(-1px)}
+
+/* TICKER */
+.ticker{border-top:1px solid rgba(242,237,228,.08);border-bottom:1px solid rgba(242,237,228,.08);overflow:hidden;padding:14px 0;background:rgba(194,24,91,.04);position:relative;z-index:1}
+.ticker-inner{display:flex;animation:ticker 30s linear infinite;white-space:nowrap;width:max-content}
+.ticker-item{padding:0 48px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,228,.35);border-right:1px solid rgba(242,237,228,.1)}.ticker-item span{color:var(--pink);opacity:.9}
+
+/* SECTIONS */
+.section{padding:100px 60px;position:relative;z-index:1}
+.section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:16px}
+.section-title{font-family:var(--serif);font-size:clamp(36px,4.5vw,56px);font-weight:700;line-height:1.05;margin-bottom:48px;max-width:700px}.section-title em{font-style:italic;font-weight:400;color:rgba(242,237,228,.45)}
+
+/* ROOM TABLE */
+.room-table{width:100%;border-collapse:collapse;margin-bottom:40px;font-size:12px}
+.room-table thead tr{border-bottom:1px solid rgba(242,237,228,.12)}
+.room-table th{text-align:left;padding:10px 20px 10px 0;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--pink);font-weight:400}
+.room-table td{padding:16px 20px 16px 0;border-bottom:1px solid rgba(242,237,228,.05);color:rgba(242,237,228,.5);vertical-align:top;line-height:1.6;transition:all .2s ease}
+.room-table td:first-child{color:var(--off-white);font-weight:600;min-width:130px}.room-table td:last-child{color:rgba(194,24,91,.9)}
+.room-table tr:hover td{background:rgba(194,24,91,.03)}
+.room-table tr:last-child td{border-bottom:2px solid rgba(194,24,91,.3)}.room-table tr:last-child td:first-child{color:var(--pink)}
+
+/* PROBLEM */
+.problem-block{max-width:680px;margin-bottom:40px}.problem-block p{font-size:13px;color:rgba(242,237,228,.5);line-height:1.9;margin-bottom:12px}.problem-block .until-now{font-size:14px;color:var(--off-white);font-weight:600;letter-spacing:.03em;margin-top:4px;margin-bottom:20px}
+.show-description{max-width:680px;margin-bottom:36px;border-left:2px solid var(--pink-dim);padding-left:28px}.show-description p{font-size:14px;color:rgba(242,237,228,.7);line-height:1.9;margin-bottom:10px}.show-description p:last-child{margin-bottom:0}
+.anon-note{max-width:560px;margin-bottom:28px}.anon-note p{font-size:12px;color:rgba(242,237,228,.4);line-height:1.8}
+.submit-link{display:inline-block;font-size:13px;font-weight:600;color:var(--off-white);letter-spacing:.1em;background:var(--pink);padding:12px 28px;transition:all .3s ease}.submit-link:hover{background:#d81b60;transform:translateY(-1px);box-shadow:0 6px 20px rgba(194,24,91,.25)}
+
+/* EXHIBITS */
+.exhibits-intro{font-size:11px;color:rgba(242,237,228,.3);letter-spacing:.08em;margin-bottom:40px}
+.exhibits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2px;margin-bottom:32px}
+.exhibit-card{background:rgba(242,237,228,.025);border:1px solid rgba(242,237,228,.07);padding:36px;transition:all .5s var(--ease-out-expo);position:relative;overflow:hidden}
+.exhibit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink),rgba(242,184,198,.6),var(--pink),transparent);opacity:0;transition:opacity .4s ease}
+.exhibit-card:hover{background:rgba(242,237,228,.04);border-color:rgba(194,24,91,.2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3),0 0 0 1px rgba(194,24,91,.08)}.exhibit-card:hover::before{opacity:.6}
+.exhibit-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.exhibit-tag{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--pink);border:1px solid var(--pink-dim);padding:3px 10px;opacity:.85}
+.exhibit-num{font-size:10px;letter-spacing:.2em;color:rgba(242,237,228,.12)}
+.exhibit-quote{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.55;color:rgba(242,237,228,.82);margin-bottom:24px}
+.exhibit-detail{font-size:11px;color:rgba(242,237,228,.28);line-height:1.7;border-top:1px solid rgba(242,237,228,.06);padding-top:18px}.exhibit-detail .verified{display:block;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.18);margin-top:6px}
+.redact{display:inline-block;background:rgba(242,237,228,.1);color:transparent;border-radius:1px;padding:1px 6px;user-select:none}
+.exhibit-note{padding:28px 36px;border:1px solid rgba(194,24,91,.2);background:rgba(194,24,91,.025);margin-bottom:32px}.exhibit-note p{font-size:12px;color:rgba(242,237,228,.45);line-height:1.8;max-width:620px}
+.exhibit-footer{display:flex;gap:48px;align-items:flex-start;padding:32px 0;border-top:1px solid rgba(242,237,228,.06);flex-wrap:wrap}
+.exhibit-footer-stat{font-size:11px;color:rgba(242,237,228,.35);letter-spacing:.05em;white-space:nowrap}.exhibit-footer-stat strong{display:block;font-family:var(--serif);font-size:32px;font-weight:700;color:var(--off-white);line-height:1;margin-bottom:4px}
+.exhibit-footer-body{font-size:12px;color:rgba(242,237,228,.35);line-height:1.7;max-width:400px}
+
+/* STATS */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-top:1px solid rgba(242,237,228,.08);border-bottom:1px solid rgba(242,237,228,.08);position:relative;z-index:1}
+.stat-item{padding:44px 36px;border-right:1px solid rgba(242,237,228,.08);transition:background .3s ease}.stat-item:hover{background:rgba(194,24,91,.03)}.stat-item:last-child{border-right:none}
+.stat-num{font-family:var(--serif);font-size:48px;font-weight:700;line-height:1;margin-bottom:8px}.stat-num span{color:var(--pink)}
+.stat-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.32);line-height:1.6}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:40px}
+.process-item{padding:36px;background:rgba(242,237,228,.02);border:1px solid rgba(242,237,228,.06);transition:all .4s var(--ease-out-expo);position:relative;overflow:hidden}
+.process-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);opacity:0;transition:opacity .4s ease}
+.process-item:hover{border-color:rgba(194,24,91,.15);transform:translateY(-2px);background:rgba(242,237,228,.03)}.process-item:hover::before{opacity:.4}
+.process-num{font-size:10px;color:var(--pink);letter-spacing:.3em;margin-bottom:16px}
+.process-title{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:10px}
+.process-body{font-size:12px;color:rgba(242,237,228,.42);line-height:1.8}
+
+/* NOZOMI HOST */
+.nozomi-section{padding:100px 60px;border-top:1px solid rgba(242,237,228,.08);position:relative;z-index:1}.nozomi-section .section-label{margin-bottom:20px}
+.nozomi-section h2{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.1;margin-bottom:28px;max-width:560px}
+.nozomi-section p{font-size:14px;color:rgba(242,237,228,.55);line-height:1.9;margin-bottom:16px;max-width:560px}.nozomi-section p strong{color:var(--off-white)}.nozomi-section .btn-ghost{margin-top:16px}
+
+/* DUAL CTA */
+.dual-cta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(242,237,228,.08);position:relative;z-index:1}
+.cta-panel{padding:80px 60px;position:relative;overflow:hidden}.cta-panel:first-child{border-right:1px solid rgba(242,237,228,.08);background:rgba(194,24,91,.03)}
+.cta-panel::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 110%,rgba(194,24,91,.07) 0%,transparent 60%);pointer-events:none}
+.cta-eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:20px}
+.cta-title{font-family:var(--serif);font-size:clamp(24px,2.5vw,36px);font-weight:700;line-height:1.2;margin-bottom:16px;max-width:380px}
+.cta-body{font-size:13px;color:rgba(242,237,228,.48);line-height:1.8;max-width:380px;margin-bottom:36px}
+.cta-note{margin-top:14px;font-size:12px;color:rgba(242,237,228,.35);line-height:1.7;max-width:360px}
+
+/* FAQ */
+.faq-section{padding:100px 60px;border-top:1px solid rgba(242,237,228,.08);position:relative;z-index:1}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px}
+.faq-item{padding:32px 36px;background:rgba(242,237,228,.02);border:1px solid rgba(242,237,228,.05);transition:all .3s ease}.faq-item:hover{border-color:rgba(242,237,228,.1);background:rgba(242,237,228,.03)}
+.faq-q{font-size:13px;color:var(--off-white);margin-bottom:10px;font-weight:600}.faq-a{font-size:12px;color:rgba(242,237,228,.42);line-height:1.8}
+
+/* FOOTER */
+.sr-footer{padding:36px 60px;border-top:1px solid rgba(242,237,228,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;position:relative;z-index:1}
+.footer-brand{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,228,.28)}.footer-brand strong{color:rgba(242,237,228,.55)}
+.footer-links a{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.22);transition:color .2s}.footer-links a:hover{color:var(--pink)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-out-expo),transform .7s var(--ease-out-expo)}.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){.dual-cta,.faq-grid{grid-template-columns:1fr}.dual-cta .cta-panel:first-child{border-right:none;border-bottom:1px solid rgba(242,237,228,.08)}}
+@media(max-width:768px){.hero,.section,.faq-section,.cta-panel,.nozomi-section{padding:60px 24px}.hero{padding-top:120px}.sr-footer{padding:28px 24px}.stat-item{border-right:none;border-bottom:1px solid rgba(242,237,228,.08)}.nz-nav{padding:0 16px}.nz-btn-back{display:none}.back-to-top{bottom:20px;right:20px}}
+</style>
+</head>
+<body>
+<canvas id="sakura-canvas"></canvas>
+<div class="reading-progress" id="readingProgress"></div>
+
+<nav class="nz-nav"><div class="nz-nav-inner">
+<a href="/" class="nz-nav-logo"><img class="logo-dark" src="/images/Nozomi_Logo_White (1).png" alt="Nozomi" height="32"><img class="logo-light" src="/images/Nozomi_Logo_Black (2).png" alt="Nozomi" height="32"></a>
+<div class="nz-nav-actions"><a href="/" class="nz-btn-back">← Back</a><button id="themeToggle" class="nz-theme-toggle" aria-label="Toggle theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><a href="https://forms.fillout.com/t/fiYYkaHNbeus" class="nz-btn-primary" target="_blank" rel="noopener noreferrer">Apply Now</a></div>
+</div></nav>
+
+<section class="hero">
+  <div class="hero-label">The Signal Room — Season 01 · A Nozomi Network Production</div>
+  <h1>What they<br>couldn't <em>say.</em></h1>
+  <p class="hero-sub">Anonymous confessions from the founders and VCs behind Web3's biggest launches. <strong>The market maker deals they signed. The exchange terms they accepted. The VC pressure they caved to.</strong> The things they wanted to say publicly, but couldn't.</p>
+  <p class="hero-until">Until now.</p>
+  <p class="hero-tagline">The show where the people who built Web3's biggest launches finally tell you what actually happened (not the PR spin).</p>
+  <div class="hero-ctas"><a href="#watch" class="btn-primary">Watch the Show</a><a href="#apply" class="btn-ghost">Tell Your Story — Anonymously</a></div>
+  <div class="hero-trust">IDENTITIES PROTECTED · VOICES ALTERED · FACTS INTACT</div>
+  <div class="jp-ornament"><div class="line"></div><span class="symbol">望</span><div class="line"></div></div>
+</section>
+
+<div class="ticker"><div class="ticker-inner">
+  <div class="ticker-item">85% of 2025 TGEs trade below issue price <span>///</span></div>
+  <div class="ticker-item">Median drawdown <span>−71%</span> FDV</div>
+  <div class="ticker-item">Tier 1 listing demands up to <span>10% token supply</span></div>
+  <div class="ticker-item">MM loan option: avg <span>4–5% circulating supply</span></div>
+  <div class="ticker-item">Founders who know the deal <span>vs</span> founders who don't</div>
+  <div class="ticker-item">85% of 2025 TGEs trade below issue price <span>///</span></div>
+  <div class="ticker-item">Median drawdown <span>−71%</span> FDV</div>
+  <div class="ticker-item">Tier 1 listing demands up to <span>10% token supply</span></div>
+  <div class="ticker-item">MM loan option: avg <span>4–5% circulating supply</span></div>
+  <div class="ticker-item">Founders who know the deal <span>vs</span> founders who don't</div>
+</div></div>
+
+<section class="section">
+  <div class="section-label reveal">/ The Problem</div>
+  <h2 class="section-title reveal">Launches have turned from adoption engines into coordinated exit events <em>that tear networks apart from the inside.</em></h2>
+  <table class="room-table reveal">
+    <thead><tr><th>Who</th><th>What's actually happening</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr><td>Market Maker</td><td>Convinces founders to take the "free" loan option. Then sells at the top, crashes the price, and buys it all back at the bottom. They call this "providing liquidity."</td><td>Profit on the way up. Profit on the way down. Risk-free.</td></tr>
+      <tr><td>Exchange</td><td>Demands 2–8% of your token supply plus a $200K–2M deposit before they'll list you. Paid before you launch.</td><td>Collected before a single token trades. Zero risk.</td></tr>
+      <tr><td>KOL</td><td>Negotiates secret preferred terms nobody else gets. Promotes your launch to their audience. Dumps on their own followers at TGE.</td><td>Exited at the peak. Their followers hold the bag.</td></tr>
+      <tr><td>Airdrop Community</td><td>Airdrop farmers running 50 wallets. They claim at TGE, dump immediately, and rotate to the next project. Repeat. The "community" on your dashboard was never real.</td><td>Extracted. Gone before day 2.</td></tr>
+      <tr><td>VC</td><td>In most launches, VC tokens were locked for months or years. So most of them desperately try to OTC before launch, playing hot potato with tokens they know will be worthless by the time they unlock.</td><td>Offloaded risk to someone else. Or stuck holding a locked bag they can't sell.</td></tr>
+      <tr><td>Founder</td><td>Sells to cover runway. Constrained by optics. Watched by everyone.</td><td>Takes the blame.</td></tr>
+    </tbody>
+  </table>
+  <div class="problem-block reveal">
+    <p>Every token launch has a story the founder can't tell publicly. <strong>NDAs are standard. CEXes threaten to delist. Counterparties have lawyers.</strong> Naming anyone costs more than the founder can afford.</p>
+    <p>That structure works because nobody talks.</p>
+    <p>And it causes the same predatory patterns to repeat every cycle because nobody warned the next founder walking in blind…</p>
+    <p class="until-now">Until now.</p>
+  </div>
+  <div class="show-description reveal">
+    <p>The Signal Room is an anonymous video show where post-TGE founders say what actually happened.</p>
+    <p>One guest per episode. One launch post-mortem. On record, no facts altered, no PR spin.</p>
+  </div>
+  <div class="anon-note reveal"><p>Your account exists nowhere except your memory. This is where it goes.</p><p>First contact is anonymous. No project name required.</p></div>
+  <a href="#apply" class="submit-link reveal">Submit your story →</a>
+</section>
+
+<section class="section" style="padding-top:0" id="watch">
+  <div class="section-label reveal">/ The Real Stories. Finally.</div>
+  <h2 class="section-title reveal">The following accounts are verified.<br><em>Identities redacted by request.</em></h2>
+  <p class="exhibits-intro reveal">Nothing reconstructed.</p>
+  <div class="exhibits-grid">
+    <div class="exhibit-card reveal"><div class="exhibit-header"><div class="exhibit-tag">Exhibit A — Market Maker</div><div class="exhibit-num">A</div></div><div class="exhibit-quote">"We negotiated them down from 8% to 6% supply and from $2M to $1.4M deposit. We thought we'd won something. They exercised the call option at hour 14. $38M left the order book in 40 minutes. Our community thought it was a hack."</div><div class="exhibit-detail">Founder, <span class="redact">████████████████</span> — Tier 1 listing. MM contract signed under NDA.<span class="verified">Verified. Project redacted by request.</span></div></div>
+    <div class="exhibit-card reveal"><div class="exhibit-header"><div class="exhibit-tag">Exhibit B — CEX Listing</div><div class="exhibit-num">B</div></div><div class="exhibit-quote">"The listing agent sent the terms over Signal. 7% supply, $1.8M in BNB, locked for 12 months. We had 48 hours to decide. They said the slot would go to the next project if we walked. We didn't walk."</div><div class="exhibit-detail">Founder, <span class="redact">████████████████</span> — Negotiation conducted off-record. NDA signed at closing.<span class="verified">Verified. Project redacted by request.</span></div></div>
+    <div class="exhibit-card reveal"><div class="exhibit-header"><div class="exhibit-tag">Exhibit C — VC Pressure</div><div class="exhibit-num">C</div></div><div class="exhibit-quote">"Our lead investor called three times the week before we were going to delay. Never said push the date directly. Just kept asking what the community would think if we moved it again. We launched. 72 hours later I stopped opening Telegram."</div><div class="exhibit-detail">Founder, <span class="redact">████████████████</span> — VC cliff hit 90 days post-TGE.<span class="verified">Verified. Project redacted by request.</span></div></div>
+    <div class="exhibit-card reveal"><div class="exhibit-header"><div class="exhibit-tag">Exhibit D — VC / Insider</div><div class="exhibit-num">D</div></div><div class="exhibit-quote">"I knew the unlock schedule would hit the community hard. Everyone at the table knew. We approved the structure anyway because our LPs needed the liquidity event. I haven't spoken to the founder since."</div><div class="exhibit-detail">VC Partner, <span class="redact">████████████████</span> — Fund distributed within 60 days of TGE.<span class="verified">Verified. Project redacted by request.</span></div></div>
+  </div>
+  <div class="exhibit-note reveal"><p>The parties named in these accounts are reading this. They don't know which exhibit is about them.</p></div>
+  <div class="exhibit-footer reveal">
+    <div class="exhibit-footer-stat"><strong>0</strong>founders who could explain their terms publicly</div>
+    <div class="exhibit-footer-stat"><strong>1 show</strong>where they finally can — anonymously</div>
+    <div class="exhibit-footer-body">The same deals work because the information stays private. Each account on record makes the next founder harder to trap.</div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item reveal"><div class="stat-num">85<span>%</span></div><div class="stat-label">of 2025 token launches<br>trade below TGE price</div></div>
+  <div class="stat-item reveal"><div class="stat-num">−<span>71%</span></div><div class="stat-label">median FDV drawdown<br>within 6 months</div></div>
+  <div class="stat-item reveal"><div class="stat-num">0</div><div class="stat-label">founders who explained<br>their MM terms publicly</div></div>
+  <div class="stat-item reveal"><div class="stat-num">1<span>show</span></div><div class="stat-label">where they finally<br>can — anonymously</div></div>
+</div>
+
+<section class="section">
+  <div class="section-label reveal">/ How It Works</div>
+  <h2 class="section-title reveal">Everything that could identify you<br><em>disappears before it airs.</em></h2>
+  <div class="process-grid">
+    <div class="process-item reveal"><div class="process-num">01 ///</div><div class="process-title">You Submit</div><div class="process-body">A private form. No identifying information required at first contact. Tell us what happened.</div></div>
+    <div class="process-item reveal"><div class="process-num">02 ///</div><div class="process-title">We Anonymize</div><div class="process-body">We change your voice, blur your face, turn specific numbers into ranges, and replace every counterparty's name with the role they played. You review and approve everything before we record anything.</div></div>
+    <div class="process-item reveal"><div class="process-num">03 ///</div><div class="process-title">It Airs</div><div class="process-body">Video. Published on X. Your story reaches every founder about to walk into the same room you walked into, before it's too late for them to change course.</div></div>
+    <div class="process-item reveal"><div class="process-num">04 ///</div><div class="process-title">The Pattern Breaks</div><div class="process-body">The same deal terms have worked for years because nobody warned the next person. Each account on record makes the next founder harder to trap.</div></div>
+  </div>
+</section>
+
+<section class="nozomi-section">
+  <div class="section-label">/ Your Host</div>
+  <h2>Nozomi Network</h2>
+  <p>We work with founders <strong>3–6 months from TGE</strong>, the window where the decisions that kill launches are still reversible.</p>
+  <p>Last year we helped founders raise <strong>$87 million</strong>. We were part of TGEs that went to shit and some that 10x'd from launch.</p>
+  <p>We've been inside the launches described on this page. That's why The Signal Room exists.</p>
+  <p>Because most founders don't know what they're walking into until they're already inside it and it's too late.</p>
+  <a href="https://www.nozomi.network" target="_blank" class="btn-ghost">www.nozomi.network →</a>
+</section>
+
+<div class="dual-cta" id="apply">
+  <div class="cta-panel"><div class="cta-eyebrow">/ If You Were In That Room</div><h2 class="cta-title">Your account exists nowhere except your memory.</h2><p class="cta-body">Now it can start to matter.</p><a href="#" class="btn-primary">Tell Your Story — Anonymously →</a><p class="cta-note">First contact is anonymous. No project name required.<br>Your story could save the next founder.</p></div>
+  <div class="cta-panel"><div class="cta-eyebrow">/ If You Are About To Enter Those Rooms</div><h2 class="cta-title">The deals in these exhibits are being offered right now.</h2><p class="cta-body">To founders who have never seen this page. Talk to someone who has been in that room before you sign anything.</p><a href="https://www.nozomi.network" target="_blank" class="btn-ghost">www.nozomi.network →</a></div>
+</div>
+
+<section class="faq-section">
+  <div class="section-label reveal">/ FAQ</div>
+  <h2 class="section-title reveal" style="margin-bottom:0">Questions.</h2>
+  <div class="faq-grid">
+    <div class="faq-item reveal"><div class="faq-q">What is The Signal Room?</div><div class="faq-a">The Signal Room is an anonymous video show where post-TGE founders say what actually happened. One guest per episode. One launch post-mortem. On record, no facts altered, no PR spin.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">Is this real or staged?</div><div class="faq-a">Every confession comes from a real founder or VC who went through a real launch. Nothing is reconstructed. The confession cards on this page are real accounts, verified before publication.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">Could this breach my NDAs?</div><div class="faq-a">NDAs cover named parties, specific figures, and direct attribution. They do not cover an anonymous account of structural patterns with identifying details removed. We compress timelines, convert figures to ranges, and replace all counterparty names with roles before anything airs. You approve what remains. We are not your lawyer — if you have specific NDA concerns, raise them in your first conversation with us. We have worked through this with multiple guests already.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">What does the guest actually get?</div><div class="faq-a">The thing most founders want. To say what actually happened, to an audience that understands exactly what it means, without the consequences. Competent founders become victims in the current misaligned TGE landscape and saying their version of the story on record — even anonymously — is the thing that makes our industry legit.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">What's the point of anonymization if you can't name anyone?</div><div class="faq-a">Naming the exchange or the market maker isn't what helps the next founder. Knowing the exact terms they'll be offered does. Knowing the pressure tactics they'll use does. Knowing the decision moment they'll manufacture does. That's all in the episodes — specific, verified, and usable — without the legal exposure of naming anyone.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">What happens after I apply?</div><div class="faq-a">Someone from the Nozomi team responds personally within 24 hours. If it's a fit, they walk you through the full anonymization process before anything is scheduled. No commitment until you've seen exactly what the episode will look like.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">Who sees my application?</div><div class="faq-a">2 members from the Nozomi team only. Not shared internally, not logged in any CRM.</div></div>
+    <div class="faq-item reveal"><div class="faq-q">What is the format?</div><div class="faq-a">Video. Face blurred, voice changed. Published on X. Each episode runs 25 to 35 minutes. Three to five clips go out separately. You never appear as yourself.</div></div>
+  </div>
+</section>
+
+<footer class="sr-footer">
+  <div class="footer-brand"><strong>The Signal Room</strong> · A Nozomi Network Production</div>
+  <div class="footer-links"><a href="https://x.com/NozomiNetwork" target="_blank">Follow on X: @NozomiNetwork</a></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+<script>
+// SAKURA PETALS
+(function(){
+  const c=document.getElementById('sakura-canvas');if(!c)return;const x=c.getContext('2d');let p=[];const N=20;
+  function rz(){c.width=innerWidth;c.height=innerHeight}rz();addEventListener('resize',rz);
+  const cols=[{r:242,g:184,b:198},{r:250,g:212,b:223},{r:194,g:24,b:91},{r:212,g:134,b:156}];
+  class P{constructor(){this.r(1)}r(i){this.x=Math.random()*c.width;this.y=i?Math.random()*c.height:-20-Math.random()*100;this.s=Math.random()*7+4;this.sy=Math.random()*.6+.2;this.sx=Math.random()*.5-.25;this.ro=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.02;this.w=Math.random()*Math.PI*2;this.ws=Math.random()*.015+.008;this.wa=Math.random()*1.2+.4;this.c=cols[Math.floor(Math.random()*cols.length)];this.o=Math.random()*.25+.08;this.sc=Math.random()*.5+.5}u(){this.y+=this.sy;this.w+=this.ws;this.x+=this.sx+Math.sin(this.w)*this.wa*.3;this.ro+=this.rs;if(this.y>c.height+20)this.r(0);if(this.x>c.width+20)this.x=-20;if(this.x<-20)this.x=c.width+20}d(){x.save();x.translate(this.x,this.y);x.rotate(this.ro);x.scale(this.sc,this.sc);x.globalAlpha=this.o;x.beginPath();x.moveTo(0,-this.s);x.bezierCurveTo(this.s*.8,-this.s*.5,this.s*.6,this.s*.3,0,this.s);x.bezierCurveTo(-this.s*.6,this.s*.3,-this.s*.8,-this.s*.5,0,-this.s);x.fillStyle=`rgb(${this.c.r},${this.c.g},${this.c.b})`;x.fill();x.restore()}}
+  for(let i=0;i<N;i++)p.push(new P);(function a(){x.clearRect(0,0,c.width,c.height);p.forEach(v=>{v.u();v.d()});requestAnimationFrame(a)})();
+})();
+// REVEAL
+(function(){const o=new IntersectionObserver((e)=>{e.forEach((el,i)=>{if(el.isIntersecting){setTimeout(()=>el.target.classList.add('visible'),i*60);o.unobserve(el.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(el=>o.observe(el))})();
+// THEME
+(function(){const h=document.documentElement;const s=localStorage.getItem('nozomi-theme');if(s)h.setAttribute('data-theme',s);document.getElementById('themeToggle').addEventListener('click',function(){const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('nozomi-theme',n)})})();
+// PROGRESS + CANVAS FADE
+addEventListener('scroll',()=>{const pb=document.getElementById('readingProgress');if(pb){const h=document.documentElement.scrollHeight-window.innerHeight;pb.style.width=(scrollY/h*100)+'%'}const sc=document.getElementById('sakura-canvas');if(sc){const f=Math.max(.06,.3-(.24*scrollY/window.innerHeight));sc.style.opacity=f}});
+// BACK TO TOP
+(function(){const b=document.getElementById('backToTop');addEventListener('scroll',()=>{b.classList.toggle('visible',scrollY>600)});b.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})})})();
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+<script src="/site.js"></script>
+</body>
+</html>
