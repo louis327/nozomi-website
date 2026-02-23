@@ -149,13 +149,35 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 .footer-links a{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-faint);transition:color .2s}.footer-links a:hover{color:var(--pink)}
 
 /* ANIMATIONS */
+/* SIGNAL ROOM FORM DROPDOWN */
+.sr-form-drop{max-height:0;overflow:hidden;transition:max-height .6s var(--ease-out-expo);position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.sr-form-drop.open{max-height:800px}
+.sr-form-section{padding:60px 60px 80px}
+.sr-form-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:14px;display:block;font-weight:600}
+.sr-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:900px}
+.sr-form-field{padding:32px 36px;background:var(--card-bg);border:1px solid var(--border-light)}
+.sr-form-field.full{grid-column:1/-1}
+.sr-form-field input,.sr-form-field textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border-med);color:var(--fg);font-family:var(--mono);font-size:13px;padding:10px 0;outline:none;transition:border-color .2s}
+.sr-form-field input::placeholder,.sr-form-field textarea::placeholder{color:var(--fg-faint)}
+.sr-form-field input:focus,.sr-form-field textarea:focus{border-bottom-color:var(--pink)}
+.sr-form-field textarea{resize:none;height:80px;line-height:1.7}
+.sr-role-options{display:flex;gap:2px;flex-wrap:wrap}
+.sr-role-option{padding:8px 16px;border:1px solid var(--border-med);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-dim);cursor:pointer;transition:all .2s;user-select:none;font-family:var(--mono)}
+.sr-role-option:hover{border-color:var(--pink-border);color:var(--fg-sec)}
+.sr-role-option.active{border-color:var(--pink);color:var(--fg);background:rgba(194,24,91,.1)}
+.sr-form-submit{max-width:900px;margin-top:2px}
+.sr-form-submit button{background:var(--pink);color:#fff;border:none;padding:18px 48px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .2s;width:100%}
+.sr-form-submit button:hover{background:#d81b60}
+.sr-form-note{font-size:10px;color:var(--fg-faint);letter-spacing:.1em;text-align:center;margin-top:16px}
+.sr-form-message{text-align:center;margin-top:16px;font-size:12px;display:none;font-family:var(--mono)}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-out-expo),transform .7s var(--ease-out-expo)}.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* RESPONSIVE */
 @media(max-width:900px){.dual-cta,.stats-bar{grid-template-columns:1fr}.dual-cta .cta-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}.stat-item{border-right:none;border-bottom:1px solid var(--border)}.stat-item:last-child{border-bottom:none}}
-@media(max-width:768px){.hero,.section,.why-section,.faq-section,.cta-panel,.nozomi-section{padding-left:24px;padding-right:24px}.hero{padding-top:120px}.sr-footer{padding:28px 24px}.nz-nav{padding:0 16px}.nz-btn-back{display:none}.back-to-top{bottom:20px;right:20px}.exhibits-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.stats-bar{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.hero,.section,.why-section,.faq-section,.cta-panel,.nozomi-section{padding-left:24px;padding-right:24px}.hero{padding-top:120px}.sr-footer{padding:28px 24px}.nz-nav{padding:0 16px}.nz-btn-back{display:none}.back-to-top{bottom:20px;right:20px}.exhibits-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.stats-bar{grid-template-columns:1fr 1fr}.sr-form-grid{grid-template-columns:1fr}.sr-form-section{padding:40px 24px 60px}}
 </style>
 </head>
 <body>
@@ -181,7 +203,7 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 
 <!-- TICKER -->
 <div class="ticker"><div class="ticker-inner">
-  <div class="ticker-item">85% of 2025 TGEs trade below issue price <span></span></div>
+  <div class="ticker-item">85% of 2025 TGEs trade below issue price <span>///</span></div>
   <div class="ticker-item">Median drawdown <span>−71%</span> FDV</div>
   <div class="ticker-item">Tier 1 listing demands up to <span>10% token supply</span></div>
   <div class="ticker-item">MM loan option: avg <span>4–5% circulating supply</span></div>
@@ -200,7 +222,7 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
   <div class="why-prose reveal">
     <p>Every token launch has a story the founder can't tell publicly. <strong>NDAs are standard. CEXes threaten to delist. Counterparties have lawyers.</strong> Naming anyone costs more than the founder can afford.</p>
     <p>That structure works because nobody talks.</p>
-    <p>And it causes the same predatory patterns to repeat every cycle because the next founder walks in without a map.</p>
+    <p>And it causes the same predatory patterns to repeat every cycle because nobody warned the next founder walking in blind…</p>
     <p class="until-now">Until now.</p>
   </div>
   <div class="why-description reveal">
@@ -278,8 +300,42 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 
 <!-- DUAL CTA -->
 <div class="dual-cta" id="apply">
-  <div class="cta-panel"><div class="cta-eyebrow">/ If You Were In That Room</div><h2 class="cta-title">Your account exists nowhere except your memory.</h2><p class="cta-body">Now it can save the next founder</p><a href="#" class="btn-primary">Tell Your Story — Anonymously →</a><p class="cta-note">First contact is anonymous. No project name required.</p></div>
+  <div class="cta-panel"><div class="cta-eyebrow">/ If You Were In That Room</div><h2 class="cta-title">Your account exists nowhere except your memory.</h2><p class="cta-body">Now it can start to matter.</p><button class="btn-primary" onclick="document.getElementById('sr-form-drop').classList.toggle('open')">Tell Your Story — Anonymously →</button><p class="cta-note">First contact is anonymous. No project name required.<br>Your story could save the next founder.</p></div>
   <div class="cta-panel"><div class="cta-eyebrow">/ If You Are About To Enter Those Rooms</div><h2 class="cta-title">The deals in these exhibits are being offered right now.</h2><p class="cta-body">To founders who have never seen this page. Talk to someone who has been in that room before you sign anything.</p><a href="https://www.nozomi.network" target="_blank" class="btn-ghost">www.nozomi.network →</a></div>
+</div>
+
+<!-- SIGNAL ROOM FORM DROPDOWN -->
+<div id="sr-form-drop" class="sr-form-drop">
+<div class="sr-form-section">
+  <div class="sr-form-grid">
+    <div class="sr-form-field">
+      <label class="sr-form-label">/ Your Role</label>
+      <div class="sr-role-options">
+        <div class="sr-role-option" onclick="this.classList.toggle('active')">Founder</div>
+        <div class="sr-role-option" onclick="this.classList.toggle('active')">Co-Founder</div>
+        <div class="sr-role-option" onclick="this.classList.toggle('active')">VC</div>
+        <div class="sr-role-option" onclick="this.classList.toggle('active')">Advisor</div>
+      </div>
+    </div>
+    <div class="sr-form-field">
+      <label class="sr-form-label">/ When Was Your TGE</label>
+      <input type="text" id="sr-tge" placeholder="e.g. Q3 2024" />
+    </div>
+    <div class="sr-form-field full">
+      <label class="sr-form-label">/ The part you've never been able to say publicly</label>
+      <textarea id="sr-story" placeholder="One sentence is enough to start."></textarea>
+    </div>
+    <div class="sr-form-field full">
+      <label class="sr-form-label">/ Your Telegram Handle</label>
+      <input type="text" id="sr-telegram" placeholder="@handle" />
+    </div>
+  </div>
+  <div class="sr-form-submit">
+    <button type="button" id="sr-submit-btn" onclick="srSubmitForm()">Submit — First Contact Is Anonymous →</button>
+  </div>
+  <p class="sr-form-note">No identifying information stored. No cold outreach. Your call, your pace.</p>
+  <p class="sr-form-message" id="sr-form-message"></p>
+</div>
 </div>
 
 <!-- FAQ — ACCORDION -->
@@ -313,6 +369,8 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 addEventListener('scroll',()=>{const pb=document.getElementById('readingProgress');if(pb){const h=document.documentElement.scrollHeight-window.innerHeight;pb.style.width=(scrollY/h*100)+'%'}const sc=document.getElementById('sakura-canvas');if(sc){const f=Math.max(.06,.3-(.24*scrollY/window.innerHeight));sc.style.opacity=f}});
 (function(){const b=document.getElementById('backToTop');addEventListener('scroll',()=>{b.classList.toggle('visible',scrollY>600)});b.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})})})();
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+async function srSubmitForm(){const btn=document.getElementById('sr-submit-btn');const msg=document.getElementById('sr-form-message');const role=[...document.querySelectorAll('.sr-role-option.active')].map(el=>el.textContent).join(', ');const tge=document.getElementById('sr-tge').value.trim();const story=document.getElementById('sr-story').value.trim();const telegram=document.getElementById('sr-telegram').value.trim();if(!role){srShowMsg('Please select your role.','#C2185B');return}if(!tge){srShowMsg('Please enter your approximate TGE date.','#C2185B');return}if(!story){srShowMsg('Please share what happened — one sentence is enough.','#C2185B');return}if(!telegram){srShowMsg('Please enter your Telegram handle.','#C2185B');return}btn.textContent='Sending...';btn.style.opacity='0.6';btn.style.pointerEvents='none';try{const response=await fetch('https://api.airtable.com/v0/appOYSJinkFKquOM9/Submissions',{method:'POST',headers:{'Authorization':'Bearer patLfIuLPYRaqWrdI.91410f04dae313b8885e97997bbebf961d4e4e97f008b77c5f02a2a582cd6069','Content-Type':'application/json'},body:JSON.stringify({records:[{fields:{'Role':role,'TGE':tge,'Story':story,'Telegram':telegram,'Submitted At':new Date().toISOString()}}]})});if(response.ok){btn.textContent='Submitted.';btn.style.background='#2D6A4F';srShowMsg("We'll be in touch on Telegram within 24 hours.",'var(--fg-dim)')}else{btn.textContent='Submit — First Contact Is Anonymous →';btn.style.opacity='1';btn.style.pointerEvents='auto';srShowMsg('Something went wrong. Try again or reach us on X @NozomiNetwork.','#C2185B')}}catch(e){btn.textContent='Submit — First Contact Is Anonymous →';btn.style.opacity='1';btn.style.pointerEvents='auto';srShowMsg('Something went wrong. Try again or reach us on X @NozomiNetwork.','#C2185B')}}
+function srShowMsg(text,color){const msg=document.getElementById('sr-form-message');msg.textContent=text;msg.style.color=color;msg.style.display='block'}
 </script>
 <script src="/site.js"></script>
 </body>
