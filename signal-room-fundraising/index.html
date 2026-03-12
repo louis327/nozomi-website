@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal Room: Fundraising Edition — A Nozomi Network Production</title>
+<meta name="description" content="The show where founders who just closed a round tell you what actually got the deal done.">
+<link rel="icon" type="image/png" href="/favicon_nozomi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX6C0Q0P1P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZX6C0Q0P1P');
+</script>
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --font-display: 'Sora', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --font-mono-nz: 'JetBrains Mono', monospace;
+    --serif: 'Playfair Display', serif;
+    --pink: #C2185B;
+    --pink-dim: #7B0D38;
+    --sakura: #F2B8C6;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme="light"] {
+    --nz-nav-bg: rgba(251,245,240,0.88);
+    --nz-border: rgba(180,100,120,0.08);
+    --nz-border-med: rgba(180,100,120,0.12);
+    --nz-text: #1A1018;
+    --nz-text-sec: rgba(26,16,24,0.55);
+    --bg: #FAF6F1;
+    --fg: #1A1018;
+    --fg-sec: rgba(26,16,24,0.6);
+    --fg-dim: rgba(26,16,24,0.4);
+    --fg-faint: rgba(26,16,24,0.25);
+    --fg-ghost: rgba(26,16,24,0.08);
+    --border: rgba(26,16,24,0.08);
+    --border-light: rgba(26,16,24,0.05);
+    --border-med: rgba(26,16,24,0.1);
+    --border-strong: rgba(26,16,24,0.15);
+    --card-bg: rgba(26,16,24,0.025);
+    --card-bg-hover: rgba(26,16,24,0.04);
+    --card-border: rgba(26,16,24,0.08);
+    --pink-glow: rgba(194,24,91,0.03);
+    --pink-glow-med: rgba(194,24,91,0.04);
+    --pink-glow-strong: rgba(194,24,91,0.06);
+    --pink-border: rgba(194,24,91,0.25);
+    --pink-hover-bg: rgba(194,24,91,0.04);
+    --ticker-bg: rgba(194,24,91,0.04);
+    --scanline: rgba(0,0,0,0.015);
+    --btt-bg: rgba(255,255,255,0.9);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--scanline) 2px, var(--scanline) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--pink); color: #fff; }
+
+  .reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--sakura));
+    z-index: 1001;
+    transition: width .1s linear;
+    opacity: .7;
+  }
+
+  .nz-nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 1000;
+    padding: 0 32px;
+    background: var(--nz-nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--nz-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nz-btn-back {
+    font-family: var(--font-mono-nz);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--nz-text-sec);
+    padding: 10px 20px;
+    border: 1px solid var(--nz-border-med);
+    border-radius: 100px;
+    transition: all .3s ease;
+  }
+  .nz-btn-back:hover { color: var(--nz-text); border-color: var(--nz-text); }
+
+  .nz-btn-primary {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 100px;
+    transition: all .3s var(--ease-out-expo);
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    background: #000;
+    color: #fff;
+  }
+  .nz-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+
+  .hero-outer {
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    padding: 120px 60px 80px;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-outer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 20%, var(--pink-glow-strong) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, var(--pink-glow-med) 0%, transparent 60%);
+  }
+
+  .hero-production {
+    font-family: var(--font-mono-nz);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp .6s ease .1s forwards;
+    position: relative;
+  }
+
+  .hero-trust {
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp .8s ease .9s forwards;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 700;
+    line-height: .95;
+    letter-spacing: -.02em;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp .8s ease .3s forwards;
+    position: relative;
+  }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--fg-sec); }
+
+  .hero-sub {
+    max-width: 500px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-sec);
+    line-height: 1.85;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp .8s ease .5s forwards;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .8s ease .65s forwards;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .3s ease;
+  }
+  .btn-primary:hover { background: #d81b60; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(194,24,91,.25); }
+
+  .btn-ghost {
+    background: 0 0;
+    color: var(--fg-sec);
+    border: 1px solid var(--border-strong);
+    padding: 14px 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .3s ease;
+  }
+  .btn-ghost:hover { border-color: var(--fg-dim); color: var(--fg); transform: translateY(-1px); }
+
+  .ticker {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 14px 0;
+    background: var(--ticker-bg);
+    position: relative;
+    z-index: 1;
+  }
+  .ticker-inner {
+    display: flex;
+    animation: tickerScroll 32s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .ticker-item {
+    padding: 0 48px;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    border-right: 1px solid var(--border-med);
+    flex-shrink: 0;
+  }
+  .ticker-item span { color: var(--pink); opacity: .9; }
+
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+  .section-title em { font-style: italic; font-weight: 400; color: var(--fg-sec); }
+
+  .the-show {
+    padding: 100px 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .show-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .show-body {
+    max-width: 680px;
+    margin-top: 32px;
+  }
+
+  .show-body p {
+    font-size: 14px;
+    color: var(--fg-sec);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .show-body p:last-child { margin-bottom: 0; }
+  .show-body strong { color: var(--fg); font-weight: 600; }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-item {
+    padding: 48px 40px;
+    border-right: 1px solid var(--border);
+    transition: background .3s ease;
+  }
+  .stat-item:hover { background: var(--pink-glow); }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-num span { color: var(--pink); }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    line-height: 1.6;
+  }
+
+  .anatomy-wrap {
+    padding: 100px 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .anatomy-intro {
+    margin-bottom: 48px;
+  }
+
+  .anatomy-intro .anatomy-desc {
+    max-width: 600px;
+    margin-top: 16px;
+  }
+
+  .anatomy-desc {
+    font-size: 14px;
+    color: var(--fg-sec);
+    line-height: 1.9;
+  }
+
+  .anatomy-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-light);
+  }
+
+  .anatomy-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    border-bottom: 1px solid var(--border-light);
+    transition: background .2s ease, border-left-color .2s ease;
+    border-left: 2px solid transparent;
+  }
+  .anatomy-item:last-child { border-bottom: none; }
+  .anatomy-item:hover { background: var(--pink-hover-bg); border-left-color: var(--pink); }
+
+  .anatomy-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--pink);
+    letter-spacing: .2em;
+    padding: 27px 16px 24px 20px;
+    border-right: 1px solid var(--border-light);
+  }
+
+  .anatomy-text {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--fg-sec);
+    padding: 24px 32px;
+  }
+  .anatomy-text strong { color: var(--fg); font-weight: 600; }
+
+  .how-it-works {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+  .how-inner {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+    border: 1px solid var(--border-light);
+  }
+  .process-item {
+    padding: 36px;
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-light);
+    transition: all .4s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+  }
+  .process-item:last-child { border-right: none; }
+  .process-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    opacity: 0;
+    transition: opacity .4s ease;
+  }
+  .process-item:hover { background: var(--card-bg-hover); }
+  .process-item:hover::before { opacity: .4; }
+  .how-qualify {
+    font-size: 12px;
+    color: var(--fg-dim);
+    letter-spacing: .04em;
+    margin-bottom: 48px;
+    margin-top: 8px;
+  }
+  .process-num { font-size: 10px; color: var(--pink); letter-spacing: .3em; margin-bottom: 16px; font-family: var(--mono); }
+  .process-title { font-family: var(--serif); font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .process-body { font-size: 13px; color: var(--fg-dim); line-height: 1.8; }
+
+  .nozomi-section {
+    padding: 100px 60px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .nozomi-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    max-width: 560px;
+  }
+  .nozomi-section p {
+    font-size: 14px;
+    color: var(--fg-sec);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    max-width: 560px;
+  }
+  .nozomi-section p strong { color: var(--fg); }
+  .nozomi-section .btn-ghost { margin-top: 16px; }
+
+  .dual-cta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .cta-panel {
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-panel:first-child {
+    border-right: 1px solid var(--border);
+    background: var(--pink-glow);
+  }
+  .cta-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 110%, var(--pink-glow-strong) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 20px;
+  }
+
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    max-width: 380px;
+  }
+  .cta-title em { font-style: italic; font-weight: 400; color: var(--fg-sec); }
+
+  .cta-body {
+    font-size: 13px;
+    color: var(--fg-sec);
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 36px;
+  }
+
+  .sr-footer {
+    padding: 36px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-brand {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .footer-brand strong { color: var(--fg-sec); }
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--pink); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .nz-nav { padding: 0 16px; }
+    .hero { padding: 80px 24px; padding-top: 120px; }
+    .the-show, .anatomy-wrap, .nozomi-section { padding: 72px 24px; }
+    .show-grid { grid-template-columns: 1fr; gap: 32px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+    .anatomy-intro { grid-template-columns: 1fr; gap: 28px; }
+    .how-inner { padding: 72px 24px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+    .process-item:last-child { border-bottom: none; }
+    .dual-cta { grid-template-columns: 1fr; }
+    .cta-panel { padding: 60px 24px; }
+    .cta-panel:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .sr-footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<nav class="nz-nav">
+  <a href="/" class="nz-btn-back">← Back</a>
+  <a href="https://x.com/NozomiNetwork" class="nz-btn-primary" target="_blank" rel="noopener">Apply Now</a>
+</nav>
+
+<div class="hero-outer">
+<div class="hero">
+  <div class="hero-production">The Signal Room: Fundraising Edition — Season 01 · A Nozomi Network Production</div>
+
+  <h1>Every fundraising story <em>sounds the same.</em></h1>
+
+  <p class="hero-sub">
+    <strong>"Grateful. Humbled. Strong team, right timing, great conviction."</strong><br>
+    None of it tells the next founder what the first investor call sounded like. Or why that specific raise closed when it did.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://x.com/NozomiNetwork" class="btn-primary" target="_blank" rel="noopener">Watch the Show →</a>
+    <a href="https://x.com/NozomiNetwork" class="btn-ghost" target="_blank" rel="noopener">Tell Your Story →</a>
+  </div>
+
+  <p class="hero-trust">One show · One raise · For the founder about to go in</p>
+</div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner" aria-hidden="true">
+    <div class="ticker-item">One guest. One raise. Start to close. <span></span></div>
+    <div class="ticker-item">How you built the investor list <span></span></div>
+    <div class="ticker-item">Which investor moved first, and why <span></span></div>
+    <div class="ticker-item">The terms that nearly killed it <span></span></div>
+    <div class="ticker-item">What you gave up that wasn't in the deck <span></span></div>
+    <div class="ticker-item">What the close moment actually looked like <span></span></div>
+    <div class="ticker-item">One guest. One raise. Start to close. <span></span></div>
+    <div class="ticker-item">How you built the investor list <span></span></div>
+    <div class="ticker-item">Which investor moved first, and why <span></span></div>
+    <div class="ticker-item">The terms that nearly killed it <span></span></div>
+    <div class="ticker-item">What you gave up that wasn't in the deck <span></span></div>
+    <div class="ticker-item">What the close moment actually looked like <span></span></div>
+  </div>
+</div>
+
+<div class="the-show reveal">
+  <div class="section-label">/ The Show</div>
+  <h2 class="section-title">The public version is always <em>sanitised.</em></h2>
+  <div class="show-body">
+    <p>Every panel, every podcast, every coffee chat produces the same three sentences: <strong>Great team, strong thesis, right timing.</strong> None of that is useful to anyone about to raise. They go into their first investor meeting knowing exactly as much as they did before.</p>
+    <p>This show is structured differently. We ask the questions that matter: <em>What moved a specific investor. What terms nearly killed the deal. What you gave up that wasn't in the deck. Why you closed in 6 weeks when everyone said raise time is 6 months.</em></p>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num">6<span style="font-size:24px">–</span>18<span style="font-size:24px">mo</span></div>
+    <div class="stat-label">Average time from first<br>raise attempt to close</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num"><span>~</span>200</div>
+    <div class="stat-label">Investor touchpoints in<br>a typical seed round</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Founders who explained<br>their raise mechanics publicly</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">1<span style="font-size:24px">show</span></div>
+    <div class="stat-label">Where founders tell<br>the version that matters</div>
+  </div>
+</div>
+
+<div class="anatomy-wrap">
+  <div class="anatomy-intro reveal">
+    <div class="section-label">/ The Episodes</div>
+    <h2 class="section-title">One raise. <em>Start to close.</em></h2>
+    <p class="anatomy-desc">Every episode covers the full arc of a single raise, from first investor conversation through close — the parts that get left out of every other version of this story.</p>
+  </div>
+  <div class="anatomy-list reveal">
+    <div class="anatomy-item">
+      <div class="anatomy-num">01</div>
+      <div class="anatomy-text"><strong>How you built the investor list.</strong> Who you targeted, how you prioritised, what made it longer or shorter as you went.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">02</div>
+      <div class="anatomy-text"><strong>What the first conversations looked like.</strong> The warm intros that went cold. The cold outreach that worked. What you said in the first call.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">03</div>
+      <div class="anatomy-text"><strong>What wasn't working, and what you changed.</strong> The pitch that didn't land. The narrative pivot. The moment you realised the ask was wrong.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">04</div>
+      <div class="anatomy-text"><strong>Which investor moved first and why.</strong> What changed in that conversation. What they said that the others hadn't. Why that deal closed when it did.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">05</div>
+      <div class="anatomy-text"><strong>What terms got negotiated.</strong> What you pushed back on. What you accepted. What you gave up that you weren't expecting to.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">06</div>
+      <div class="anatomy-text"><strong>What the close moment looked like.</strong> Not the announcement. The conversation before the announcement. When you knew it was done.</div>
+    </div>
+    <div class="anatomy-item">
+      <div class="anatomy-num">07</div>
+      <div class="anatomy-text"><strong>What you'd do differently.</strong> Not the PR version of this answer. The real one.</div>
+    </div>
+  </div>
+</div>
+
+<div class="how-it-works">
+  <div class="how-inner">
+    <div class="section-label">/ How It Works</div>
+    <div class="process-grid">
+      <div class="process-item reveal">
+        <div class="process-num">01 ///</div>
+        <div class="process-title">Respond</div>
+        <div class="process-body">We'll reach out on X. We do the background research before we contact you — round size, timing, public announcements. If it's the right fit, we take it from there.</div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">02 ///</div>
+        <div class="process-title">We Map the Arc</div>
+        <div class="process-body">One recording session. We go through the raise from first conversation to close — who you targeted, what wasn't working, what changed, how it got done. You don't prep. We ask.</div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">03 ///</div>
+        <div class="process-title">It Airs</div>
+        <div class="process-body">25–35 minutes. Not the panel answer, not the LinkedIn post. The raise, start to close, for the founders about to go through it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nozomi-section reveal">
+  <div class="section-label">/ Your Host</div>
+  <h2>Nozomi Network</h2>
+  <p>We're not journalists. We're the people founders called before they signed.</p>
+  <p>We work with founders <strong>3–12 months from TGE</strong> on GTM, positioning, community raise, and token listing strategy. Last year we helped founders raise <strong>$87 million</strong>. We've been in the room for raises that closed in six weeks and raises that dragged for fourteen months. We know the difference. And we know what to ask.</p>
+  <a href="https://www.nozomi.network" class="btn-ghost" target="_blank" rel="noopener">www.nozomi.network →</a>
+</div>
+
+<div class="dual-cta" id="apply">
+  <div class="cta-panel">
+    <div class="cta-eyebrow">/ If You Just Closed</div>
+    <h2 class="cta-title">The version you've been telling privately is more useful than <em>anything on LinkedIn.</em></h2>
+    <p class="cta-body">Tell it properly. One conversation. The version that matters to every founder about to walk in behind you.</p>
+    <a href="https://x.com/NozomiNetwork" class="btn-primary" target="_blank" rel="noopener">DM Us on X →</a>
+  </div>
+
+  <div class="cta-panel">
+    <div class="cta-eyebrow">/ If You Are About To Raise</div>
+    <h2 class="cta-title">The founders in these episodes just did what <em>you're about to do.</em></h2>
+    <p class="cta-body">Watch before you go in.</p>
+    <a href="https://www.nozomi.network" class="btn-ghost" target="_blank" rel="noopener">www.nozomi.network →</a>
+  </div>
+</div>
+
+<footer class="sr-footer">
+  <div class="footer-brand"><strong>The Signal Room</strong> · Fundraising Edition · A Nozomi Network Production</div>
+  <div class="footer-links"><a href="https://x.com/NozomiNetwork" target="_blank" rel="noopener">Follow on X: @NozomiNetwork</a></div>
+</footer>
+
+<script>
+  const bar = document.getElementById('readingProgress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
