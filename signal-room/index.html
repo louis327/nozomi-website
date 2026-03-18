@@ -47,6 +47,29 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 .hero-trust{font-size:10px;letter-spacing:.25em;color:var(--fg-faint);opacity:0;animation:fadeUp .8s ease .9s forwards}
 .jp-ornament{display:flex;align-items:center;gap:16px;margin-top:20px;opacity:0;animation:fadeUp .8s ease 1s forwards}.jp-ornament .line{width:40px;height:1px;background:var(--pink);opacity:.3}.jp-ornament .symbol{font-size:14px;color:var(--pink);opacity:.4;letter-spacing:8px}
 
+/* ANONYMOUS FIGURE */
+.anon-figure{position:absolute;right:60px;bottom:60px;width:320px;height:440px;z-index:0;opacity:0;animation:figureIn 1.2s ease .6s forwards;pointer-events:none}
+.anon-figure svg{width:100%;height:100%}
+.anon-figure-body{fill:var(--fg);opacity:.06}
+.anon-figure-outline{fill:none;stroke:var(--pink);stroke-width:.5;opacity:.15}
+.anon-figure-glow{fill:url(#figureGlow);opacity:.4}
+/* face static/noise */
+.anon-face-static{opacity:.12;animation:faceNoise 3s steps(4) infinite}
+/* glitch slices */
+.glitch-wrap{position:absolute;inset:0;overflow:hidden}
+.glitch-slice{position:absolute;width:100%;overflow:hidden;opacity:0}
+.glitch-slice svg{position:absolute;top:0;left:0;width:100%;height:100%}
+.glitch-slice:nth-child(1){top:18%;height:8%;animation:glitchSlice1 6s ease infinite}
+.glitch-slice:nth-child(2){top:42%;height:5%;animation:glitchSlice2 6s ease infinite}
+.glitch-slice:nth-child(3){top:65%;height:6%;animation:glitchSlice3 6s ease infinite}
+/* scanline overlay on figure */
+.anon-figure::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 1px,rgba(194,24,91,.02) 1px,rgba(194,24,91,.02) 2px);pointer-events:none}
+@keyframes figureIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes faceNoise{0%{transform:translate(0,0)}25%{transform:translate(-1px,1px)}50%{transform:translate(1px,-1px)}75%{transform:translate(-1px,-1px)}100%{transform:translate(0,0)}}
+@keyframes glitchSlice1{0%,92%,100%{opacity:0;transform:translateX(0)}93%{opacity:.7;transform:translateX(12px)}95%{opacity:.5;transform:translateX(-8px)}96%{opacity:0;transform:translateX(0)}}
+@keyframes glitchSlice2{0%,88%,100%{opacity:0;transform:translateX(0)}89%{opacity:.6;transform:translateX(-15px)}91%{opacity:.4;transform:translateX(6px)}92%{opacity:0;transform:translateX(0)}}
+@keyframes glitchSlice3{0%,95%,100%{opacity:0;transform:translateX(0)}96%{opacity:.5;transform:translateX(10px)}98%{opacity:.3;transform:translateX(-12px)}99%{opacity:0;transform:translateX(0)}}
+
 /* BUTTONS */
 .btn-primary{background:var(--pink);color:#fff;border:none;padding:14px 32px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:inline-block;transition:all .3s ease}.btn-primary:hover{background:#d81b60;transform:translateY(-1px);box-shadow:0 8px 24px rgba(194,24,91,.25)}
 .btn-ghost{background:0 0;color:var(--fg-sec);border:1px solid var(--border-strong);padding:14px 32px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:inline-block;transition:all .3s ease}.btn-ghost:hover{border-color:var(--fg-dim);color:var(--fg);transform:translateY(-1px)}
@@ -176,7 +199,8 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-out-expo),transform .7s var(--ease-out-expo)}.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* RESPONSIVE */
-@media(max-width:900px){.dual-cta,.stats-bar{grid-template-columns:1fr}.dual-cta .cta-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}.stat-item{border-right:none;border-bottom:1px solid var(--border)}.stat-item:last-child{border-bottom:none}}
+@media(max-width:1100px){.anon-figure{right:20px;width:240px;height:340px;bottom:40px;opacity:.7}}
+@media(max-width:900px){.anon-figure{display:none}.dual-cta,.stats-bar{grid-template-columns:1fr}.dual-cta .cta-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}.stat-item{border-right:none;border-bottom:1px solid var(--border)}.stat-item:last-child{border-bottom:none}}
 @media(max-width:768px){.hero,.section,.why-section,.faq-section,.cta-panel,.nozomi-section{padding-left:24px;padding-right:24px}.hero{padding-top:120px}.sr-footer{padding:28px 24px}.nz-nav{padding:0 16px}.nz-btn-back{display:none}.back-to-top{bottom:20px;right:20px}.exhibits-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.stats-bar{grid-template-columns:1fr 1fr}.sr-form-grid{grid-template-columns:1fr}.sr-form-section{padding:40px 24px 60px}}
 </style>
 </head>
@@ -191,6 +215,56 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 
 <!-- HERO -->
 <section class="hero">
+  <!-- Anonymous Figure -->
+  <div class="anon-figure" aria-hidden="true">
+    <svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="figureGlow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--pink)" stop-opacity="0"/>
+          <stop offset="40%" stop-color="var(--pink)" stop-opacity=".08"/>
+          <stop offset="100%" stop-color="var(--pink)" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="faceClip"><ellipse cx="160" cy="110" rx="52" ry="62"/></clipPath>
+        <filter id="faceBlur"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <!-- body fill -->
+      <path class="anon-figure-body" d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z"/>
+      <!-- outline stroke -->
+      <path class="anon-figure-outline" d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z"/>
+      <!-- glow overlay -->
+      <path class="anon-figure-glow" d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z"/>
+      <!-- face area: blurred static/noise -->
+      <g clip-path="url(#faceClip)">
+        <ellipse cx="160" cy="110" rx="52" ry="62" fill="var(--fg)" opacity=".04"/>
+        <g class="anon-face-static" filter="url(#faceBlur)">
+          <rect x="110" y="55" width="10" height="8" fill="var(--pink)" opacity=".3" rx="1"/>
+          <rect x="135" y="70" width="14" height="6" fill="var(--fg)" opacity=".2" rx="1"/>
+          <rect x="160" y="58" width="8" height="10" fill="var(--pink)" opacity=".25" rx="1"/>
+          <rect x="125" y="90" width="12" height="5" fill="var(--fg)" opacity=".15" rx="1"/>
+          <rect x="155" y="85" width="16" height="7" fill="var(--pink)" opacity=".2" rx="1"/>
+          <rect x="140" y="105" width="10" height="12" fill="var(--fg)" opacity=".18" rx="1"/>
+          <rect x="170" y="100" width="8" height="9" fill="var(--pink)" opacity=".22" rx="1"/>
+          <rect x="118" y="115" width="14" height="6" fill="var(--fg)" opacity=".12" rx="1"/>
+          <rect x="150" y="125" width="20" height="5" fill="var(--pink)" opacity=".15" rx="1"/>
+          <rect x="130" y="140" width="11" height="8" fill="var(--fg)" opacity=".2" rx="1"/>
+          <rect x="165" y="135" width="9" height="10" fill="var(--pink)" opacity=".18" rx="1"/>
+          <rect x="145" y="60" width="6" height="14" fill="var(--fg)" opacity=".1" rx="1"/>
+          <rect x="175" y="75" width="12" height="8" fill="var(--pink)" opacity=".16" rx="1"/>
+          <rect x="115" y="130" width="8" height="6" fill="var(--fg)" opacity=".14" rx="1"/>
+          <rect x="185" y="95" width="7" height="11" fill="var(--pink)" opacity=".12" rx="1"/>
+        </g>
+        <!-- ? symbol in face center -->
+        <text x="160" y="120" text-anchor="middle" font-family="var(--serif)" font-size="48" font-weight="700" fill="var(--pink)" opacity=".08">?</text>
+      </g>
+    </svg>
+    <!-- glitch displacement slices -->
+    <div class="glitch-wrap">
+      <div class="glitch-slice"><svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg"><path d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z" fill="var(--pink)" opacity=".12"/></svg></div>
+      <div class="glitch-slice"><svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg"><path d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z" fill="var(--pink)" opacity=".1"/></svg></div>
+      <div class="glitch-slice"><svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg"><path d="M160 0 C200 0 230 30 230 70 L230 100 C230 155 205 180 200 185 L210 195 C270 210 310 260 315 340 L320 440 L0 440 L5 340 C10 260 50 210 110 195 L120 185 C115 180 90 155 90 100 L90 70 C90 30 120 0 160 0Z" fill="var(--pink)" opacity=".08"/></svg></div>
+    </div>
+  </div>
+
   <div class="hero-label">The Signal Room — Season 01 · A Nozomi Network Production</div>
   <h1>What they<br>couldn't <em>say.</em></h1>
   <p class="hero-sub">Anonymous confessions from the founders and VCs behind Web3's biggest launches. <strong>The market maker deals they signed. The exchange terms they accepted. The VC pressure they caved to.</strong> The things they wanted to say publicly, but couldn't.</p>
