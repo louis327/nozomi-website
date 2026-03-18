@@ -50,6 +50,15 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
 /* ANONYMOUS FIGURE VIDEO */
 .anon-video-wrap{position:absolute;top:0;right:0;width:60%;height:100%;z-index:0;pointer-events:none;overflow:hidden;opacity:0;animation:figureIn 2s ease 1s forwards}
 .anon-video-wrap video{width:100%;height:100%;object-fit:cover;object-position:center top;mix-blend-mode:lighten;filter:brightness(0.75) contrast(3.2) sepia(1) saturate(3.5) hue-rotate(300deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 12%,white 22%,white 50%,transparent 90%);mask-image:linear-gradient(to bottom,transparent 0%,transparent 12%,white 22%,white 50%,transparent 90%)}
+/* Glitch layers — two copies offset with different colors for RGB split */
+.glitch-clone{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0}
+.glitch-clone video{width:100%;height:100%;object-fit:cover;object-position:center top;mix-blend-mode:lighten;filter:brightness(0.75) contrast(3.2) sepia(1) saturate(3.5) hue-rotate(300deg);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 12%,white 22%,white 50%,transparent 90%);mask-image:linear-gradient(to bottom,transparent 0%,transparent 12%,white 22%,white 50%,transparent 90%)}
+.glitch-r{animation:glitchR 6s infinite 0.5s}
+.glitch-r video{filter:brightness(0.9) contrast(3.2) sepia(1) saturate(4) hue-rotate(310deg)}
+.glitch-b{animation:glitchB 6s infinite}
+.glitch-b video{filter:brightness(0.85) contrast(3.2) sepia(1) saturate(3) hue-rotate(290deg)}
+@keyframes glitchR{0%,84%,100%{opacity:0;clip-path:none;transform:none}85%{opacity:.6;clip-path:inset(15% 0 65% 0);transform:translateX(8px)}86%{opacity:.4;clip-path:inset(55% 0 15% 0);transform:translateX(-12px)}87%{opacity:.7;clip-path:inset(30% 0 45% 0);transform:translateX(18px) skewX(-3deg)}87.5%{opacity:0;clip-path:none;transform:none}92%{opacity:.5;clip-path:inset(40% 0 35% 0);transform:translateX(-15px) skewX(2deg)}92.5%{opacity:.8;clip-path:inset(8% 0 78% 0);transform:translateX(22px)}93%{opacity:.3;clip-path:inset(65% 0 5% 0);transform:translateX(-6px)}93.5%{opacity:0;clip-path:none;transform:none}}
+@keyframes glitchB{0%,86%,100%{opacity:0;clip-path:none;transform:none}87%{opacity:.5;clip-path:inset(45% 0 30% 0);transform:translateX(-10px)}87.5%{opacity:.6;clip-path:inset(10% 0 72% 0);transform:translateX(14px) skewX(2deg)}88%{opacity:.4;clip-path:inset(60% 0 15% 0);transform:translateX(-20px)}88.5%{opacity:0;clip-path:none;transform:none}93.5%{opacity:.6;clip-path:inset(25% 0 55% 0);transform:translateX(16px) skewX(-4deg)}94%{opacity:.3;clip-path:inset(70% 0 8% 0);transform:translateX(-8px)}94.5%{opacity:.7;clip-path:inset(5% 0 80% 0);transform:translateX(12px)}95%{opacity:0;clip-path:none;transform:none}}
 .anon-video-pink{display:none}
 .anon-video-wrap::after{display:none}
 [data-theme="light"] .anon-video-wrap video{mix-blend-mode:multiply;filter:saturate(0.2) brightness(1.3) contrast(0.9);opacity:.25}
@@ -206,6 +215,8 @@ a{color:inherit;text-decoration:none}::selection{background:var(--pink);color:#f
       <source src="/images/anon-figure-clean.mp4" type="video/mp4">
     </video>
     <div class="anon-video-pink"></div>
+    <div class="glitch-clone glitch-r"><video autoplay muted loop playsinline disablepictureinpicture><source src="/images/anon-figure-clean.webm" type="video/webm"></video></div>
+    <div class="glitch-clone glitch-b"><video autoplay muted loop playsinline disablepictureinpicture><source src="/images/anon-figure-clean.webm" type="video/webm"></video></div>
   </div>
   <div class="hero-label">The Signal Room — Season 01 · A Nozomi Network Production</div>
   <h1>What they<br>couldn't <em>say.</em></h1>
