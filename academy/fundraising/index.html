@@ -3,360 +3,688 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raise Web3 | The Fundraising OS for Web3 Founders | Nozomi Network</title>
-<meta name="description" content="Stop pitching. Start closing. Nine modules covering every piece of the system successful Web3 founders used to raise millions in a bull and bear market.">
-<meta property="og:title" content="Raise Web3 | The Fundraising OS for Web3 Founders">
-<meta property="og:description" content="Stop pitching. Start closing. Nine modules. Deck. Pitch. Investor list. Valuation. Sprint.">
-<meta property="og:image" content="https://nozomi.network/images/Nozomi_Logo_Black (2).png">
-<meta property="og:url" content="https://nozomi.network/academy/fundraising">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Raise Web3: The Fundraising OS | Nozomi Network</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
+  --bg:      #fafaf8;
+  --white:   #ffffff;
+  --off:     #f5f4f0;
+  --dark:    #111111;
+  --mid:     #444444;
+  --light:   #999999;
+  --border:  #e4e4e0;
+  --border2: #d0d0cc;
   --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'DM Sans', -apple-system, sans-serif;
-  --dark: #111111;
-  --dark2: #1a1a1a;
-  --mid: #666;
-  --light: #aaa;
-  --border: #e4e4e4;
-  --off: #f5f4f0;
-  --white: #ffffff;
-  --accent: #2a2a2a;
+  --sans:  'DM Sans', -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
 }
+
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
   font-family: var(--sans);
+  background: var(--bg);
   color: var(--dark);
-  background: #fafaf8;
   line-height: 1.65;
+  overflow-x: hidden;
   background-image:
-    radial-gradient(circle, rgba(180,60,60,0.055) 1.5px, transparent 1.5px),
-    linear-gradient(rgba(0,0,0,0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.028) 1px, transparent 1px);
+    radial-gradient(circle, rgba(160,50,50,0.07) 1.5px, transparent 1.5px),
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
   background-size: 200px 200px, 48px 48px, 48px 48px;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+
+#petal-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+
+/* NAV */
 nav {
+  position: sticky; top: 0; z-index: 200;
+  height: 64px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 6%; height: 64px;
+  padding: 0 6%;
   border-bottom: 1.5px solid var(--dark);
   background: rgba(250,250,248,0.95);
-  backdrop-filter: blur(6px);
-  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(8px);
 }
-.nav-brand { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
-.nav-links { display: flex; align-items: center; gap: 10px; }
-.nav-home { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1.5px solid var(--dark); border-radius: 3px; transition: background 0.15s, color 0.15s; }
-.nav-home:hover { background: var(--dark); color: var(--white); }
-.nav-cta { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--dark); color: var(--white); padding: 8px 18px; border-radius: 3px; transition: background 0.15s; }
+.nav-logo { height: 28px; width: auto; }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-home {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 18px; border: 1.5px solid var(--dark); border-radius: 2px;
+  transition: background .15s, color .15s;
+}
+.nav-home:hover { background: var(--dark); color: #fff; }
+.nav-cta {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 18px; background: var(--dark); color: #fff; border-radius: 2px;
+  transition: background .15s;
+}
 .nav-cta:hover { background: #333; }
-.hero { text-align: center; padding: 96px 6% 80px; max-width: 860px; margin: 0 auto; }
-.hero-pill { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border: 1.5px solid var(--dark); padding: 6px 16px; border-radius: 2px; margin-bottom: 36px; background: rgba(250,250,248,0.9); }
-.hero-title { font-family: var(--serif); font-style: italic; font-size: 88px; font-weight: 400; line-height: 1.0; margin-bottom: 10px; letter-spacing: -0.025em; }
-.hero-tagline { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); margin-bottom: 32px; }
-.hero-promise { font-size: 20px; line-height: 1.65; font-weight: 300; color: var(--dark); max-width: 620px; margin: 0 auto 44px; }
-.hero-promise strong { font-weight: 600; }
-.btn-dark { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--dark); color: var(--white); padding: 16px 40px; border-radius: 3px; border: none; cursor: pointer; transition: background 0.15s; }
-.btn-dark:hover { background: #333; }
-.hero-note { font-size: 12px; color: var(--light); margin-top: 14px; }
-.stats-strip { border-top: 1.5px solid var(--dark); border-bottom: 1.5px solid var(--dark); background: var(--white); display: grid; grid-template-columns: repeat(4, 1fr); }
-.stat-item { text-align: center; padding: 32px 24px; border-right: 1px solid var(--border); }
+
+/* LAYOUT */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 6%; position: relative; z-index: 1; }
+
+/* LABELS */
+.label {
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--light); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+.label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 6% 88px;
+  max-width: 820px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.hero-pill {
+  display: inline-block;
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1.5px solid var(--dark); padding: 6px 18px; border-radius: 2px;
+  margin-bottom: 40px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(72px, 11vw, 124px);
+  font-style: italic; font-weight: 400;
+  line-height: 0.92; letter-spacing: -0.02em;
+  color: var(--dark); margin-bottom: 12px;
+}
+.hero-sub {
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--light); margin-bottom: 36px;
+}
+.hero-promise {
+  font-size: 19px; font-weight: 300; line-height: 1.78;
+  color: var(--mid); max-width: 580px; margin: 0 auto 48px;
+}
+.hero-promise strong { color: var(--dark); font-weight: 500; }
+.hero-actions { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--dark); color: #fff;
+  padding: 15px 36px; border-radius: 2px; border: none; cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.btn-dark:hover { background: #333; transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); padding: 15px 28px;
+  border: 1.5px solid var(--border2); border-radius: 2px;
+  transition: border-color .15s, color .15s;
+}
+.btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+.hero-note {
+  font-family: var(--mono); font-size: 10px; font-weight: 300;
+  letter-spacing: 0.1em; color: #ccc; margin-top: 16px;
+}
+
+/* STAT STRIP */
+.stat-strip {
+  border-top: 1.5px solid var(--dark);
+  border-bottom: 1.5px solid var(--dark);
+  background: var(--white);
+  display: grid; grid-template-columns: repeat(4,1fr);
+  position: relative; z-index: 1;
+}
+.stat-item { text-align: center; padding: 34px 20px; border-right: 1px solid var(--border); }
 .stat-item:last-child { border-right: none; }
-.stat-n { font-family: var(--serif); font-size: 38px; font-weight: 700; margin-bottom: 6px; line-height: 1; }
-.stat-l { font-size: 12px; color: var(--mid); line-height: 1.45; font-weight: 400; }
-.logo-section { padding: 56px 6%; background: var(--off); border-bottom: 1px solid var(--border); overflow: hidden; }
-.logo-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); text-align: center; margin-bottom: 40px; }
-.logo-cloud { position: relative; height: 220px; max-width: 900px; margin: 0 auto; }
-.logo-item { position: absolute; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #c0bfba; white-space: nowrap; transition: color 0.3s; user-select: none; }
-.logo-item:hover { color: #888; }
-.logo-item img { height: 22px; width: auto; opacity: 0.25; filter: grayscale(100%); transition: opacity 0.3s; }
-.logo-item:hover img { opacity: 0.5; }
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 6%; }
-.section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--light); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.section-h { font-family: var(--serif); font-size: 46px; font-weight: 700; line-height: 1.1; margin-bottom: 18px; letter-spacing: -0.015em; }
-.section-sub { font-size: 16px; line-height: 1.75; color: var(--mid); font-weight: 300; margin-bottom: 40px; max-width: 600px; }
-.dark-band { background: var(--dark); }
-.dark-band .section-label { color: rgba(255,255,255,0.25); }
-.dark-band .section-label::after { background: rgba(255,255,255,0.08); }
-.dark-band .section-h { color: var(--white); }
-.dark-band .section-sub { color: rgba(255,255,255,0.45); }
-.problem-section { padding: 84px 0; }
-.problem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); }
-.prob-card { background: #161616; padding: 32px 30px; }
-.prob-num { font-family: var(--serif); font-style: italic; font-size: 40px; color: rgba(255,255,255,0.12); line-height: 1; margin-bottom: 16px; }
-.prob-h { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.45; margin-bottom: 12px; }
-.prob-p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.38); font-weight: 300; }
-.outcome-section { padding: 84px 0; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 44px; }
-.out-card { background: var(--white); padding: 28px 30px; display: flex; gap: 16px; }
-.out-tick { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-.out-tick svg { width: 10px; height: 10px; }
-.out-text { font-size: 14px; line-height: 1.7; color: var(--mid); font-weight: 300; }
-.out-text strong { color: var(--dark); font-weight: 600; }
-.curriculum-section { padding: 84px 0; }
-.curr-wrap { margin-top: 44px; border: 1.5px solid var(--white); }
-.curr-row { display: grid; grid-template-columns: 52px 1px 1fr; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.08); transition: background 0.15s; }
-.curr-row:last-child { border-bottom: none; }
-.curr-row:hover { background: rgba(255,255,255,0.03); }
-.curr-num { font-family: var(--serif); font-style: italic; font-size: 20px; color: rgba(255,255,255,0.3); padding: 22px 0 22px 24px; display: flex; align-items: flex-start; padding-top: 24px; }
-.curr-divider { background: rgba(255,255,255,0.08); width: 1px; }
-.curr-body { padding: 22px 24px; }
-.curr-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 5px; }
-.curr-sub { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.38); font-weight: 300; }
-.format-section { padding: 0 0 84px; }
-.format-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 20px; text-align: center; }
-.format-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); }
-.fmt-card { background: #161616; padding: 28px 22px; text-align: center; }
-.fmt-num { font-family: var(--serif); font-style: italic; font-size: 32px; color: rgba(255,255,255,0.2); margin-bottom: 10px; line-height: 1; }
-.fmt-h { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
-.fmt-p { font-size: 12px; line-height: 1.55; color: rgba(255,255,255,0.35); font-weight: 300; }
-.noz-section { padding: 84px 0; background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.noz-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-.noz-h { font-family: var(--serif); font-size: 40px; font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
-.noz-p { font-size: 15px; line-height: 1.8; color: var(--mid); font-weight: 300; margin-bottom: 16px; }
-.noz-founder { font-size: 13px; color: var(--light); font-style: italic; }
-.noz-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.noz-stat { background: var(--white); padding: 26px 24px; }
-.noz-stat-n { font-family: var(--serif); font-size: 34px; font-weight: 700; margin-bottom: 5px; line-height: 1; }
-.noz-stat-l { font-size: 12px; color: var(--mid); line-height: 1.45; font-weight: 300; }
-.insight-section { padding: 84px 0; background: var(--white); border-bottom: 1px solid var(--border); }
-.ins-wrap { border: 1.5px solid var(--dark); margin-top: 44px; }
-.ins-row { display: flex; align-items: flex-start; gap: 22px; padding: 30px; border-bottom: 1px solid var(--border); }
-.ins-row:last-child { border-bottom: none; }
-.ins-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--off); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--mid); flex-shrink: 0; letter-spacing: 0.02em; }
-.ins-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-.ins-role { font-size: 12px; color: var(--light); margin-bottom: 12px; font-weight: 300; }
-.ins-p { font-size: 14px; line-height: 1.75; color: var(--mid); font-weight: 300; }
-.ins-tag { display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--off); border: 1px solid var(--border); color: var(--mid); padding: 4px 12px; border-radius: 2px; }
-.feat-section { padding: 84px 0; }
-.feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); margin-top: 44px; }
-.feat-card { background: #161616; padding: 30px 28px; }
-.feat-card.top { border-top: 2px solid rgba(255,255,255,0.5); }
-.feat-h { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
-.feat-p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.38); font-weight: 300; }
-.cta-section { padding: 110px 6%; text-align: center; background: var(--dark); border-top: 1.5px solid rgba(255,255,255,0.1); }
-.cta-h { font-family: var(--serif); font-style: italic; font-size: 72px; font-weight: 400; color: var(--white); margin-bottom: 18px; line-height: 1.0; letter-spacing: -0.025em; }
-.cta-sub { font-size: 17px; color: rgba(255,255,255,0.4); max-width: 480px; margin: 0 auto 44px; line-height: 1.7; font-weight: 300; }
-.cta-form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto 16px; }
-.cta-input { flex: 1; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: var(--white); font-size: 14px; border-radius: 3px; outline: none; font-family: var(--sans); font-weight: 300; transition: border-color 0.2s; }
-.cta-input::placeholder { color: rgba(255,255,255,0.25); }
+.stat-n { font-family: var(--serif); font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+.stat-l { font-size: 11px; color: var(--mid); line-height: 1.5; font-weight: 300; }
+
+/* LOGO WALL */
+.logo-section {
+  padding: 56px 0; background: var(--off);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative; z-index: 1;
+}
+.logo-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--light); text-align: center; margin-bottom: 40px;
+}
+.logo-track-wrap {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+.logo-track {
+  display: flex; gap: 52px; align-items: center;
+  animation: logoScroll 30s linear infinite;
+  width: max-content;
+}
+.logo-track img { height: 22px; width: auto; opacity: 0.22; filter: grayscale(100%); flex-shrink: 0; transition: opacity .3s; }
+.logo-track img:hover { opacity: 0.55; filter: none; }
+@keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+.section { padding: 92px 0; position: relative; z-index: 1; }
+.section.off { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.section.white { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.section-h {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.015em;
+  margin-bottom: 16px; color: var(--dark);
+}
+.section-h em { font-style: italic; font-weight: 400; color: var(--mid); }
+.section-sub { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.8; max-width: 560px; margin-bottom: 52px; }
+
+/* PROBLEM - list, no boxes */
+.prob-list { display: flex; flex-direction: column; }
+.prob-item {
+  display: grid; grid-template-columns: 52px 1fr;
+  border-top: 1px solid var(--border);
+  padding: 36px 0;
+  transition: background .15s;
+}
+.prob-item:last-child { border-bottom: 1px solid var(--border); }
+.prob-item:hover { background: rgba(0,0,0,0.014); margin: 0 -6%; padding: 36px 6%; }
+.prob-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--light); padding-top: 3px; }
+.prob-h { font-family: var(--sans); font-style: normal; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--dark); margin-bottom: 10px; }
+.prob-p { font-size: 14px; line-height: 1.78; color: #666; font-weight: 400; }
+
+/* OUTCOMES */
+.outcome-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border); border-left: 1px solid var(--border);
+}
+.out-item {
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 32px 28px; display: flex; gap: 16px;
+  transition: background .15s;
+}
+.out-item:hover { background: rgba(0,0,0,0.02); }
+.out-check {
+  width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;
+  border: 1px solid var(--dark); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.out-check svg { width: 9px; height: 9px; }
+.out-text { font-size: 14px; line-height: 1.75; color: var(--mid); font-weight: 300; }
+.out-text strong { color: var(--dark); font-weight: 500; }
+
+/* CURRICULUM */
+.curr-list { border-top: 1px solid var(--border); }
+.curr-item {
+  display: grid; grid-template-columns: 52px 1fr auto;
+  align-items: start; gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+  transition: background .15s;
+}
+.curr-item:hover { background: rgba(0,0,0,0.014); margin: 0 -6%; padding: 28px 6%; }
+.curr-n { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--light); padding-top: 3px; }
+.curr-title { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 7px; letter-spacing: -0.01em; }
+.curr-desc { font-size: 13px; line-height: 1.75; color: #666; font-weight: 400; }
+.curr-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--light); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px;
+  white-space: nowrap; margin-top: 3px; flex-shrink: 0;
+}
+
+.format-strip {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  border-top: 1px solid var(--border); border-left: 1px solid var(--border);
+  margin-top: 56px;
+}
+.fmt-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 24px 20px; text-align: center; }
+.fmt-n { font-family: var(--serif); font-size: 28px; font-weight: 700; color: #ddd; line-height: 1; margin-bottom: 10px; }
+.fmt-h { font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+.fmt-p { font-size: 11px; line-height: 1.6; color: var(--mid); font-weight: 300; }
+
+/* CREDIBILITY */
+.cred-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.cred-h { font-family: var(--serif); font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 20px; }
+.cred-h em { font-style: italic; font-weight: 400; color: var(--mid); }
+.cred-p { font-size: 14px; line-height: 1.82; color: var(--mid); font-weight: 300; margin-bottom: 14px; }
+.cred-founder { font-family: var(--mono); font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: var(--light); border-top: 1px solid var(--border); padding-top: 18px; margin-top: 8px; font-style: italic; }
+.cred-stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+.cred-stat { padding: 28px 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .15s; }
+.cred-stat:nth-child(even) { border-right: none; }
+.cred-stat:nth-last-child(-n+2) { border-bottom: none; }
+.cred-stat:hover { background: var(--off); }
+.cred-n { font-family: var(--serif); font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+.cred-l { font-size: 11px; color: var(--mid); line-height: 1.5; font-weight: 300; }
+
+/* INSIGHTS */
+.ins-list { border-top: 1px solid var(--border); }
+.ins-item { display: grid; grid-template-columns: 160px 1fr; border-bottom: 1px solid var(--border); padding: 40px 0; }
+.ins-left { padding-right: 32px; }
+.ins-type { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--light); margin-bottom: 8px; }
+.ins-name { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+.ins-role { font-size: 12px; color: var(--light); font-weight: 300; line-height: 1.5; font-style: italic; }
+.ins-p { font-size: 14px; line-height: 1.78; color: var(--mid); font-weight: 300; }
+.ins-tag { display: inline-block; margin-top: 14px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); border: 1px solid var(--border); padding: 4px 12px; border-radius: 2px; }
+
+/* DIFFERENTIATORS */
+.diff-list { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-left: 1px solid var(--border); margin-top: 52px; }
+.diff-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 28px; transition: background .15s; }
+.diff-item:hover { background: rgba(0,0,0,0.018); }
+.diff-h { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+.diff-p { font-size: 13px; line-height: 1.75; color: var(--mid); font-weight: 300; }
+
+/* CTA */
+.cta-section { padding: 112px 6%; text-align: center; background: var(--dark); position: relative; z-index: 1; }
+.cta-h { font-family: var(--serif); font-style: italic; font-size: clamp(44px, 7vw, 80px); font-weight: 400; color: #fff; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 18px; }
+.cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); max-width: 420px; margin: 0 auto 48px; line-height: 1.7; }
+.cta-form { display: flex; gap: 8px; max-width: 440px; margin: 0 auto 16px; }
+.cta-input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-family: var(--sans); font-size: 14px; font-weight: 300; border-radius: 2px; outline: none; transition: border-color .2s; }
+.cta-input::placeholder { color: rgba(255,255,255,0.3); }
 .cta-input:focus { border-color: rgba(255,255,255,0.35); }
-.cta-btn { background: var(--white); color: var(--dark); padding: 14px 24px; border-radius: 3px; border: none; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; font-family: var(--sans); transition: background 0.15s; }
+.cta-btn { background: #fff; color: var(--dark); padding: 14px 26px; border-radius: 2px; border: none; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background .15s; }
 .cta-btn:hover { background: #eee; }
-.cta-note { font-size: 12px; color: rgba(255,255,255,0.2); font-weight: 300; }
-footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 30px 6%; text-align: center; }
-footer p { font-size: 12px; color: rgba(255,255,255,0.2); font-weight: 300; }
-footer a { color: rgba(255,255,255,0.45); }
+.cta-note { font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.1em; color: rgba(255,255,255,0.15); }
+
+/* FOOTER */
+footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 6%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+footer p { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+footer a { color: rgba(255,255,255,0.4); }
 footer a:hover { color: rgba(255,255,255,0.7); }
-@media(max-width:800px){
-  .hero-title { font-size: 52px; }
-  .stats-strip { grid-template-columns: 1fr 1fr; }
-  .stat-item { border-bottom: 1px solid var(--border); }
-  .problem-grid, .feat-grid { grid-template-columns: 1fr; }
+
+/* RESPONSIVE */
+@media(max-width: 860px){
+  .cred-inner { grid-template-columns: 1fr; gap: 40px; }
   .outcome-grid { grid-template-columns: 1fr; }
-  .noz-inner { grid-template-columns: 1fr; gap: 36px; }
-  .format-grid { grid-template-columns: 1fr 1fr; }
-  .section-h { font-size: 32px; }
-  .cta-h { font-size: 44px; }
+  .diff-list { grid-template-columns: 1fr; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-bottom: 1px solid var(--border); }
+  .ins-item { grid-template-columns: 1fr; gap: 16px; }
+  .ins-left { padding-right: 0; }
+  .curr-item { grid-template-columns: 44px 1fr; }
+  .curr-tag { display: none; }
+  .format-strip { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media(max-width: 580px){
+  .format-strip { grid-template-columns: 1fr 1fr; }
   .cta-form { flex-direction: column; }
-  .logo-cloud { height: auto; position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 28px; }
-  .logo-item { position: static; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
 </head>
 <body>
+
+<canvas id="petal-canvas"></canvas>
+
+<!-- NAV -->
 <nav>
-  <div class="nav-brand">Nozomi</div>
-  <div class="nav-links">
-    <a href="/" class="nav-home">Home</a>
+  <a href="https://nozomi.network">
+    <img class="nav-logo" src="https://nozomi.network/images/Nozomi_Logo_Black (2).png" alt="Nozomi">
+  </a>
+  <div class="nav-right">
+    <a href="https://nozomi.network" class="nav-home">Home</a>
     <a href="#waitlist" class="nav-cta">Join Waitlist</a>
   </div>
 </nav>
-<section>
+
+<!-- HERO -->
+<section style="position:relative;z-index:1;">
   <div class="hero">
     <div class="hero-pill">Launching 2026</div>
     <h1 class="hero-title">Raise Web3</h1>
-    <p class="hero-tagline">The Fundraising OS for Web3 Founders</p>
+    <p class="hero-sub">The Fundraising OS for Web3 Founders</p>
     <p class="hero-promise">
       Stop pitching. Start closing.<br><br>
       Nine modules. Every piece of the system successful Web3 founders used to raise millions in a bull and a bear market.<br><br>
       <strong>Deck. Pitch. Investor list. Valuation. Sprint.</strong><br><br>
       Built from direct insights from the leading VCs actively funding Web3 right now and the founders who closed millions when the market was at its worst.
     </p>
-    <a href="#waitlist" class="btn-dark">Join the Waitlist</a>
-    <p class="hero-note">No spam. Early access when doors open.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-dark">Join the Waitlist &rarr;</a>
+      <a href="#curriculum" class="btn-outline">See the curriculum</a>
+    </div>
+    <p class="hero-note">nozomi.network/academy/fundraising - no spam, early access when doors open</p>
   </div>
 </section>
-<div class="stats-strip">
-  <div class="stat-item"><div class="stat-n">$87M</div><div class="stat-l">raised for Web3 founders by Nozomi in 2025</div></div>
-  <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">modules, zero filler, one complete system</div></div>
-  <div class="stat-item"><div class="stat-n">Bear</div><div class="stat-l">market battle-tested, every single framework</div></div>
-  <div class="stat-item"><div class="stat-n">Top 30</div><div class="stat-l">Web3 ecosystem relationships inside</div></div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-item"><div class="stat-n">$87M</div><div class="stat-l">Raised for Web3 founders<br>by Nozomi in 2025</div></div>
+  <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">Modules, zero filler,<br>one complete system</div></div>
+  <div class="stat-item"><div class="stat-n">Bear</div><div class="stat-l">Market battle-tested,<br>every single framework</div></div>
+  <div class="stat-item"><div class="stat-n">Top 30</div><div class="stat-l">Web3 ecosystem relationships<br>inside the course</div></div>
 </div>
+
+<!-- LOGO WALL -->
 <div class="logo-section">
   <div class="logo-label">Nozomi works directly with the leading Web3 ecosystems</div>
-  <div class="logo-cloud">
-    <div class="logo-item" style="top:10px;left:8%"><img src="https://nozomi.network/images/Immutable (1).png" alt="Immutable"></div>
-    <div class="logo-item" style="top:0px;left:30%"><img src="https://nozomi.network/images/Aptos_logo_(2025).png" alt="Aptos"></div>
-    <div class="logo-item" style="top:8px;left:58%"><img src="https://nozomi.network/images/Arbitrum.png" alt="Arbitrum"></div>
-    <div class="logo-item" style="top:72px;left:4%"><img src="https://nozomi.network/images/BNB Chain (1).png" alt="BNB Chain"></div>
-    <div class="logo-item" style="top:68px;left:26%"><img src="https://nozomi.network/images/SUI (1).png" alt="Sui"></div>
-    <div class="logo-item" style="top:75px;left:50%"><img src="https://nozomi.network/images/Berachain (1).png" alt="Berachain"></div>
-    <div class="logo-item" style="top:70px;left:72%"><img src="https://nozomi.network/images/OPTIMISM (1).png" alt="Optimism"></div>
-    <div class="logo-item" style="top:140px;left:6%"><img src="https://nozomi.network/images/Polkadot (1).png" alt="Polkadot"></div>
-    <div class="logo-item" style="top:135px;left:28%"><img src="https://nozomi.network/images/Movement.png" alt="Movement"></div>
-    <div class="logo-item" style="top:142px;left:50%"><img src="https://nozomi.network/images/Skale (1).png" alt="Skale"></div>
-    <div class="logo-item" style="top:138px;left:68%"><img src="https://nozomi.network/images/STORY (1).png" alt="Story"></div>
-    <div class="logo-item" style="top:195px;left:8%"><img src="https://nozomi.network/images/Cardano.png" alt="Cardano"></div>
-    <div class="logo-item" style="top:192px;left:28%"><img src="https://nozomi.network/images/Abstract.png" alt="Abstract"></div>
-    <div class="logo-item" style="top:196px;left:48%"><img src="https://nozomi.network/images/Virtual.png" alt="Virtual"></div>
-    <div class="logo-item" style="top:190px;left:68%"><img src="https://nozomi.network/images/Legion.png" alt="Legion"></div>
-    <div class="logo-item" style="top:18px;left:80%"><img src="https://nozomi.network/images/AVAX (1).png" alt="Avalanche"></div>
+  <div class="logo-track-wrap">
+    <div class="logo-track">
+      <img src="https://nozomi.network/images/Immutable (1).png" alt="Immutable">
+      <img src="https://nozomi.network/images/Aptos_logo_(2025).png" alt="Aptos">
+      <img src="https://nozomi.network/images/Arbitrum.png" alt="Arbitrum">
+      <img src="https://nozomi.network/images/AVAX (1).png" alt="Avalanche">
+      <img src="https://nozomi.network/images/BNB Chain (1).png" alt="BNB Chain">
+      <img src="https://nozomi.network/images/SUI (1).png" alt="Sui">
+      <img src="https://nozomi.network/images/Berachain (1).png" alt="Berachain">
+      <img src="https://nozomi.network/images/OPTIMISM (1).png" alt="Optimism">
+      <img src="https://nozomi.network/images/Polkadot (1).png" alt="Polkadot">
+      <img src="https://nozomi.network/images/Movement.png" alt="Movement">
+      <img src="https://nozomi.network/images/Skale (1).png" alt="Skale">
+      <img src="https://nozomi.network/images/STORY (1).png" alt="Story">
+      <img src="https://nozomi.network/images/Cardano.png" alt="Cardano">
+      <img src="https://nozomi.network/images/Abstract.png" alt="Abstract">
+      <img src="https://nozomi.network/images/Virtual.png" alt="Virtual">
+      <img src="https://nozomi.network/images/Legion.png" alt="Legion">
+      <img src="https://nozomi.network/images/Immutable (1).png" alt="Immutable">
+      <img src="https://nozomi.network/images/Aptos_logo_(2025).png" alt="Aptos">
+      <img src="https://nozomi.network/images/Arbitrum.png" alt="Arbitrum">
+      <img src="https://nozomi.network/images/AVAX (1).png" alt="Avalanche">
+      <img src="https://nozomi.network/images/BNB Chain (1).png" alt="BNB Chain">
+      <img src="https://nozomi.network/images/SUI (1).png" alt="Sui">
+      <img src="https://nozomi.network/images/Berachain (1).png" alt="Berachain">
+      <img src="https://nozomi.network/images/OPTIMISM (1).png" alt="Optimism">
+      <img src="https://nozomi.network/images/Polkadot (1).png" alt="Polkadot">
+      <img src="https://nozomi.network/images/Movement.png" alt="Movement">
+      <img src="https://nozomi.network/images/Skale (1).png" alt="Skale">
+      <img src="https://nozomi.network/images/STORY (1).png" alt="Story">
+      <img src="https://nozomi.network/images/Cardano.png" alt="Cardano">
+      <img src="https://nozomi.network/images/Abstract.png" alt="Abstract">
+      <img src="https://nozomi.network/images/Virtual.png" alt="Virtual">
+      <img src="https://nozomi.network/images/Legion.png" alt="Legion">
+    </div>
   </div>
 </div>
-<div class="dark-band">
+
+<!-- PROBLEM -->
+<div class="section">
   <div class="wrap">
-    <div class="problem-section">
-      <div class="section-label">The problem</div>
-      <h2 class="section-h">If any of this sounds familiar,<br>this course was built for you.</h2>
-      <p class="section-sub">Not generic startup advice. The specific things killing Web3 raises right now.</p>
-      <div class="problem-grid">
-        <div class="prob-card"><div class="prob-num">01</div><div class="prob-h">You have had 20 or 30 meetings and nothing has committed</div><div class="prob-p">Everyone says they love it. Nobody writes a cheque. You keep booking more meetings hoping the next one will be different. The round quietly dies with no clear reason why.</div></div>
-        <div class="prob-card"><div class="prob-num">02</div><div class="prob-h">Investors keep asking for traction you do not have yet</div><div class="prob-p">You are pre-product or early MVP. The product is real and the vision is clear. But every meeting ends with "come back when you have more." You do not know what would actually change that answer.</div></div>
-        <div class="prob-card"><div class="prob-num">03</div><div class="prob-h">Your valuation feels right but investors keep pushing back on it</div><div class="prob-p">You picked a number that felt credible. Now every meeting turns into a negotiation about price instead of a conversation about the opportunity. You cannot defend it without just repeating it louder.</div></div>
-        <div class="prob-card"><div class="prob-num">04</div><div class="prob-h">Your deck explains the tech perfectly and investors still are not excited</div><div class="prob-p">You spent months on the architecture. The deck covers every feature in detail. Investors nod through the whole thing and never follow up. The product is real. The pitch is not landing.</div></div>
-        <div class="prob-card"><div class="prob-num">05</div><div class="prob-h">You know you need community capital but have no idea how to do it right</div><div class="prob-p">Everyone tells you to raise from your community. Nobody tells you how to structure it without creating a wall of sell pressure from people who just wanted a quick 2x.</div></div>
-        <div class="prob-card"><div class="prob-num">06</div><div class="prob-h">You are raising right now and nothing from the bull run playbook works</div><div class="prob-p">The bar is completely different. What got a term sheet in 2021 gets a polite pass today. You are not sure if the problem is the market, the story, or the terms. It is probably all three.</div></div>
+    <div class="label">The problem</div>
+    <h2 class="section-h">If any of this sounds familiar,<br><em>this course was built for you.</em></h2>
+    <p class="section-sub">Not generic startup advice. The specific things killing Web3 raises right now.</p>
+    <div class="prob-list">
+      <div class="prob-item">
+        <div class="prob-num">01</div>
+        <div>
+          <div class="prob-h">You have had 20 or 30 meetings and nothing has committed.</div>
+          <div class="prob-p">Everyone says they love it. Nobody writes a cheque. You keep booking more meetings hoping the next one will be different. The round quietly dies with no clear reason why.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">02</div>
+        <div>
+          <div class="prob-h">Investors keep asking for traction you do not have yet.</div>
+          <div class="prob-p">You are pre-product or early MVP. The product is real and the vision is clear. But every meeting ends with "come back when you have more." You do not know what would actually change that answer.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">03</div>
+        <div>
+          <div class="prob-h">Your valuation feels right but investors keep pushing back on it.</div>
+          <div class="prob-p">You picked a number that felt credible. Now every meeting turns into a negotiation about price instead of a conversation about the opportunity. You cannot defend it without just repeating it louder.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">04</div>
+        <div>
+          <div class="prob-h">Your deck explains the tech perfectly and investors still are not excited.</div>
+          <div class="prob-p">You spent months on the architecture. The deck covers every feature in detail. Investors nod through the whole thing and never follow up. The product is real. The pitch is not landing.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">05</div>
+        <div>
+          <div class="prob-h">You know you need community capital but have no idea how to do it right.</div>
+          <div class="prob-p">Everyone tells you to raise from your community. Nobody tells you how to structure it without creating a wall of sell pressure from people who just wanted a quick 2x.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">06</div>
+        <div>
+          <div class="prob-h">You are raising right now and nothing from the bull run playbook works.</div>
+          <div class="prob-p">The bar is completely different. What got a term sheet in 2021 gets a polite pass today. You are not sure if the problem is the market, the story, or the terms. It is probably all three.</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="outcome-section">
+
+<!-- OUTCOMES -->
+<div class="section white">
   <div class="wrap">
-    <div class="section-label">What you will have when you finish</div>
-    <h2 class="section-h">By the end of this course<br>you can finally...</h2>
+    <div class="label">What you will have when you finish</div>
+    <h2 class="section-h">By the end of this course<br><em>you can finally...</em></h2>
     <p class="section-sub">Not knowledge. Actual deliverables you built and can walk into any investor meeting with.</p>
     <div class="outcome-grid">
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Walk into any investor meeting with a raise amount you can defend line by line</strong>, without freezing when someone asks how the allocation breaks down.</div></div>
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Explain what you are building in 10 seconds or 90</strong>, without losing someone the moment you mention ZK proofs or cross-chain validators.</div></div>
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Know exactly which investors to approach, in what order, and through which path</strong>, instead of blasting the same cold deck to 200 people and wondering why nobody responds.</div></div>
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Run a real raise sprint that builds momentum and closes</strong>, instead of a rolling raise that drags for six months with everyone waiting for someone else to go first.</div></div>
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Choose the right fundraising model for your stage and community</strong>, without accidentally structuring a raise that creates a sell wall the day you launch.</div></div>
-      <div class="out-card"><div class="out-tick"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="out-text"><strong>Set and defend a valuation that makes sense for your stage</strong>, without launching at a number that makes your token impossible to grow into.</div></div>
-    </div>
-  </div>
-</div>
-<div class="dark-band">
-  <div class="wrap">
-    <div class="curriculum-section">
-      <div class="section-label">What is inside</div>
-      <h2 class="section-h">9 modules. A complete system.<br>From first number to final wire.</h2>
-      <p class="section-sub">Every module builds on the last. Nothing is standalone because nothing in fundraising is standalone.</p>
-      <div class="curr-wrap">
-        <div class="curr-row"><div class="curr-num">1</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Fundraising goals and blueprint</div><div class="curr-sub">Get clear on your fundraising goals. How much to raise, what it is for, and what milestone it funds. Set your target, build the number bottom-up line by line, allocate it across four buckets, and write the one-sentence raise narrative you will use in every investor conversation.</div></div></div>
-        <div class="curr-row"><div class="curr-num">2</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Valuation and deal structure</div><div class="curr-sub">How Web3 valuations actually work. The inflation trap that kills rounds before they start. SAFEs vs SAFTs. Vesting mechanics that keep investors aligned instead of waiting for the cliff.</div></div></div>
-        <div class="curr-row"><div class="curr-num">3</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Choose your fundraising model</div><div class="curr-sub">VC, ICO 2.0, IDO, IEO, grants, hybrid stack. Which one fits your stage and community, and the community raise timing problem most founders get badly wrong.</div></div></div>
-        <div class="curr-row"><div class="curr-num">4</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Messaging stack and elevator pitch</div><div class="curr-sub">Positioning statement, USP, hell and heaven framework. A pitch deliverable in 10 seconds or 90, written and rehearsed before you approach anyone.</div></div></div>
-        <div class="curr-row"><div class="curr-num">5</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Build your pitch deck</div><div class="curr-sub">The three questions every investor is answering in the first two minutes. Every slide built for your actual project. The clarity test that exposes every vague slide before an investor does.</div></div></div>
-        <div class="curr-row"><div class="curr-num">6</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Advisors: build a team investors bet on</div><div class="curr-sub">Your advisory board is your first fundraising test. If credible people will not back you with their time, what makes you think a VC will back you with capital?</div></div></div>
-        <div class="curr-row"><div class="curr-num">7</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Build your investor list</div><div class="curr-sub">Three filters. Four investor categories. Three tiers. The warm path system. A CRM built for momentum, not just storing names.</div></div></div>
-        <div class="curr-row"><div class="curr-num" style="font-size:13px;padding-top:26px;">8-9</div><div class="curr-divider"></div><div class="curr-body"><div class="curr-title">Outreach, the sprint, and close</div><div class="curr-sub">The rolling raise trap. The sprint model. Running meetings. Six objections with the right answers. Building FOMO. From verbal yes to signed documents to wire.</div></div></div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Walk into any investor meeting with a raise amount you can defend line by line,</strong> without freezing when someone asks how the allocation breaks down.</div>
       </div>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="format-section">
-      <div class="format-label">How each module is structured</div>
-      <div class="format-grid">
-        <div class="fmt-card"><div class="fmt-num">1</div><div class="fmt-h">Theory</div><div class="fmt-p">The framework, why it works, and what breaks without it.</div></div>
-        <div class="fmt-card"><div class="fmt-num">2</div><div class="fmt-h">Real examples</div><div class="fmt-p">Worked examples from real projects at different stages.</div></div>
-        <div class="fmt-card"><div class="fmt-num">3</div><div class="fmt-h">VC and founder insights</div><div class="fmt-p">Direct from interviews with leading VCs and bear market founders.</div></div>
-        <div class="fmt-card"><div class="fmt-num">4</div><div class="fmt-h">Templates</div><div class="fmt-p">Cold emails, CRM structures, deck frameworks, ready to use.</div></div>
-        <div class="fmt-card"><div class="fmt-num">5</div><div class="fmt-h">Worksheets</div><div class="fmt-p">Build the actual deliverable. Not just understand it.</div></div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Explain what you are building in 10 seconds or 90,</strong> without losing someone the moment you mention ZK proofs or cross-chain validators.</div>
+      </div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Know exactly which investors to approach, in what order, and through which path,</strong> instead of blasting the same cold deck to 200 people and wondering why nobody responds.</div>
+      </div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Run a real raise sprint that builds momentum and closes,</strong> instead of a rolling raise that drags for six months with everyone waiting for someone else to go first.</div>
+      </div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Choose the right fundraising model for your stage and community,</strong> without accidentally structuring a raise that creates a sell wall the day you launch.</div>
+      </div>
+      <div class="out-item">
+        <div class="out-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2 3.8-3.8" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="out-text"><strong>Set and defend a valuation that makes sense for your stage,</strong> without launching at a number that makes your token impossible to grow into.</div>
       </div>
     </div>
   </div>
 </div>
-<div class="noz-section">
+
+<!-- CURRICULUM -->
+<div id="curriculum" class="section off">
   <div class="wrap">
-    <div class="section-label">Who built this</div>
-    <div class="noz-inner">
+    <div class="label">What is inside</div>
+    <h2 class="section-h">9 modules. A complete system.<br><em>From first number to final wire.</em></h2>
+    <p class="section-sub">Every module builds on the last. Nothing is standalone because nothing in fundraising is standalone.</p>
+    <div class="curr-list">
+      <div class="curr-item">
+        <div class="curr-n">01</div>
+        <div><div class="curr-title">Fundraising goals and blueprint</div><div class="curr-desc">Get clear on how much to raise, what it is for, and what milestone it funds. Build the number bottom-up line by line, allocate across four buckets, and write the one-sentence raise narrative you will use in every investor conversation.</div></div>
+        <span class="curr-tag">Blueprint</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">02</div>
+        <div><div class="curr-title">Valuation and deal structure</div><div class="curr-desc">How Web3 valuations actually work. The inflation trap that kills rounds before they start. SAFEs vs SAFTs. Vesting mechanics that keep investors aligned instead of waiting for the cliff.</div></div>
+        <span class="curr-tag">Valuation &middot; SAFEs &middot; SAFTs</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">03</div>
+        <div><div class="curr-title">Choose your fundraising model</div><div class="curr-desc">VC, ICO 2.0, IDO, IEO, grants, hybrid stack. Which one fits your stage and community, and the community raise timing problem most founders get badly wrong.</div></div>
+        <span class="curr-tag">VC &middot; ICO &middot; IDO &middot; IEO</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">04</div>
+        <div><div class="curr-title">Messaging stack and elevator pitch</div><div class="curr-desc">Positioning statement, USP, hell and heaven framework. A pitch deliverable in 10 seconds or 90, written and rehearsed before you approach anyone.</div></div>
+        <span class="curr-tag">Positioning &middot; USP &middot; Pitch</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">05</div>
+        <div><div class="curr-title">Build your pitch deck</div><div class="curr-desc">The three questions every investor is answering in the first two minutes. Every slide built for your actual project. The clarity test that exposes every vague slide before an investor does.</div></div>
+        <span class="curr-tag">Deck &middot; Clarity test</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">06</div>
+        <div><div class="curr-title">Advisors: build a team investors bet on</div><div class="curr-desc">Your advisory board is your first fundraising test. If credible people will not back you with their time, what makes you think a VC will back you with capital?</div></div>
+        <span class="curr-tag">Advisory board</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">07</div>
+        <div><div class="curr-title">Build your investor list</div><div class="curr-desc">Three filters. Four investor categories. Three tiers. The warm path system. A CRM built for momentum, not just storing names.</div></div>
+        <span class="curr-tag">CRM &middot; Warm path</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">08</div>
+        <div><div class="curr-title">Outreach and the sprint</div><div class="curr-desc">The rolling raise trap. The sprint model. Running meetings. Six objections with the right answers. Building FOMO without manufactured pressure.</div></div>
+        <span class="curr-tag">Sprint &middot; Objections</span>
+      </div>
+      <div class="curr-item">
+        <div class="curr-n">09</div>
+        <div><div class="curr-title">Close</div><div class="curr-desc">From verbal yes to signed documents to wire. Term sheets, due diligence, legal, and what kills a deal in the final stretch when everything else went right.</div></div>
+        <span class="curr-tag">Term sheets &middot; Close</span>
+      </div>
+    </div>
+    <div class="format-strip">
+      <div class="fmt-item"><div class="fmt-n">1</div><div class="fmt-h">Theory</div><div class="fmt-p">The framework, why it works, and what breaks without it.</div></div>
+      <div class="fmt-item"><div class="fmt-n">2</div><div class="fmt-h">Real examples</div><div class="fmt-p">Worked through from actual projects at different stages.</div></div>
+      <div class="fmt-item"><div class="fmt-n">3</div><div class="fmt-h">VC and founder insights</div><div class="fmt-p">Direct from interviews with leading VCs and bear market founders.</div></div>
+      <div class="fmt-item"><div class="fmt-n">4</div><div class="fmt-h">Templates</div><div class="fmt-p">Cold emails, CRM structures, deck frameworks, ready to use.</div></div>
+      <div class="fmt-item"><div class="fmt-n">5</div><div class="fmt-h">Worksheets</div><div class="fmt-p">Build the actual deliverable. Not just understand it.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDIBILITY -->
+<div class="section white">
+  <div class="wrap">
+    <div class="label">Who built this</div>
+    <div class="cred-inner">
       <div>
-        <h2 class="noz-h">Nozomi is the home<br>of Web3 founders.</h2>
-        <p class="noz-p">We work directly with Web3 founders on fundraising strategy, go-to-market, and ecosystem growth. In 2025 we facilitated $87M in fundraising across community raises, VC rounds, and hybrid structures. We have active relationships across the top 30 Web3 ecosystems, the leading VCs actively funding in the space right now, and we see hundreds of raises every year at every stage of the cycle.</p>
-        <p class="noz-p">This course is the distillation of everything we have learned from being in those rooms.</p>
-        <p class="noz-founder">Founded by Louis Dharma (ex-Head of Growth, Immutable) and Jinelle D'Lima.</p>
+        <h2 class="cred-h">Nozomi is the home<br>of <em>Web3 founders.</em></h2>
+        <p class="cred-p">We work directly with Web3 founders on fundraising strategy, go-to-market, and ecosystem growth. In 2025 we facilitated $87M in fundraising across community raises, VC rounds, and hybrid structures. We have active relationships across the top 30 Web3 ecosystems, the leading VCs actively funding in the space right now, and we see hundreds of raises every year at every stage of the cycle.</p>
+        <p class="cred-p">This course is the distillation of everything we have learned from being in those rooms.</p>
+        <div class="cred-founder">Founded by Louis Dharma (ex-Head of Growth, Immutable) and Jinelle D'Lima.</div>
       </div>
-      <div class="noz-stats">
-        <div class="noz-stat"><div class="noz-stat-n">$87M</div><div class="noz-stat-l">facilitated in fundraising in 2025</div></div>
-        <div class="noz-stat"><div class="noz-stat-n">Top 30</div><div class="noz-stat-l">Web3 ecosystem relationships</div></div>
-        <div class="noz-stat"><div class="noz-stat-n">Both</div><div class="noz-stat-l">community and institutional raises</div></div>
-        <div class="noz-stat"><div class="noz-stat-n">Bear</div><div class="noz-stat-l">market tested, every framework</div></div>
+      <div class="cred-stats">
+        <div class="cred-stat"><div class="cred-n">$87M</div><div class="cred-l">Facilitated in fundraising in 2025</div></div>
+        <div class="cred-stat"><div class="cred-n">Top 30</div><div class="cred-l">Web3 ecosystem relationships</div></div>
+        <div class="cred-stat"><div class="cred-n">Both</div><div class="cred-l">Community and institutional raises</div></div>
+        <div class="cred-stat"><div class="cred-n">Bear</div><div class="cred-l">Market tested, every framework</div></div>
       </div>
     </div>
   </div>
 </div>
-<div class="insight-section">
+
+<!-- INSIGHTS -->
+<div class="section">
   <div class="wrap">
-    <div class="section-label">Where the insights come from</div>
-    <h2 class="section-h">Built with people closing<br>real deals right now.</h2>
+    <div class="label">Where the insights come from</div>
+    <h2 class="section-h">Built with people closing<br><em>real deals right now.</em></h2>
     <p class="section-sub">Nozomi built the framework. Then we interviewed the people in the rooms where deals actually happen.</p>
-    <div class="ins-wrap">
-      <div class="ins-row">
-        <div class="ins-avatar">VC</div>
-        <div>
+    <div class="ins-list">
+      <div class="ins-item">
+        <div class="ins-left">
+          <div class="ins-type">Source 01</div>
           <div class="ins-name">Leading Web3 VCs</div>
-          <div class="ins-role">Partners from the leading crypto-native funds actively deploying capital across DeFi, infrastructure, and consumer</div>
-          <div class="ins-p">What they actually look at on a team slide. What kills a deal in the first meeting before the deck finishes loading. How they think about valuation when there is no comparable revenue multiple to work from. Their exact red flags, built into the relevant modules.</div>
-          <div class="ins-tag">Deal logic and red flags</div>
+          <div class="ins-role">Partners from top crypto-native funds actively deploying across DeFi, infrastructure, and consumer</div>
         </div>
-      </div>
-      <div class="ins-row">
-        <div class="ins-avatar">F</div>
         <div>
-          <div class="ins-name">Founders who raised during the bear market</div>
+          <p class="ins-p">What they actually look at on a team slide. What kills a deal in the first meeting before the deck finishes loading. How they think about valuation when there is no comparable revenue multiple to work from. Their exact red flags, built into the relevant modules.</p>
+          <span class="ins-tag">Deal logic and red flags</span>
+        </div>
+      </div>
+      <div class="ins-item">
+        <div class="ins-left">
+          <div class="ins-type">Source 02</div>
+          <div class="ins-name">Bear market founders</div>
           <div class="ins-role">$5M to $50M+ closed between 2022 and 2024 while everyone else was waiting for conditions to improve</div>
-          <div class="ins-p">How they structured their raise when the market was brutal. What changed between a failed sprint and the one that actually closed. What they would do differently if they were starting today. Their playbooks, not their LinkedIn bios, are inside this course.</div>
-          <div class="ins-tag">Playbooks from people who figured it out</div>
+        </div>
+        <div>
+          <p class="ins-p">How they structured their raise when the market was brutal. What changed between a failed sprint and the one that actually closed. What they would do differently if they were starting today. Their playbooks, not their LinkedIn bios, are inside this course.</p>
+          <span class="ins-tag">Playbooks from people who figured it out</span>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="dark-band">
+
+<!-- DIFFERENTIATORS -->
+<div class="section off">
   <div class="wrap">
-    <div class="feat-section">
-      <div class="section-label">What makes this different</div>
-      <h2 class="section-h">Not a course about fundraising.<br>A system for closing rounds.</h2>
-      <div class="feat-grid">
-        <div class="feat-card top"><div class="feat-h">Web3-native from the ground up</div><div class="feat-p">Token mechanics, TGE dynamics, community raises, vesting, ICO 2.0, IDOs. Not a Web2 course with crypto examples dropped in.</div></div>
-        <div class="feat-card top"><div class="feat-h">Works when capital is scarce</div><div class="feat-p">Every framework was used to close real rounds during 2022 to 2024. If it works when nobody wants to deploy, it works when they do.</div></div>
-        <div class="feat-card top"><div class="feat-h">One system, not nine loose modules</div><div class="feat-p">Your milestone informs your valuation. Your valuation shapes your deck. Your deck feeds your pitch. Nothing taught in isolation because nothing works in isolation.</div></div>
-        <div class="feat-card"><div class="feat-h">Deliverables, not lectures</div><div class="feat-p">Every module ends with something real. A milestone stack. A tiered investor list. A pitch you can deliver cold. You finish with a complete fundraising OS.</div></div>
-        <div class="feat-card"><div class="feat-h">Covers community and institutional together</div><div class="feat-p">Most courses cover one or the other. Web3 fundraising is both, often simultaneously. This course treats them as one system.</div></div>
-        <div class="feat-card"><div class="feat-h">VC insights built into the content</div><div class="feat-p">Not summarised secondhand. The actual frameworks and red flags from people writing Web3 cheques right now, woven into the modules where you need them.</div></div>
+    <div class="label">What makes this different</div>
+    <h2 class="section-h">Not a course about fundraising.<br><em>A system for closing rounds.</em></h2>
+    <div class="diff-list">
+      <div class="diff-item" style="border-top:2px solid var(--dark);">
+        <div class="diff-h">Web3-native from the ground up</div>
+        <div class="diff-p">Token mechanics, TGE dynamics, community raises, vesting, ICO 2.0, IDOs. Not a Web2 course with crypto examples dropped in.</div>
+      </div>
+      <div class="diff-item" style="border-top:2px solid var(--dark);">
+        <div class="diff-h">Works when capital is scarce</div>
+        <div class="diff-p">Every framework was used to close real rounds during 2022 to 2024. If it works when nobody wants to deploy, it works when they do.</div>
+      </div>
+      <div class="diff-item" style="border-top:2px solid var(--dark);">
+        <div class="diff-h">One system, not nine loose modules</div>
+        <div class="diff-p">Your milestone informs your valuation. Your valuation shapes your deck. Your deck feeds your pitch. Nothing taught in isolation because nothing works in isolation.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-h">Deliverables, not lectures</div>
+        <div class="diff-p">Every module ends with something real. A milestone stack. A tiered investor list. A pitch you can deliver cold. You finish with a complete fundraising OS.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-h">Covers community and institutional together</div>
+        <div class="diff-p">Most courses cover one or the other. Web3 fundraising is both, often simultaneously. This course treats them as one system.</div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-h">VC insights built into the content</div>
+        <div class="diff-p">Not summarised secondhand. The actual frameworks and red flags from people writing Web3 cheques right now, woven into the modules where you need them.</div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- CTA -->
 <div id="waitlist" class="cta-section">
   <h2 class="cta-h">Join the waitlist.</h2>
   <p class="cta-sub">The course is not open yet. Get early access when it is. No spam. No pressure.</p>
   <div class="cta-form">
-    <input class="cta-input" type="email" placeholder="your@email.com">
-    <button class="cta-btn">Join Waitlist</button>
+    <input class="cta-input" type="email" placeholder="your@email.com" id="ctaEmail">
+    <button class="cta-btn" onclick="handleWaitlist()">Join Waitlist</button>
   </div>
-  <p class="cta-note">nozomi.network/academy/fundraising -- launching 2026</p>
+  <p class="cta-note">nozomi.network/academy/fundraising, launching 2026</p>
 </div>
+
 <footer>
-  <p>Nozomi Network, the home of Web3 founders. <a href="/">nozomi.network</a></p>
+  <p>Nozomi Network, the home of Web3 founders. <a href="https://nozomi.network">nozomi.network</a></p>
+  <p>&copy; 2026 Nozomi. All rights reserved.</p>
 </footer>
+
+<script>
+(function(){
+  const canvas = document.getElementById('petal-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, petals = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function makePetal(){ return { x: Math.random()*W, y: -20-Math.random()*60, size: 5+Math.random()*8, vx: -0.5+Math.random()*1.0, vy: 0.4+Math.random()*0.8, angle: Math.random()*Math.PI*2, spin: -0.015+Math.random()*0.03, sway: Math.random()*Math.PI*2, swaySpeed: 0.007+Math.random()*0.01, opacity: 0.28+Math.random()*0.35 }; }
+  for(let i=0;i<28;i++){ const p=makePetal(); p.y=Math.random()*H; petals.push(p); }
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    petals.forEach(p=>{ p.sway+=p.swaySpeed; p.x+=p.vx+Math.sin(p.sway)*0.4; p.y+=p.vy; p.angle+=p.spin; if(p.y>H+20) Object.assign(p,makePetal()); ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle); ctx.beginPath(); ctx.ellipse(0,0,p.size*0.5,p.size,0,0,Math.PI*2); ctx.fillStyle=`rgba(210,120,140,${p.opacity})`; ctx.fill(); ctx.restore(); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+function handleWaitlist(){
+  const input = document.getElementById('ctaEmail');
+  const email = input.value.trim();
+  if(!email || !email.includes('@')){ input.focus(); return; }
+  input.value = '';
+  const btn = document.querySelector('.cta-btn');
+  btn.textContent = "You're on the list";
+  btn.style.background = '#ddd';
+  btn.disabled = true;
+}
+</script>
 </body>
 </html>
