@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Pitch Audit | Find Out Why VCs Are Passing on Your Round | Nozomi Network</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_nozomi.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_nozomi.png">
+<link rel="shortcut icon" href="/favicon_nozomi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #fafaf8;
+  --white:   #ffffff;
+  --off:     #f5f4f0;
+  --dark:    #111111;
+  --mid:     #444444;
+  --light:   #999999;
+  --border:  #e4e4e0;
+  --border2: #d0d0cc;
+  --accent:  #a03232;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.65;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle, rgba(160,50,50,0.07) 1.5px, transparent 1.5px),
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 200px 200px, 48px 48px, 48px 48px;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+#petal-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  border-bottom: 1.5px solid var(--dark);
+  background: rgba(250,250,248,0.95);
+  backdrop-filter: blur(8px);
+}
+.nav-logo { height: 28px; width: auto; }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-home {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 18px; border: 1.5px solid var(--dark); border-radius: 2px;
+  transition: background .15s, color .15s;
+}
+.nav-home:hover { background: var(--dark); color: #fff; }
+.nav-cta {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 18px; background: var(--dark); color: #fff; border-radius: 2px;
+  transition: background .15s;
+}
+.nav-cta:hover { background: #333; }
+
+/* LAYOUT */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 6%; position: relative; z-index: 1; }
+
+/* LABELS */
+.label {
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--light); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+.label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 6% 88px;
+  max-width: 880px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1.5px solid var(--dark); padding: 6px 18px; border-radius: 2px;
+  margin-bottom: 40px;
+}
+.hero-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(160,50,50,0.55);
+  animation: livePulse 2.2s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(160,50,50,0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(160,50,50,0); }
+  100% { box-shadow: 0 0 0 0 rgba(160,50,50,0); }
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7.2vw, 88px);
+  font-style: italic; font-weight: 400;
+  line-height: 1.02; letter-spacing: -0.02em;
+  color: var(--dark); margin-bottom: 20px;
+}
+.hero-sub {
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--light); margin-bottom: 36px;
+}
+.hero-promise {
+  font-size: 18px; font-weight: 300; line-height: 1.82;
+  color: var(--mid); max-width: 640px; margin: 0 auto 40px;
+}
+.hero-promise strong { color: var(--dark); font-weight: 500; }
+.hero-meta {
+  display: inline-flex; align-items: center; gap: 22px;
+  font-family: var(--mono); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mid);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 12px 0; margin-bottom: 40px;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+.hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border2); display: inline-block; }
+.hero-actions { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--dark); color: #fff;
+  padding: 15px 36px; border-radius: 2px; border: none; cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.btn-dark:hover { background: #333; transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); padding: 15px 28px;
+  border: 1.5px solid var(--border2); border-radius: 2px;
+  transition: border-color .15s, color .15s;
+}
+.btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+.hero-note {
+  font-family: var(--mono); font-size: 10px; font-weight: 300;
+  letter-spacing: 0.1em; color: #ccc; margin-top: 20px;
+}
+
+/* STAT STRIP */
+.stat-strip {
+  border-top: 1.5px solid var(--dark);
+  border-bottom: 1.5px solid var(--dark);
+  background: var(--white);
+  display: grid; grid-template-columns: repeat(4,1fr);
+  position: relative; z-index: 1;
+}
+.stat-item { text-align: center; padding: 34px 20px; border-right: 1px solid var(--border); }
+.stat-item:last-child { border-right: none; }
+.stat-n { font-family: var(--serif); font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+.stat-l { font-size: 11px; color: var(--mid); line-height: 1.5; font-weight: 300; }
+
+/* LOGO WALL */
+.logo-section {
+  padding: 56px 0; background: var(--off);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative; z-index: 1;
+}
+.logo-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--light); text-align: center; margin-bottom: 40px;
+}
+.logo-track-wrap {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+          mask: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+.logo-track {
+  display: flex; gap: 52px; align-items: center;
+  animation: logoScroll 30s linear infinite;
+  width: max-content;
+}
+.logo-track img { height: 22px; width: auto; opacity: 0.22; filter: grayscale(100%); flex-shrink: 0; transition: opacity .3s; }
+.logo-track img:hover { opacity: 0.55; filter: none; }
+@keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+.section { padding: 92px 0; position: relative; z-index: 1; }
+.section.off { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.section.white { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.section-h {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.015em;
+  margin-bottom: 16px; color: var(--dark);
+}
+.section-h em { font-style: italic; font-weight: 400; color: var(--mid); }
+.section-sub { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.8; max-width: 620px; margin-bottom: 52px; }
+
+/* PROBLEM */
+.prob-list { display: flex; flex-direction: column; }
+.prob-item {
+  display: grid; grid-template-columns: 52px 1fr;
+  border-top: 1px solid var(--border);
+  padding: 36px 0;
+  transition: background .15s;
+}
+.prob-item:last-child { border-bottom: 1px solid var(--border); }
+.prob-item:hover { background: rgba(0,0,0,0.014); margin: 0 -6%; padding: 36px 6%; }
+.prob-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--light); padding-top: 3px; }
+.prob-h { font-family: var(--sans); font-style: normal; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--dark); margin-bottom: 10px; }
+.prob-p { font-size: 14px; line-height: 1.78; color: #666; font-weight: 400; }
+
+/* WHAT YOU GET, pillars grid */
+.pillars { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-left: 1px solid var(--border); margin-top: 8px; }
+.pillar { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 28px; transition: background .15s; }
+.pillar:hover { background: rgba(0,0,0,0.018); }
+.pillar-n { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--light); margin-bottom: 14px; }
+.pillar-h { font-family: var(--sans); font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.005em; }
+.pillar-p { font-size: 13.5px; line-height: 1.78; color: var(--mid); font-weight: 300; }
+.pillar-p strong { color: var(--dark); font-weight: 500; }
+
+/* HOW IT WORKS */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); margin-top: 8px; }
+.step { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 28px; }
+.step-n { font-family: var(--serif); font-size: 44px; font-weight: 700; color: #ddd; line-height: 1; margin-bottom: 18px; }
+.step-h { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.005em; }
+.step-p { font-size: 13px; line-height: 1.78; color: var(--mid); font-weight: 300; }
+.step-time { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-top: 14px; display: inline-block; border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; }
+
+/* QUALIFICATION */
+.qual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); margin-top: 8px; }
+.qual-col { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 30px; }
+.qual-h { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
+.qual-h.yes { color: var(--dark); }
+.qual-h.no { color: var(--light); }
+.qual-h .badge { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; font-weight: 700; }
+.qual-h.yes .badge { background: var(--dark); color: #fff; }
+.qual-h.no .badge { border: 1px solid var(--border2); color: var(--light); }
+.qual-list { list-style: none; padding: 0; margin: 0; }
+.qual-list li { font-size: 14px; line-height: 1.7; color: var(--mid); font-weight: 300; padding: 12px 0; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+.qual-list li:first-child { border-top: none; padding-top: 0; }
+.qual-list li::before { content: ''; flex-shrink: 0; width: 6px; height: 1px; background: var(--border2); margin-top: 12px; }
+.qual-col.no .qual-list li { color: var(--light); }
+
+/* TRACK RECORD */
+.cred-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.cred-h { font-family: var(--serif); font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 20px; }
+.cred-h em { font-style: italic; font-weight: 400; color: var(--mid); }
+.cred-p { font-size: 14px; line-height: 1.82; color: var(--mid); font-weight: 300; margin-bottom: 14px; }
+.cred-founder { font-family: var(--mono); font-size: 11px; font-weight: 300; letter-spacing: 0.06em; color: var(--light); border-top: 1px solid var(--border); padding-top: 18px; margin-top: 8px; font-style: italic; }
+.cred-stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+.cred-stat { padding: 28px 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .15s; }
+.cred-stat:nth-child(even) { border-right: none; }
+.cred-stat:nth-last-child(-n+2) { border-bottom: none; }
+.cred-stat:hover { background: var(--off); }
+.cred-n { font-family: var(--serif); font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+.cred-l { font-size: 11px; color: var(--mid); line-height: 1.5; font-weight: 300; }
+
+/* WHY FREE, two col explainer */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; border-top: 1px solid var(--border); padding-top: 48px; margin-top: 8px; }
+.split-block .split-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--light); margin-bottom: 14px; }
+.split-block p { font-size: 14px; line-height: 1.82; color: var(--mid); font-weight: 300; margin-bottom: 14px; }
+.split-block p strong { color: var(--dark); font-weight: 500; }
+.split-exchange { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); margin-top: 32px; }
+.exch-col { padding: 22px 0; padding-right: 24px; }
+.exch-col:last-child { padding-right: 0; padding-left: 24px; border-left: 1px solid var(--border); }
+.exch-l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-bottom: 8px; }
+.exch-p { font-size: 13px; line-height: 1.7; color: var(--mid); font-weight: 300; }
+
+/* CTA */
+.cta-section { padding: 112px 6%; text-align: center; background: var(--dark); position: relative; z-index: 1; }
+.cta-h { font-family: var(--serif); font-style: italic; font-size: clamp(40px, 6.5vw, 72px); font-weight: 400; color: #fff; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 18px; }
+.cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 480px; margin: 0 auto 28px; line-height: 1.7; }
+.cta-card { max-width: 520px; margin: 0 auto 28px; border: 1px solid rgba(255,255,255,0.12); padding: 28px 32px; text-align: left; border-radius: 2px; }
+.cta-card ul { list-style: none; padding: 0; margin: 0; }
+.cta-card li { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.7); font-weight: 300; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 12px; }
+.cta-card li:first-child { border-top: none; padding-top: 0; }
+.cta-card li::before { content: ''; flex-shrink: 0; width: 6px; height: 1px; background: rgba(255,255,255,0.25); margin-top: 11px; }
+.cta-card .cta-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid rgba(255,255,255,0.12); margin-top: 18px; padding-top: 18px; }
+.cta-card-meta div { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.cta-card-meta div strong { color: #fff; font-weight: 500; display: block; margin-top: 4px; }
+.cta-btn-big {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; color: var(--dark);
+  padding: 17px 40px; border-radius: 2px; border: none;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; transition: background .15s, transform .12s;
+}
+.cta-btn-big:hover { background: #eee; transform: translateY(-1px); }
+.cta-note { font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); margin-top: 22px; }
+.cta-ps { max-width: 520px; margin: 36px auto 0; font-family: var(--mono); font-size: 11px; font-weight: 300; letter-spacing: 0.04em; color: rgba(255,255,255,0.4); line-height: 1.7; font-style: italic; text-align: left; border-left: 2px solid rgba(255,255,255,0.18); padding-left: 16px; }
+.cta-ps strong { color: rgba(255,255,255,0.7); font-weight: 500; font-style: normal; }
+
+/* FOOTER */
+footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 6%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+footer p { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 300; }
+footer a { color: rgba(255,255,255,0.4); }
+footer a:hover { color: rgba(255,255,255,0.7); }
+
+/* RESPONSIVE */
+@media(max-width: 860px){
+  .cred-inner { grid-template-columns: 1fr; gap: 40px; }
+  .pillars { grid-template-columns: 1fr; }
+  .qual-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-bottom: 1px solid var(--border); }
+  .split { grid-template-columns: 1fr; gap: 40px; }
+  .split-exchange { grid-template-columns: 1fr; }
+  .exch-col:last-child { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 22px; margin-top: 4px; }
+  .exch-col { padding-right: 0; }
+  .hero-meta { flex-direction: column; gap: 10px; }
+  .hero-meta .dot { display: none; }
+}
+@media(max-width: 580px){
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="petal-canvas"></canvas>
+
+<nav>
+  <a href="https://nozomi.network">
+    <img class="nav-logo" src="https://nozomi.network/images/Nozomi_Logo_Black (2).png" alt="Nozomi">
+  </a>
+  <div class="nav-right">
+    <a href="https://nozomi.network" class="nav-home">Home</a>
+    <a href="#book" class="nav-cta">Book Your Audit</a>
+  </div>
+</nav>
+
+<section style="position:relative;z-index:1;">
+  <div class="hero">
+    <div class="hero-pill">3 Slots Per Week</div>
+    <h1 class="hero-title">Find out why VCs<br>are passing on your round.</h1>
+    <p class="hero-sub">Free Pitch Audit. 30 Minutes with Nozomi.</p>
+    <p class="hero-promise">
+      You had 20 investor calls. 15 said it was interesting. 0 term sheets.<br><br>
+      VCs won&rsquo;t tell you what&rsquo;s wrong with your pitch. <strong>30 minutes with us, you&rsquo;ll know exactly what&rsquo;s broken.</strong> Positioning, narrative, deck, delivery, the questions you&rsquo;re answering badly without realising.
+    </p>
+    <div class="hero-meta">
+      <span>Free</span>
+      <span class="dot"></span>
+      <span>30 Minutes</span>
+      <span class="dot"></span>
+      <span>3 Per Week</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#book" class="btn-dark">Book Your Pitch Audit &rarr;</a>
+      <a href="#how" class="btn-outline">How it works</a>
+    </div>
+    <p class="hero-note">No equity. No follow-up sales call. Takes 2 minutes to book.</p>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="stat-item"><div class="stat-n">$87M</div><div class="stat-l">Raised for Web3 founders<br>by Nozomi in 2025</div></div>
+  <div class="stat-item"><div class="stat-n">100+</div><div class="stat-l">Web3 decks reviewed<br>in Q1/Q2 2026</div></div>
+  <div class="stat-item"><div class="stat-n">200+</div><div class="stat-l">Investors and ecosystems<br>across our network</div></div>
+  <div class="stat-item"><div class="stat-n">30 min</div><div class="stat-l">Live, direct, with the founder<br>of Nozomi. Not a coach.</div></div>
+</div>
+
+<div class="logo-section">
+  <div class="logo-label">Nozomi works with the leading Web3 ecosystems and 200+ investors</div>
+  <div class="logo-track-wrap">
+    <div class="logo-track">
+      <img src="/images/Immutable (1).png" alt="Immutable">
+      <img src="/images/Aptos_logo_(2025).png" alt="Aptos">
+      <img src="/images/Arbitrum.png" alt="Arbitrum">
+      <img src="/images/AVAX (1).png" alt="Avalanche">
+      <img src="/images/BNB Chain (1).png" alt="BNB Chain">
+      <img src="/images/SUI (1).png" alt="Sui">
+      <img src="/images/Berachain (1).png" alt="Berachain">
+      <img src="/images/OPTIMISM (1).png" alt="Optimism">
+      <img src="/images/Polkadot (1).png" alt="Polkadot">
+      <img src="/images/Movement.png" alt="Movement">
+      <img src="/images/Skale (1).png" alt="Skale">
+      <img src="/images/STORY (1).png" alt="Story">
+      <img src="/images/Cardano.png" alt="Cardano">
+      <img src="/images/Abstract.png" alt="Abstract">
+      <img src="/images/Virtual.png" alt="Virtual">
+      <img src="/images/Legion.png" alt="Legion">
+      <!-- duplicate for loop -->
+      <img src="/images/Immutable (1).png" alt="Immutable">
+      <img src="/images/Aptos_logo_(2025).png" alt="Aptos">
+      <img src="/images/Arbitrum.png" alt="Arbitrum">
+      <img src="/images/AVAX (1).png" alt="Avalanche">
+      <img src="/images/BNB Chain (1).png" alt="BNB Chain">
+      <img src="/images/SUI (1).png" alt="Sui">
+      <img src="/images/Berachain (1).png" alt="Berachain">
+      <img src="/images/OPTIMISM (1).png" alt="Optimism">
+      <img src="/images/Polkadot (1).png" alt="Polkadot">
+      <img src="/images/Movement.png" alt="Movement">
+      <img src="/images/Skale (1).png" alt="Skale">
+      <img src="/images/STORY (1).png" alt="Story">
+      <img src="/images/Cardano.png" alt="Cardano">
+      <img src="/images/Abstract.png" alt="Abstract">
+      <img src="/images/Virtual.png" alt="Virtual">
+      <img src="/images/Legion.png" alt="Legion">
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">The Problem</div>
+    <h2 class="section-h">You&rsquo;re doing everything right.<br><em>Nobody&rsquo;s telling you what&rsquo;s actually wrong.</em></h2>
+    <p class="section-sub">20 investor calls. All said, &ldquo;we&rsquo;ll circle back.&rdquo; None did. Meanwhile, a project technically worse than yours just announced a $3M seed from a VC who said &ldquo;too early&rdquo; to you 8 weeks ago.</p>
+    <div class="prob-list">
+      <div class="prob-item">
+        <div class="prob-num">01</div>
+        <div>
+          <div class="prob-h">You burn months learning the hard way</div>
+          <div class="prob-p">Each meeting is one VC permanently off the table. They don&rsquo;t revisit a &ldquo;no&rdquo; in this cycle. By the time you figure out the pitch was the problem, half your runway is gone.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">02</div>
+        <div>
+          <div class="prob-h">You optimise the wrong layer</div>
+          <div class="prob-p">You redesign the deck. Polish the visuals. The deck was never the problem. The narrative was. What you&rsquo;re raising, why now, why you, why this VC.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">03</div>
+        <div>
+          <div class="prob-h">You walk into rooms unprepared for the real objections</div>
+          <div class="prob-p">The pitch goes fine. Then one unexpected question lands, you fumble for 8 seconds of silence, and the VC writes you off in real time.</div>
+        </div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-num">04</div>
+        <div>
+          <div class="prob-h">You take on advisors who don&rsquo;t advise</div>
+          <div class="prob-p">Your cap table has five names that did nothing, and the next investor is asking why they&rsquo;re there. Honest teardowns are expensive. Every minute spent explaining a pass is a minute not spent on the next pitch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="section off">
+  <div class="wrap">
+    <div class="label">What you get on the call</div>
+    <h2 class="section-h">30 minutes.<br><em>Direct feedback. Real diagnosis.</em></h2>
+    <p class="section-sub">You pitch us, cold. Exactly the same way you&rsquo;d open with a real investor. Then we show you what&rsquo;s killing the round, across four layers.</p>
+    <div class="pillars">
+      <div class="pillar" style="border-top:2px solid var(--dark);">
+        <div class="pillar-n">01 / Narrative &amp; Positioning</div>
+        <div class="pillar-h">Where your story is losing them</div>
+        <div class="pillar-p">Where your positioning is causing investors to misclassify you, and where your story arc is losing them between slide 2 and slide 6.</div>
+      </div>
+      <div class="pillar" style="border-top:2px solid var(--dark);">
+        <div class="pillar-n">02 / Deck</div>
+        <div class="pillar-h">What&rsquo;s hurting, what&rsquo;s working</div>
+        <div class="pillar-p">Which slides are hurting you, which are doing the work, what you&rsquo;re missing, what to cut. Not a redesign. A diagnosis.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">03 / Pitch Delivery</div>
+        <div class="pillar-h">The tells investors decide on silently</div>
+        <div class="pillar-p">The body language and Q&amp;A tells where investors decide silently. Plus the questions you should be asking them at the end of every meeting and currently aren&rsquo;t.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">04 / Your Q&amp;A</div>
+        <div class="pillar-h">Ask what you couldn&rsquo;t ask the VCs who ghosted</div>
+        <div class="pillar-p">You ask what you couldn&rsquo;t ask the VCs who ghosted you. We answer. From inside the rooms where the cheques get written.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how" class="section">
+  <div class="wrap">
+    <div class="label">How it works</div>
+    <h2 class="section-h">Three steps.<br><em>One call. Real diagnosis.</em></h2>
+    <p class="section-sub">Six months of wasted time, back. Most founders learn what&rsquo;s wrong by burning 20 VCs and a year of runway. You learn it in 30 minutes.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-h">Book a slot</div>
+        <div class="step-p">Pick a time, upload your deck, write three lines on what you&rsquo;re raising and where you&rsquo;re stuck.</div>
+        <div class="step-time">Takes 2 minutes</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-h">Pitch us live</div>
+        <div class="step-p">30 minutes. Real-time diagnosis. We get into it from minute one. No warm-up, no fluff.</div>
+        <div class="step-time">30 Minutes</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-h">Leave knowing what to fix</div>
+        <div class="step-p">Not slide redesigns. Not &ldquo;make your value prop clearer.&rdquo; The specific reasons your round isn&rsquo;t moving, and what to change before your next meeting.</div>
+        <div class="step-time">Immediate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO THIS IS FOR -->
+<div class="section off">
+  <div class="wrap">
+    <div class="label">Who this is for</div>
+    <h2 class="section-h">Be honest with yourself<br><em>about whether this is you.</em></h2>
+    <p class="section-sub">The audit only works if you&rsquo;ve already taken real meetings. We need real investor reactions to analyse, not hypothetical ones.</p>
+    <div class="qual-grid">
+      <div class="qual-col">
+        <div class="qual-h yes"><span class="badge">&#10003;</span> You&rsquo;re a fit if</div>
+        <ul class="qual-list">
+          <li>You&rsquo;re a Web3 founder raising pre-seed through Series A</li>
+          <li>You have a deck and you&rsquo;ve pitched at least 8 investors this round</li>
+          <li>At least one VC has said &ldquo;let&rsquo;s circle back&rdquo; without a follow-up</li>
+          <li>You suspect something is wrong with your pitch but you can&rsquo;t tell what</li>
+        </ul>
+      </div>
+      <div class="qual-col no">
+        <div class="qual-h no"><span class="badge">&minus;</span> You&rsquo;re not a fit if</div>
+        <ul class="qual-list">
+          <li>You haven&rsquo;t built the deck yet. Come back when you have something to diagnose</li>
+          <li>You haven&rsquo;t pitched anyone. The audit works because of real investor reactions</li>
+          <li>You want someone to redesign your slides</li>
+          <li>You&rsquo;re Series A+ raising on traction. You don&rsquo;t need this</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACK RECORD -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">Track record</div>
+    <div class="cred-inner">
+      <div>
+        <h2 class="cred-h">$87M+ raised in 2025.<br><em>100+ Web3 decks reviewed in 2026.</em></h2>
+        <p class="cred-p">We know what makes VCs say yes. And what makes them ghost. Jinelle led marketing across Immutable and Animoca portfolios before starting Nozomi. She runs Nozomi with Louis, former Head of Growth at Immutable.</p>
+        <p class="cred-p">Together: hundreds of projects. We&rsquo;ve been inside launches that 10X&rsquo;d in month one and launches that crashed 80% on day one. We&rsquo;ve watched founders burn 6 months pitching the wrong narrative and run out of money before the project could even get started. We&rsquo;ve seen projects with &ldquo;perfect pitches&rdquo; fall apart on curve-ball investor questions testing the founder&rsquo;s personality.</p>
+        <p class="cred-p"><strong style="color:var(--dark);font-weight:500;">We know what separated them.</strong></p>
+        <div class="cred-founder">Jinelle D&rsquo;Lima &amp; Louis Dharma, co-founders of Nozomi</div>
+      </div>
+      <div class="cred-stats">
+        <div class="cred-stat">
+          <div class="cred-n">$87M</div>
+          <div class="cred-l">Facilitated in fundraising in 2025</div>
+        </div>
+        <div class="cred-stat">
+          <div class="cred-n">100+</div>
+          <div class="cred-l">Web3 decks reviewed in Q1/Q2 2026</div>
+        </div>
+        <div class="cred-stat">
+          <div class="cred-n">200+</div>
+          <div class="cred-l">Investors and ecosystems in network</div>
+        </div>
+        <div class="cred-stat">
+          <div class="cred-n">Top 30</div>
+          <div class="cred-l">Web3 ecosystem relationships</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY IT'S FREE -->
+<div class="section off">
+  <div class="wrap">
+    <div class="label">Why it&rsquo;s free</div>
+    <h2 class="section-h">And what&rsquo;s in it for us.<br><em>Fair question. Honest answer.</em></h2>
+    <div class="split">
+      <div class="split-block">
+        <div class="split-label">The honest answer</div>
+        <p>Nozomi is <strong>YC for Web3</strong>. We work with the biggest ecosystems and late-stage projects on advisory (it&rsquo;s not cheap). But that only works if we have a strong VC network.</p>
+        <p>VCs don&rsquo;t stay in our network unless we send them quality deals. So we need to see founders early. Before they&rsquo;re noisy, before they&rsquo;re being chased, when we can still tell who&rsquo;s actually building.</p>
+        <p>When we help founders early, we build trust. Later, when you&rsquo;re raising your Series A or scaling pre-TGE, you know who to call. We play the long game.</p>
+      </div>
+      <div class="split-block">
+        <div class="split-label">The exchange</div>
+        <div class="split-exchange">
+          <div class="exch-col">
+            <div class="exch-l">What we get</div>
+            <div class="exch-p">A stronger VC network. Early relationships with founders who will need our advisory later. Dealflow credibility.</div>
+          </div>
+          <div class="exch-col">
+            <div class="exch-l">What you get</div>
+            <div class="exch-p">30 minutes of direct feedback from someone who&rsquo;s reviewed 100+ Web3 decks. No $500 generalist coach who&rsquo;s never raised a token round.</div>
+          </div>
+        </div>
+        <p style="margin-top:32px;font-size:13px;line-height:1.78;color:var(--mid);font-weight:300;">We&rsquo;re not doing this out of charity. We&rsquo;re building relationships. The best way to do that is to help you when <strong style="color:var(--dark);font-weight:500;">you</strong> actually need it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING CTA -->
+<div id="book" class="cta-section">
+  <h2 class="cta-h">Book your pitch audit.</h2>
+  <p class="cta-sub">Free. No equity. No follow-up sales call. Just 30 minutes with the people who&rsquo;ve seen what&rsquo;s working right now.</p>
+  <div class="cta-card">
+    <ul>
+      <li>Upload your deck and tell us your raise details</li>
+      <li>30 minutes live with the Nozomi team</li>
+      <li>Real-time teardown: positioning, narrative, deck, delivery</li>
+      <li>Leave knowing exactly where your pitch is breaking</li>
+    </ul>
+    <div class="cta-card-meta">
+      <div>Capacity<strong>3 per week</strong></div>
+      <div>Format<strong>30-min call</strong></div>
+    </div>
+  </div>
+  <a href="#" id="bookBtn" class="cta-btn-big">Book Your Pitch Audit &rarr;</a>
+  <p class="cta-note">Takes 2 minutes to book &middot; nozomi.network/free-pitch-audit</p>
+
+  <div class="cta-ps">
+    <strong>P.S.</strong> We take 3 per week. When the slots fill, the form closes until the next intake. If you&rsquo;re mid-raise and bleeding meetings, don&rsquo;t wait.
+  </div>
+</div>
+
+<footer>
+  <p>Nozomi Network, the home of Web3 founders. <a href="https://nozomi.network">nozomi.network</a></p>
+  <p>&copy; 2026 Nozomi. All rights reserved.</p>
+</footer>
+
+<script>
+(function(){
+  const canvas = document.getElementById('petal-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, petals = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function makePetal(){ return { x: Math.random()*W, y: -20-Math.random()*60, size: 5+Math.random()*8, vx: -0.5+Math.random()*1.0, vy: 0.4+Math.random()*0.8, angle: Math.random()*Math.PI*2, spin: -0.015+Math.random()*0.03, sway: Math.random()*Math.PI*2, swaySpeed: 0.007+Math.random()*0.01, opacity: 0.28+Math.random()*0.35 }; }
+  for(let i=0;i<28;i++){ const p=makePetal(); p.y=Math.random()*H; petals.push(p); }
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    petals.forEach(p=>{ p.sway+=p.swaySpeed; p.x+=p.vx+Math.sin(p.sway)*0.4; p.y+=p.vy; p.angle+=p.spin; if(p.y>H+20) Object.assign(p,makePetal()); ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle); ctx.beginPath(); ctx.ellipse(0,0,p.size*0.5,p.size,0,0,Math.PI*2); ctx.fillStyle=`rgba(210,120,140,${p.opacity})`; ctx.fill(); ctx.restore(); });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// Booking button placeholder for Cal.com / Tally / Typeform URL
+// Replace '#' in the .cta-btn-big href with the real booking link when ready.
+document.getElementById('bookBtn').addEventListener('click', function(e){
+  if (this.getAttribute('href') === '#') {
+    e.preventDefault();
+    alert('Booking link not yet connected. Replace href on #bookBtn with your Cal.com or Tally URL.');
+  }
+});
+</script>
+</body>
+</html>
