@@ -345,7 +345,7 @@ footer a:hover { color: rgba(255,255,255,0.7); }
   </a>
   <div class="nav-right">
     <a href="https://nozomi.network" class="nav-home">Home</a>
-    <a href="#book" class="nav-cta">Book Your Audit</a>
+    <a href="https://calendar.app.google/HjUZpMj5LChZU2sX9" target="_blank" rel="noopener" class="nav-cta">Book Your Audit</a>
   </div>
 </nav>
 
@@ -366,7 +366,7 @@ footer a:hover { color: rgba(255,255,255,0.7); }
       <span>3 Per Week</span>
     </div>
     <div class="hero-actions">
-      <a href="#book" class="btn-dark">Book Your Pitch Audit &rarr;</a>
+      <a href="https://calendar.app.google/HjUZpMj5LChZU2sX9" target="_blank" rel="noopener" class="btn-dark">Book Your Pitch Audit &rarr;</a>
       <a href="#how" class="btn-outline">How it works</a>
     </div>
     <p class="hero-note">No equity. No follow-up sales call. Takes 2 minutes to book.</p>
@@ -629,7 +629,7 @@ footer a:hover { color: rgba(255,255,255,0.7); }
       <div>Format<strong>30-min call</strong></div>
     </div>
   </div>
-  <a href="#" id="bookBtn" class="cta-btn-big">Book Your Pitch Audit &rarr;</a>
+  <a href="https://calendar.app.google/HjUZpMj5LChZU2sX9" target="_blank" rel="noopener" id="bookBtn" class="cta-btn-big">Book Your Pitch Audit &rarr;</a>
   <p class="cta-note">Takes 2 minutes to book &middot; nozomi.network/free-pitch-audit</p>
 
   <div class="cta-ps">
@@ -659,14 +659,7 @@ footer a:hover { color: rgba(255,255,255,0.7); }
   loop();
 })();
 
-// Booking button placeholder for Cal.com / Tally / Typeform URL
-// Replace '#' in the .cta-btn-big href with the real booking link when ready.
-document.getElementById('bookBtn').addEventListener('click', function(e){
-  if (this.getAttribute('href') === '#') {
-    e.preventDefault();
-    alert('Booking link not yet connected. Replace href on #bookBtn with your Cal.com or Tally URL.');
-  }
-});
+// Booking link wired to Google Calendar appointment scheduler.
 </script>
 </body>
 </html>
