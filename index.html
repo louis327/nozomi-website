@@ -11,6 +11,9 @@
 </template>
 <x-dc>
 <helmet>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -168,7 +171,7 @@ a{color:inherit;text-decoration:none}
       <div class="liquid-glass" style="border-radius:22px;padding:36px 32px">
         <div class="serif-it" style="font-size:38px;line-height:1;margin-bottom:16px">02</div>
         <div style="font-size:16px;font-weight:700;color:#E1E0CC;margin-bottom:9px">Network</div>
-        <p style="font-size:13.5px;line-height:1.65;color:rgba(225,224,204,0.55);font-weight:300">Warm intros to 50+ top VCs and angels, the leading L1 and L2 ecosystems, exchanges, and market makers. Over 500 investors and projects, one intro away.</p>
+        <p style="font-size:13.5px;line-height:1.65;color:rgba(225,224,204,0.55);font-weight:300">Warm intros to 50+ top VCs and angels, the leading L1 and L2 ecosystems, exchanges, and market makers. Over 100 investors and projects, one intro away.</p>
       </div>
       <div class="liquid-glass" style="border-radius:22px;padding:36px 32px">
         <div class="serif-it" style="font-size:38px;line-height:1;margin-bottom:16px">03</div>
@@ -326,7 +329,7 @@ a{color:inherit;text-decoration:none}
   <div style="max-width:1180px;margin:0 auto">
     <div style="text-align:center;margin-bottom:34px">
       <h2 data-pullup style="font-size:clamp(30px,4.4vw,60px);font-weight:400;line-height:1.0;letter-spacing:-0.025em;margin-bottom:14px;color:#E1E0CC">Our <span class="serif-it">network</span></h2>
-      <p style="font-size:15px;color:rgba(225,224,204,0.5);font-style:italic">Over 500 investors and projects</p>
+      <p style="font-size:15px;color:rgba(225,224,204,0.5);font-style:italic">Over 100 investors and projects</p>
     </div>
     <div class="liquid-glass" style="border-radius:30px;padding:30px;position:relative;overflow:hidden">
       <div class="bg-noise" style="position:absolute;inset:0;opacity:.1;pointer-events:none"></div>
@@ -662,6 +665,30 @@ class Component extends DCLogic {
           scrollTrigger: { trigger: carousel, start: 'top top', end: () => '+=' + Math.round(window.innerHeight * 0.6), scrub: 1, invalidateOnRefresh: true }
         })
         .fromTo(emerge, { scale: 1.18, autoAlpha: 0.92 }, { scale: 1, autoAlpha: 1, ease: 'power2.out', duration: 1, immediateRender: false }, 0);
+
+        // ---- SCROLL CATCH: when the About heading comes into view, actively snap the scroll
+        //      onto it and lock input for the tween, so a fast flick can't blow past. Re-arms on scroll-up. ----
+        const heading = carousel.querySelector('.nz-emerge') || carousel;
+        let caught = false;
+        ST.create({
+          trigger: heading,
+          start: 'top 68%',
+          onEnter: () => {
+            if (caught) return;
+            caught = true;
+            const lenis = this._lenis;
+            if (lenis && lenis.scrollTo) {
+              lenis.scrollTo(heading, {
+                offset: -Math.round(window.innerHeight * 0.24),
+                duration: 0.9,
+                lock: true,
+                force: true,
+                easing: (t) => 1 - Math.pow(1 - t, 3)
+              });
+            }
+          },
+          onLeaveBack: () => { caught = false; }
+        });
       }
 
       setTimeout(() => ST.refresh(), 400);
